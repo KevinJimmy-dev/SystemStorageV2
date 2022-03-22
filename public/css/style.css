@@ -1,0 +1,19 @@
+body {
+    background-image: linear-gradient(to bottom right, #36BBA5, #fff);
+    background-attachment: fixed;
+    margin: 0;
+}
+
+/* Logo Storage System */
+#logo-storage{
+    margin-top: 200px;
+}
+
+/*Logo Marista*/
+#logo-marista {
+    position: absolute;
+    bottom: 1%;
+    left: 1%;
+    width: 75px;
+}
+
