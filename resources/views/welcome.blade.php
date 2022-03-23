@@ -17,7 +17,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
 
     {{-- Bootstrap --}}
-    <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 
@@ -26,7 +25,9 @@
 
         <div class="row marcador align-items-center">
             <div class="col mx-auto text-center">
-                <img class="img-responsive" src="/img/logo-storage.png" id="logo-storage" alt="Logo 'Storage System', duas palavras em inglês: Storage = Armazenameto e System = Sistema. Storage está acima do system, fazendo uma espécie de degrau, do lado do storage possui um chapéu de cozinheiro.">
+                <a href="/login">
+                    <img class="img-responsive" src="/img/logo-storage.png" id="logo-storage" alt="Logo 'Storage System', duas palavras em inglês: Storage = Armazenameto e System = Sistema. Storage está acima do system, fazendo uma espécie de degrau, do lado do storage possui um chapéu de cozinheiro.">
+                </a>
             </div>
         </div>
         
