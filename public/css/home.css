@@ -1,0 +1,346 @@
+/* CSS usado em todas as páginas */
+
+*{
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f1efef;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    min-height: 100%;
+}
+
+body::after{
+    content: '';
+    display: block;
+    height: 200px;
+}
+
+html{
+    height: 100%;
+}
+
+/* Navbar */
+.navbar{
+    background-color: #5fcbd7;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #5fcbd7;
+}
+
+.brand-title{
+    margin: .5rem;
+}
+
+.img-logo{
+    margin-top: -35px;
+    margin-bottom: -30px;
+    cursor: pointer;
+}
+
+.img-logo-marista{
+    margin-top: -10px;
+    margin-left: 70px;
+}
+
+.navbar-links ul{
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navbar-links li{
+    list-style: none;
+}
+
+.navbar-links li a{
+    text-decoration: none;
+    color: #ffffff;
+    padding: 1rem;
+    display: block;
+}
+
+.navbar-links li:hover{
+    background-color: #80808013;
+}
+
+.li-color:hover{
+    color: #ffffffec;
+}
+
+.sair-li{
+    color: #000000 !important;
+    padding-right: 0 !important;
+}
+
+.toggle-button{
+    position: absolute;
+    top: .75rem;
+    right: 1rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+}
+
+.toggle-button .bar{
+    height: 3px;
+    width: 100%;
+    background-color: #000000;
+    border-radius: 10px;
+}
+
+/* Responsivo Navbar */
+@media (max-width: 640px) {
+    .toggle-button{
+        margin-top: 30px;
+        display: flex;
+    }
+
+    .navbar-links{
+        display: none;
+        width: 100%;
+    }
+
+    .navbar{
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+    }
+
+    .navbar-links ul{
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .navbar-links li{
+        text-align: center;
+    }
+
+    .navbar-links a{
+        padding: .5rem 3rem;
+    }
+
+    .navbar-links.active{
+        display: flex;
+    }
+
+    .sair-img{
+        width: 5%;
+    }
+}
+
+.dropdown-menu{
+    display: none !important;
+}
+
+.dropdown-menu.show{
+    display: block !important;
+}
+
+.dropdown-item{
+    color: black !important;
+}
+
+h1{
+    text-align: center;
+    margin-top: 2%;
+}
+
+/* Tabela */
+table{
+    margin-top: 2%;
+    text-align: center;
+}
+
+.tabela {
+    background-color: #5fcbd7;
+    color: #000000
+}
+
+.btn-editar{
+    color: #198828;
+}
+
+.btn-editar:hover{
+    color: #0f5218;
+}
+
+.btn-excluir{
+    color: #4242cf;
+}
+
+.btn-excluir:hover{
+    color: #1d1dc4;
+}
+
+.left-align{
+    text-align: left;
+}
+
+abbr{
+    text-decoration: underline !important;
+}
+
+/* Mensagens */
+.msg{
+   text-align: center;
+   margin: 5px 250px 0 250px;
+}
+
+p{
+    margin-bottom: 0;
+}
+
+/* Página de pesquisa */
+#input-pesq{
+    border-radius: 15px 0 0 15px;
+}
+
+#btn-pesq{
+    border-radius: 0 15px 15px 0;
+    background-color: #5fcbd7;
+}
+
+#btn-pesq:hover{
+    background-color: #19c0d3;
+}
+
+.centered{
+    margin: 0 auto !important;
+    float: none !important;
+}
+
+.no-border{
+    border: 0 !important;
+}
+
+.no-border-top{
+    border-color: #dee2e6 !important;
+}
+
+.input-table{
+    text-align: center;
+    padding: 0 5px;
+}
+
+.required::after{
+    color: #e32;
+    content: ' *';
+    display:inline;
+}
+
+.black-color{
+    color: black;
+}
+
+.black-color:hover{
+    color: #0c0c0c9c
+}
+
+.distance-bottom{
+    margin-bottom: 50px;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+/* Footer */
+footer{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 200px;
+    padding: 35px 75px 0px;
+    background: #111;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+footer .cont{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+footer .cont .sobre{
+    margin-right: 30px;
+}
+
+footer .cont .isso{
+    width: 40%;
+}
+
+footer .cont h2{
+    position: relative;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+footer .cont h2:before{
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: #f00;
+}
+
+footer .cont p{
+    color: #999;
+}
+
+footer .cont .links ul li{
+    list-style: none;
+}
+
+footer .cont .links ul li a{
+    color: #999;
+    text-decoration: none;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+footer .cont .links ul li a:hover{
+    color: #fff;
+}
+
+footer .cont .contato{
+
+    margin-right: 0 !important;
+}
+
+footer .cont .contato .info{
+    position: relative;
+}
+
+footer .cont .contato .info li{
+    display: flex;
+    margin-bottom: 16px;
+}
+
+footer .cont .contato .info li span{
+    color: #999;
+}
+
+footer .cont .contato .info li a{
+    color: #999;
+    text-decoration: none;
+}
+
+footer .cont .contato .info li a:hover{
+    color: #fff;
+}
+
+.test:hover{
+    color: #fff !important;
+}

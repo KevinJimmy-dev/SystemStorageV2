@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('requests', function (Blueprint $table) {
             $table->id();
-            $table->date('date_request');
+            $table->date('date');
             $table->integer('product_id');
             $table->timestamps();
         });

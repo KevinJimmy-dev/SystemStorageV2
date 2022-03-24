@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('name_product', 45);
-            $table->string('storageUnity_product', 45);
-            $table->float('quantity_product');
-            $table->date('deliveryDate_product');
-            $table->date('expirationDate_product');
-            $table->text('observation_product', 200)->nullable();
+            $table->string('name', 45);
+            $table->string('storageUnity', 45);
+            $table->float('quantity');
+            $table->date('deliveryDate');
+            $table->date('expirationDate');
+            $table->text('observation', 200)->nullable();
             $table->timestamps();
         });
     }

@@ -21,7 +21,7 @@
 </head>
 
 <body id="body">
-    <!-- Tela de login -->
+    {{-- Tela de login --}}
     <section class="h-100 gradient-form" style="background-color: #f1efef;">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -37,11 +37,11 @@
                                     </div>
 
                                     {{-- Form --}}
-                                    <form method="POST" action="/auth">
+                                    <form method="POST" action="{{ route('auth') }}">
                                         @csrf
                                         {{-- User --}}
                                         <div class="form-floating mb-3">
-                                            <input type="text" class="form-control" id="usuario" required name="user" maxlength="75" placeholder="Digite o usuário">
+                                            <input type="text" class="form-control" id="usuario" required name="username" maxlength="75" placeholder="Digite o usuário">
                                             <label for="usuario">Usuário <ion-icon name="person-outline"></ion-icon> </label>
                                         </div>
 
