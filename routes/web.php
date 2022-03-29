@@ -4,6 +4,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CoordinatorController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategorieController;
+use App\Models\Categorie;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +28,12 @@ Route::post('/login/auth', [UserController::class, 'auth'])->name('auth');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/categorias', [CategorieController::class, 'index'])->name('home.categorie');
+    Route::get('/categorias/cadastrar', [CategorieController::class, 'viewRegister'])->name('viewRegister.categorie');
+    Route::post('/categorias/cadastrar/criar', [CategorieController::class, 'create'])->name('create.categorie');
+    Route::get('/categorias/editar/{id}', [CategorieController::class, 'edit'])->name('edit.categorie');
+    Route::get('/categorias/excluir/{id}', [CategorieController::class, 'delete'])->name('delete.categorie');
+
     Route::middleware(['employee'])->group(function () {
         Route::get('/funcionario', [EmployeeController::class, 'index'])->name('home.employee');
     });
