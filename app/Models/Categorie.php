@@ -9,7 +9,6 @@ class Categorie extends Model
 {
     use HasFactory;
 
-    
     public function product(){
         return $this->belongsTo('App\Models\Product');
     }

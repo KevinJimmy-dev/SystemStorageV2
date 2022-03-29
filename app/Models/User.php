@@ -51,4 +51,15 @@ class User extends Authenticatable
     public function control(){
         return $this->belongsTo('App\Models\Control');
     }
+
+    public static function userLevel(){
+
+        $user = auth()->user();
+
+        if($user){
+            $userLevel = User::where('level', $user->level)->first()->toArray();
+        }
+
+        return $userLevel;
+    }
 }
