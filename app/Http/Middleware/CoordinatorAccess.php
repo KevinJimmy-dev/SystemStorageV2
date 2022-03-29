@@ -18,8 +18,15 @@ class CoordinatorAccess
     {
         if(auth()->check() && auth()->user()->level == 2){
             return $next($request);
-        }
 
-        dd('Acesso negado, você não é cordenador!');
+        } elseif(auth()->check() && auth()->user()->level == 1){
+            return redirect('/funcionario');
+
+        } elseif(auth()->check() && auth()->user()->level == 3){
+            return redirect('/cordenador');
+            
+        } else{
+            return redirect('/login');
+        }
     }
 }

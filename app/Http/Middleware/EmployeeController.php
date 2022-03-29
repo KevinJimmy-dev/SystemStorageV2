@@ -18,8 +18,15 @@ class EmployeeController
     {
         if(auth()->check() && auth()->user()->level == 1){
             return $next($request);
-        }
 
-        dd('Acesso negado, você não é um funcionário!');
+        } elseif(auth()->check() && auth()->user()->level == 2){
+            return redirect('/funcionario');
+
+        } elseif(auth()->check() && auth()->user()->level == 3){
+            return redirect('/cordenador');
+
+        } else{
+            return redirect('/login');
+        }
     }
 }
