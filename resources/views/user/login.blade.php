@@ -17,7 +17,7 @@
     {{-- CSS password --}}
     <link rel="stylesheet" href="/css/password.css">
 
-    <title>Login</title>
+    <title>Login - Storage System</title>
 </head>
 
 <body id="body">

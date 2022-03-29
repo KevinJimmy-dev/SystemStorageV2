@@ -1,25 +1,21 @@
 /* CSS usado em todas as páginas */
-
 *{
     box-sizing: border-box;
+    font-family: Roboto;
 }
 
 body {
     background-color: #f1efef;
     margin: 0;
     padding: 0;
-    position: relative;
-    min-height: 100%;
 }
 
-body::after{
-    content: '';
-    display: block;
-    height: 200px;
-}
-
-html{
+html, body{
     height: 100%;
+}
+
+h1{
+    font-size: 2.5rem;
 }
 
 /* Navbar */
@@ -29,6 +25,7 @@ html{
     justify-content: space-between;
     align-items: center;
     color: #5fcbd7;
+    height: 98px;
 }
 
 .brand-title{
@@ -73,7 +70,7 @@ html{
 
 .sair-li{
     color: #000000 !important;
-    padding-right: 0 !important;
+    padding-right: 10px !important;
 }
 
 .toggle-button{
@@ -95,7 +92,7 @@ html{
 }
 
 /* Responsivo Navbar */
-@media (max-width: 640px) {
+@media (max-width: 992px) {
     .toggle-button{
         margin-top: 30px;
         display: flex;
@@ -146,92 +143,13 @@ html{
     color: black !important;
 }
 
-h1{
-    text-align: center;
-    margin-top: 2%;
-}
-
-/* Tabela */
-table{
-    margin-top: 2%;
-    text-align: center;
-}
-
-.tabela {
-    background-color: #5fcbd7;
-    color: #000000
-}
-
-.btn-editar{
-    color: #198828;
-}
-
-.btn-editar:hover{
-    color: #0f5218;
-}
-
-.btn-excluir{
-    color: #4242cf;
-}
-
-.btn-excluir:hover{
-    color: #1d1dc4;
-}
-
+/* Geral */
 .left-align{
     text-align: left;
 }
 
 abbr{
     text-decoration: underline !important;
-}
-
-/* Mensagens */
-.msg{
-   text-align: center;
-   margin: 5px 250px 0 250px;
-}
-
-p{
-    margin-bottom: 0;
-}
-
-/* Página de pesquisa */
-#input-pesq{
-    border-radius: 15px 0 0 15px;
-}
-
-#btn-pesq{
-    border-radius: 0 15px 15px 0;
-    background-color: #5fcbd7;
-}
-
-#btn-pesq:hover{
-    background-color: #19c0d3;
-}
-
-.centered{
-    margin: 0 auto !important;
-    float: none !important;
-}
-
-.no-border{
-    border: 0 !important;
-}
-
-.no-border-top{
-    border-color: #dee2e6 !important;
-}
-
-.input-table{
-    text-align: center;
-    padding: 0 5px;
-}
-
-.required::after{
-    color: #e32;
-    content: ' *';
-    display:inline;
 }
 
 .black-color{
@@ -242,105 +160,95 @@ p{
     color: #0c0c0c9c
 }
 
-.distance-bottom{
-    margin-bottom: 50px;
+.white-color{
+    color: #eee8e8ad !important;
 }
 
-a:hover{
-    text-decoration: none;
+.white-color:hover{
+    color: #ffffffcb !important;
+}
+
+.gray-color{
+    color: #6C757D !important;
+}
+
+.gray-color:hover{
+    color: #6c757dda !important;
+}
+
+a, a:hover{
+    text-decoration: none !important;  
+}
+
+.fa-solid{
+    color: black;
+}
+
+/* Mensagens */
+.msg{
+    background-color: #D4EDDA;
+    color: #155724;
+    border: 1px solid #C3E6CB;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center;
+    padding: 10px;
+}
+
+p{
+    margin-bottom: 0;
+}
+
+/* Table */
+.tabela{
+    background-color: #5fcbd7;
+    color: #000000;
+    margin-top: 1.5rem;
+}
+
+/* Content */
+.body-content {
+    min-height: 100%;
+    margin-bottom: -200px; 
+}
+
+.body-content:after {
+    content: "";
+    display: block;
 }
 
 /* Footer */
-footer{
-    position: absolute;
-    bottom: 0px;
-    width: 100%;
-    height: 200px;
-    padding: 35px 75px 0px;
-    background: #111;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-footer .cont{
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    flex-direction: row;
-}
-
-footer .cont .sobre{
-    margin-right: 30px;
-}
-
-footer .cont .isso{
-    width: 40%;
-}
-
-footer .cont h2{
+footer {
     position: relative;
-    color: #fff;
-    font-weight: 500;
-    margin-bottom: 15px;
+    bottom:0;
+    left:0;
+    right: 0;
+    background-color: #111 !important;
 }
 
-footer .cont h2:before{
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 50px;
-    height: 2px;
-    background: #f00;
+footer section{
+    display: unset;
 }
 
-footer .cont p{
-    color: #999;
+footer .div-footer{
+    background-color: #111 !important;
 }
 
-footer .cont .links ul li{
-    list-style: none;
+footer .sides{
+    margin-left: 0px !important;
+    padding-left: 0px !important;
 }
 
-footer .cont .links ul li a{
-    color: #999;
-    text-decoration: none;
-    margin-right: 10px;
-    display: inline-block;
+footer .sobre{
+    text-align: initial;
 }
 
-footer .cont .links ul li a:hover{
-    color: #fff;
+footer .titles{
+    text-align: initial;
 }
 
-footer .cont .contato{
-
-    margin-right: 0 !important;
+.rodape, .page-wrap:after {
+    height: 207px;
 }
 
-footer .cont .contato .info{
-    position: relative;
-}
-
-footer .cont .contato .info li{
-    display: flex;
-    margin-bottom: 16px;
-}
-
-footer .cont .contato .info li span{
-    color: #999;
-}
-
-footer .cont .contato .info li a{
-    color: #999;
-    text-decoration: none;
-}
-
-footer .cont .contato .info li a:hover{
-    color: #fff;
-}
-
-.test:hover{
-    color: #fff !important;
-}

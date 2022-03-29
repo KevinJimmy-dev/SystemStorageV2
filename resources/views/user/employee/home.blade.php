@@ -1,27 +1,42 @@
-@extends('layouts.main')
+@extends('layouts.template')
 
-@section('css', 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css')
-@section('integrityCss', 'sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO')
-@section('crossoriginCss', 'anonymous')
-
-@section('css2', '/css/home.css')
+@section('title', 'Homes - Storage System')
 
 @section('content')
+<h1 class="text-center mt-5 mb-5">Produtos Cadastrados</h1>
 
-@extends('layouts.headerEmployee')
-
-Página de funcionario
-
-<br>
-
-<a href="{{ route('logout') }}">Sair</a>
-
-{{-- Bootstrap 5.1 --}}
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-{{-- Navbar --}}
-<script src="../../../Controller/Pages/_js/navbar.js"></script>
-
-<script src="https://kit.fontawesome.com/09a5251690.js" crossorigin="anonymous"></script>
-
+<div class="container mt-5 mb-3 my-3">
+    <div class="table-responsive" id="tbl">
+        <table class="tabela table table-bordered">
+            <thead>
+                <tr class="text-center">
+                    <th>Produto</td>
+                    <th>Quantidade</td>
+                    <th>Entrega</td>
+                    <th>Validade</td>
+                    <th>Observação</td>
+                    <th>Categoria</td>
+                    <th>Ações</td>
+                </tr>
+            </thead>
+            <tbody>
+                @for($i = 0; $i < count($products); $i++)
+                    <tr>
+                        <td>{{ $products[$i]['name'] }}</td>
+                        <td class="text-center">{{ $products[$i]['quantity'] . " " . $products[$i]['storageUnity'] }}</td>
+                        <td class="text-center">{{ date('d/m/Y', strtotime($products[$i]['deliveryDate'])) }}</td>
+                        <td class="text-center">{{ date('d/m/Y', strtotime($products[$i]['expirationDate'])) }}</td>
+                        <td>{{ $products[$i]['observation'] }}</td>
+                        <td>{{ $categories[$i]['name_categorie'] }}</td>
+                        <td class="text-center">
+                            <a href="{{ route('categorias/editar/', $product[$i][$id]) }}">EDITAR </a>
+                            |
+                            <a href="">EXCLUIR </a>
+                        </td>
+                    </tr>
+                @endfor
+            </tbody>
+        </table>
+    </div>        
+</div>
 @endsection
