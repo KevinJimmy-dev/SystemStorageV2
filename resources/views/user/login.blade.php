@@ -61,6 +61,14 @@
                                             <input type="submit" value="ACESSAR" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3 mt-4">
                                         </div>
                                     </form>
+                                    <div class="container body-content mt-5">
+                                        @if(session('msgError'))
+                                            <p class="msgError">{{ session('msgError') }}</p>
+                                        @endif
+                                        @if(session('msgWarning'))
+                                            <p class="msgWarning">{{ session('msgWarning') }}</p>
+                                        @endif
+                                    </div>
 
                                 </div>
                             </div>
