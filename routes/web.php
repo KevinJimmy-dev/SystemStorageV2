@@ -1,11 +1,8 @@
 <?php
 
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\CoordinatorController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CategorieController;
-use App\Models\Categorie;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategorieController;   
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,21 +25,18 @@ Route::post('/login/auth', [UserController::class, 'auth'])->name('auth');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/home', [UserController::class, 'home'])->name('home.user');
+
     Route::get('/categorias', [CategorieController::class, 'index'])->name('home.categorie');
     Route::get('/categorias/cadastrar', [CategorieController::class, 'viewRegister'])->name('viewRegister.categorie');
     Route::post('/categorias/cadastrar/criar', [CategorieController::class, 'create'])->name('create.categorie');
     Route::get('/categorias/editar/{id}', [CategorieController::class, 'edit'])->name('edit.categorie');
-    Route::get('/categorias/excluir/{id}', [CategorieController::class, 'delete'])->name('delete.categorie');
+    Route::put('/categorias/atualizar/{id}', [CategorieController::class, 'update'])->name('update.categorie');
+    Route::delete('/categorias/excluir/{id}', [CategorieController::class, 'destroy'])->name('delete.categorie');
 
-    Route::middleware(['employee'])->group(function () {
-        Route::get('/funcionario', [EmployeeController::class, 'index'])->name('home.employee');
-    });
-
-    Route::middleware(['coordinator'])->group(function () {
-        Route::get('/cordenador', [CoordinatorController::class, 'index'])->name('home.coordinator');
-    });
-
-    Route::middleware(['admin'])->group(function () {
-        Route::get('/admin', [AdminController::class, 'index'])->name('home.admin');
-    });
+    Route::get('/produtos/cadastrar', [ProductController::class, 'viewRegister'])->name('viewRegister.product');
+    Route::post('/produtos/cadastrar/criar', [ProductController::class, 'create'])->name('create.product');
+    Route::get('/produtos/editar/{id}', [ProductController::class, 'edit'])->name('edit.product');
+    Route::put('/produtos/atualizar/{id}', [ProductController::class, 'update'])->name('update.product');
+    Route::delete('/produtos/excluir/{id}', [ProductController::class, 'destroy'])->name('delete.product');
 });
