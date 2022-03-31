@@ -1,3 +1,7 @@
+*{
+  font-family: Roboto;
+}
+
 /* CSS do login */
 .gradient-custom-2 {
   /* fallback for old browsers */
@@ -18,6 +22,31 @@
 
 #img1{
   margin-bottom: 10%;
+}
+
+/* Msgs */
+.msgError{
+  background-color: #f5090987;
+  color: black;
+  font-weight: bold;
+  border: 1px solid #d35353;
+  width: 100%;
+  margin-top: -48px;
+  margin-bottom: 0;
+  text-align: center;
+  padding: 10px;
+}
+
+.msgWarning{
+  background-color: #f2f37578;
+  color: black;
+  font-weight: bold;
+  border: 1px solid #b5b331;
+  width: 100%;
+  margin-top: -48px;
+  margin-bottom: 0;
+  text-align: center;
+  padding: 10px;
 }
 
 @media (min-width: 768px) {

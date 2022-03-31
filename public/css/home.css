@@ -184,20 +184,54 @@ a, a:hover{
     color: black;
 }
 
+/* Buttons */
+.btn-edit{
+   
+}
+
+.btn-delete{
+    
+}
+
+/* Modal */
+.modal-title{
+    color: black;
+    font-weight: bolder;
+}
+
+.modal-body{
+    color: black;
+}
+
 /* Mensagens */
 .msg{
-    background-color: #D4EDDA;
-    color: #155724;
-    border: 1px solid #C3E6CB;
+    background-color: #b4e9c1;
+    color: black;
+    font-weight: bold;
+    border: 1px solid #447a50b0;
     width: 100%;
-    margin-top: 0;
+    margin-top: -48px;
     margin-bottom: 0;
     text-align: center;
     padding: 10px;
 }
 
+.msgError{
+
+}
+
+.msgWarning{
+
+}
+
 p{
     margin-bottom: 0;
+}
+
+.required::after{
+    color: #e32;
+    content: ' *';
+    display:inline;
 }
 
 /* Table */
