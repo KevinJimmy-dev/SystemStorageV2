@@ -14,8 +14,6 @@ class CategorieController extends Controller
 
         $categories = Categorie::all()->toArray();
 
-        //dd($products);
-
         return view('categorie.home', [
             'userLevel' => $userLevel,
             'categories' => $categories
@@ -27,7 +25,7 @@ class CategorieController extends Controller
         $userLevel = User::userLevel();
 
         return view('categorie.register', [
-            'userLevel' => $userLevel,
+            'userLevel' => $userLevel
         ]);
     }
 
@@ -37,8 +35,53 @@ class CategorieController extends Controller
 
         $categorie->name_categorie = $request->categorie;
 
-        $categorie->save();
+        $read = $categorie->save();
 
-        return redirect('/categorias')->with('msg', "Categoria criada com sucesso!");
+        if($read){
+            return redirect()->route('home.categorie')->with('msg', "Categoria cadastrada com sucesso!");
+        } else{
+            return redirect()->route('home.categorie')->with('msgError', "Erro ao cadastrar a Categoria!");
+        }
+    }
+
+    public function edit($id){
+
+        $userLevel = User::userLevel();
+
+        $categorie = Categorie::findOrFail($id);
+
+        return view('categorie.edit', [
+            'categorie' => $categorie,
+            'userLevel' => $userLevel
+        ]);
+    }
+
+    public function update(Request $request){
+
+        $data = $request->all();
+
+        $update = Categorie::findOrFail($request->id)->update($data);
+
+        if($update){
+            return redirect()->route('home.categorie')->with('msg', "Categoria editada com sucesso!");
+        } else{
+            return redirect()->route('home.categorie')->with('msgError', "Erro ao editar a Categoria!");
+        }
+    }
+
+    public function destroy(Request $request){
+
+        $id = $request['id'];
+
+        $categorie = Categorie::find($id);
+
+        $delete = $categorie->delete();
+
+        if($delete){
+            return redirect()->route('home.categorie')->with('msg', "Categoria excluida com sucesso!");
+
+        } else{
+            return redirect()->route('home.categorie')->with('msgError', "Erro ao excluir a categoria!");
+        }
     }
 }
