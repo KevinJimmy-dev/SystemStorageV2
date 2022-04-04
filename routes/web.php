@@ -1,8 +1,11 @@
 <?php
 
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CategorieController;   
+use App\Http\Controllers\{
+    UserController,
+    ProductController,
+    CategorieController
+};
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,6 +39,12 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/produtos/cadastrar', [ProductController::class, 'viewRegister'])->name('viewRegister.product');
     Route::post('/produtos/cadastrar/criar', [ProductController::class, 'create'])->name('create.product');
+    Route::get('/produtos/pesquisar/', [ProductController::class, 'viewSearch'])->name('viewSearch.product');
+    Route::post('/produtos/pesquisar/{search}', [ProductController::class, 'search'])->name('search.product');
+
+    Route::get('/requisitar', [ProductController::class, 'requestView'])->name('requestView');
+    Route::get('/requisitar/search', [ProductController::class, 'requestSearch'])->name('requestSearch');
+
     Route::get('/produtos/editar/{id}', [ProductController::class, 'edit'])->name('edit.product');
     Route::put('/produtos/atualizar/{id}', [ProductController::class, 'update'])->name('update.product');
     Route::delete('/produtos/excluir/{id}', [ProductController::class, 'destroy'])->name('delete.product');
