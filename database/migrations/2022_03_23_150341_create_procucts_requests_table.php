@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products_requests', function (Blueprint $table) {
+        Schema::create('product_request', function (Blueprint $table) {
             $table->id();
             $table->float('quantity_request');
             $table->foreignId('product_id')->constrained();
             $table->foreignId('request_id')->constrained();
-            $table->timestamps();
+            $table->timestamp('created_at');
         });
     }
 

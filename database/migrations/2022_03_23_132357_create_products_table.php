@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('deliveryDate');
             $table->date('expirationDate');
             $table->text('observation', 200)->nullable();
-            $table->timestamps();
+            $table->foreignId('categorie_id')->constrained('categories');
         });
     }
 

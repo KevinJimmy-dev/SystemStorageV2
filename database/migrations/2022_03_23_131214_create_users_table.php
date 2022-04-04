@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('username', 45);
             $table->string('password', 75);
             $table->integer('level');
-            $table->binary('stats');
+            $table->boolean('stats');
             $table->timestamps();
         });
     }
