@@ -15,7 +15,7 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                @if($categories)
                     @for($i = 0; $i < count($categories); $i++) 
                         <tr>
                             <td class="text-center">{{ $categories[$i]['name_categorie'] }}</td>
@@ -59,7 +59,13 @@
                             </td>
                         </tr>
                     @endfor
-                    
+                @else
+                    <tr>
+                        <td colspan="2">
+                            <p>Ainda não há nenhuma categoria cadastrada... <a href="{{ route('viewRegister.categorie') }}">Clique aqui para cadastrar a primeira.</a></p>
+                        </td>
+                    </tr>
+                @endif
                 </tbody>
             </table>
         </div>

@@ -17,7 +17,7 @@
 
                 <div class="form-floating mb-3">
                     <select name="storageUnity" class="form-select select" id="storageUnity" required>
-                        <option value="none" disabled selected>Selecione uma unidade de medida</option>
+                        <option value="">Selecione uma unidade de medida</option>
                         <option value="Kg">Kg - Quilograma</option>
                         <option value="g">g - Grama</option>        
                         <option value="L">L - Litro</option>
@@ -47,8 +47,8 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <select name="categorie_id" class="form-select select" id="categorie_id" required>
-                        <option value="none" disabled selected>Selecione uma categoria</option>
+                    <select name="categorie_id" class="form-select select" id="categorie_id" required oninvalid="this.setCustomValidity('Selecione uma categoria!')" onchange="try{setCustomValidity('')}catch(e){}">
+                        <option value="">Selecione uma categoria</option> 
                         @foreach($categories as $categorie)
                             <option value="{{ $categorie->id }}">
                                 {{ $categorie->name_categorie }}
@@ -60,7 +60,7 @@
 
                 <div class="row">
                     <div class="col text-center">
-                        <input type='submit' class="btn btn-info text-center" id="btn-update" value='Cadastrar' disabled>
+                        <input type='submit' class="btn btn-info text-center" id="btn-update" value='Cadastrar'>
                     </div>
                 </div>  
 

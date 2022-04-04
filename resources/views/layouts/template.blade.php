@@ -10,7 +10,11 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
+    <script src="https://kit.fontawesome.com/09a5251690.js" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="/css/home.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <title>@yield('title')</title>
 </head>
@@ -97,14 +101,14 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="li-color">
+                        <a href="{{ route('viewSearch.product') }}" class="li-color">
                             <strong>
                                 Pesquisar Produto <i class="fa-solid fa-magnifying-glass"></i>
                             </strong>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="li-color">
+                        <a href="{{ route('requestView') }}" class="li-color">
                             <strong>
                                 Requisição <i class="fa-solid fa-utensils"></i>
                             </strong>
@@ -201,9 +205,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
     <script src="/js/navbar.js"></script>
-
-    <script src="https://kit.fontawesome.com/09a5251690.js" crossorigin="anonymous"></script>
-
 </body>
 
 </html>

@@ -20,7 +20,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                
+                @if($products)
                     @for($i = 0; $i < count($products); $i++)
                         <tr>
                             <td>{{ $products[$i]['name'] }}</td>
@@ -49,7 +49,7 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Excluir Categoria</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">Excluir Produto</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
@@ -68,7 +68,13 @@
                             </td>
                         </tr>
                     @endfor
-                
+                @else
+                    <tr>
+                        <td colspan="7">
+                            <p>Ainda não há nenhum produto cadastrado... <a href="{{ route('viewRegister.product') }}">Clique aqui para cadastrar o primeiro.</a></p>
+                        </td>
+                    </tr>
+                @endif
                 </tbody>
             </table>
         </div>        
