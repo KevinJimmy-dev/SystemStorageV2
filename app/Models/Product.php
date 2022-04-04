@@ -11,6 +11,8 @@ class Product extends Model
 
     protected $guarded = [];
 
+    public $timestamps = false;
+
     public function categories(){
         return $this->hasMany('App\Models\Categorie');
     }
@@ -20,6 +22,6 @@ class Product extends Model
     }
 
     public function controls(){
-        return $this->belongsToMany('App\Models\Control');
+        return $this->belongsToMany(Control::class);
     }
 }
