@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Product;
-use App\Models\User;
-use App\Models\Categorie;
+use App\Models\{
+    Product,
+    User,
+    Categorie,
+    Control
+};
+use Illuminate\Support\Arr;
 
 class ProductController extends Controller{
 
@@ -28,6 +32,8 @@ class ProductController extends Controller{
 
     public function create(Request $request){
 
+        $user = auth()->user();
+
         $product = new Product();
 
         $product->name = $request->name;
@@ -41,11 +47,57 @@ class ProductController extends Controller{
         $create = $product->save();
 
         if($create){
-            return redirect()->route('home.user')->with('msg', "Produto cadastrado com sucesso!");
 
+            $control = new Control();
+
+            $control->observation_control = $request->observation;
+            $control->user_id = $user->id;
+
+            $createControl = $control->save();
+
+            if($createControl){
+
+                $control->products()->attach([
+                    1 => ['control_id' => $control->id, 'product_id' => $product->id]
+                ]);
+
+                return redirect()->route('home.user')->with('msg', "Produto cadastrado com sucesso!");
+            }
         } else{
             return redirect()->route('home.user')->with('msgError', "Erro ao cadastrar o produto!");
         }
+    }
+
+    public function viewSearch(){
+
+        $userLevel = User::userLevel();
+
+        $categories = Categorie::all();
+
+        return view('product.search', [
+            'userLevel' => $userLevel,
+            'categories' =>$categories
+        ]);
+    }
+
+    public function search(){
+
+        $userLevel = User::userLevel();
+
+        $categories = Categorie::all();
+        
+        $search = request('search');
+
+        $products = Product::where([
+            ['name', 'like', '%' . $search . '%']
+        ])->get()->toArray();
+
+        return view('product.resultsSearch', [
+            'userLevel' => $userLevel,
+            'categories' => $categories,
+            'products' => $products,
+            'search' => $search
+        ]);
     }
 
     public function edit($id){
@@ -90,6 +142,38 @@ class ProductController extends Controller{
             
         } else{
             return redirect()->route('home.user')->with('msgError', "Erro ao excluir o produto!");
+        }
+    }
+
+    public function requestView(){
+
+        $userLevel = User::userLevel();
+
+        return view('request/home', [
+            'userLevel' => $userLevel
+        ]);
+    }
+
+    public function requestSearch(Request $request){
+
+        $products = $request->word;
+
+        $products = Product::where([
+            ['name', 'like', '%' . $products . '%']
+        ])->get()->toArray();
+
+        if(count($products) <= 0){
+            echo "<li>Nenhum produto encontrado...</li>";
+
+        } else{
+            foreach($products as $product){                
+                echo "<li>
+                        $product[name] 
+                        <button class='btn-add' id='$product[id]' name='$product[name]' onclick='add(id, name, $product[quantity]);'>
+                            <i class='fa-solid fa-plus direita'></i>
+                        </button>
+                    </li>"; 
+            }  
         }
     }
 }

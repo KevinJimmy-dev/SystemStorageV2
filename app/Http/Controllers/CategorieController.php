@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categorie;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Exception;
 
 class CategorieController extends Controller
 {
@@ -75,13 +76,14 @@ class CategorieController extends Controller
 
         $categorie = Categorie::find($id);
 
-        $delete = $categorie->delete();
+        try{
+            $categorie->delete();
 
-        if($delete){
             return redirect()->route('home.categorie')->with('msg', "Categoria excluida com sucesso!");
 
-        } else{
-            return redirect()->route('home.categorie')->with('msgError', "Erro ao excluir a categoria!");
+        } catch(Exception $e){
+
+            return redirect()->route('home.categorie')->with('msgError', "Você não pode excluir essa categoria, porque possui produtos cadastrados com ela!");  
         }
     }
 }
