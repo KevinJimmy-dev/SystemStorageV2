@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/requisitar', [ProductController::class, 'requestView'])->name('requestView');
     Route::get('/requisitar/search', [ProductController::class, 'requestSearch'])->name('requestSearch');
+    Route::get('/requisitar/request', [ProductController::class, 'request'])->name('request');
 
     Route::get('/produtos/editar/{id}', [ProductController::class, 'edit'])->name('edit.product');
     Route::put('/produtos/atualizar/{id}', [ProductController::class, 'update'])->name('update.product');
