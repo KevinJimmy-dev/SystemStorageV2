@@ -21,13 +21,15 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg">
+        <nav class="navbar navbar-expand">
             <div class="brand-title">
                 <abbr title="Página Inicial">
                     <a href="{{ route('home.user') }}">
                         <img class="img-logo" src="/img/logo-storage1.png" alt="Logo 'Storage System', duas palavras em inglês: Storage = Armazenameto e System = Sistema. Storage está acima do system, fazendo uma espécie de degrau, do lado do storage possui um chapéu de cozinheiro." width="120px">
                     </a>
                 </abbr>
+
+                
             </div>
 
             <a href="#" class="toggle-button">

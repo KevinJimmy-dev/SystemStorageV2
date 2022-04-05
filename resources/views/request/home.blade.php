@@ -27,23 +27,30 @@
             </div>
         </div>
 
-        <div class="container mt-3 mb-3 my-3">
-            <div class="table-responsive" id="tbl">
-                <table class="tabela table table-bordered">
-                    <thead>
-                        <tr class="text-center">
-                            <th>Produto</td>
-                            <th>Quantidade Disponível</td>
-                            <th>Quantidade Requerida</td>
-                            <th>Remover</td>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody">
-                        
-                    </tbody>
-                </table>
+        <form action="{{ route('request') }}" method="get">
+            <div class="container mt-3 mb-3 my-3">
+                <div class="table-responsive" id="tbl">
+                    <table class="tabela table table-bordered text-center">
+                        <thead>
+                            <tr class="text-center">
+                                <th>Produto</td>
+                                <th>Quantidade Disponível</td>
+                                <th>Quantidade Requerida</td>
+                                <th>Remover</td>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+            
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row mt-4">
+                    <div class="col text-center">
+                        <input type='submit' class="btn btn-info text-center" id="btn-update" value='Requisitar'>
+                    </div>
+                </div>
             </div>
-        </div>
+        </form>
     </main>
 
     <script>
@@ -68,7 +75,7 @@
             });
         });
 
-        function add(id, name, quantity){
+        function add(id, name, quantity, unityStorage){
             var tbody = document.querySelector('#tbody');
             var tbl = document.querySelector('#tbl');
 
@@ -77,20 +84,24 @@
             var td2 = document.createElement('td');
             var td3 = document.createElement('td');
             var td4 = document.createElement('td');
-            var hidden = document.createElement('td');
 
             td1.innerHTML = name;
-            td2.innerHTML = "<input type='number' value='" + quantity + "' readonly>";
-            td3.innerHTML = "<input type='text'>";
-            hidden.innerHTML = "<input type='hidden' value='" + id + "'>";
+            td2.innerHTML = "<input type='number' required value='" + quantity + "' readonly class='input-req no-background' name='quantity[]'> " + unityStorage + "";
+            td3.innerHTML = "<input type='number' required class='input-req' name='request_value[]'>";
+            td4.innerHTML = "<i class='fa-solid fa-circle-minus black-color' onclick='remove(event.target);'></i> <input type='hidden' value='" + id + "' name='id_product[]'> <input type='hidden' value='" + name + "' name='name_product[]'>";
+
+            td2.classList.add('format');
 
             tbody.appendChild(tr);
-            tbl.appendChild(hidden);
 
             tr.appendChild(td1);
             tr.appendChild(td2);
             tr.appendChild(td3);
             tr.appendChild(td4);
+        }
+
+        function remove(elementoClicado){
+            elementoClicado.closest('tr').remove();
         }
     </script>
 @endsection

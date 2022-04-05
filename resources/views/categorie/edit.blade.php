@@ -22,6 +22,7 @@
             </form>
         </div>
     </main>
+    
     <script>
         const categorieValue = "{{$categorie->name_categorie}}";
         const btnSubmit = document.querySelector("#btn-update");
