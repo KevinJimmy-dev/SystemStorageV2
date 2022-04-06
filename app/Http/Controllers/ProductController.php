@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Http\Request as HttpRequest;
 use App\Http\Controllers\Controller;
 use App\Models\{
     Product,
     User,
     Categorie,
-    Control
+    Control,
+    Request
 };
 use Exception;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller{
 
@@ -31,7 +33,7 @@ class ProductController extends Controller{
         ]);
     }
 
-    public function create(Request $request){
+    public function create(HttpRequest $request){
 
         $user = auth()->user();
 
@@ -116,7 +118,7 @@ class ProductController extends Controller{
         ]);
     }
 
-    public function update(Request $request){
+    public function update(HttpRequest $request){
 
         $data = $request->all();
 
@@ -130,7 +132,7 @@ class ProductController extends Controller{
         }
     }
 
-    public function destroy(Request $request){
+    public function destroy(HttpRequest $request){
 
         $id = $request['id'];
 
@@ -155,7 +157,7 @@ class ProductController extends Controller{
         ]);
     }
 
-    public function requestSearch(Request $request){
+    public function requestSearch(HttpRequest $request){
 
         $products = $request->word;
 
@@ -182,7 +184,9 @@ class ProductController extends Controller{
         }
     }
 
-    public function request(Request $request){
+    public function request(HttpRequest $request){
+
+        $user = auth()->user();
         
         $quantity = $request->quantity;
         $requests = $request->request_value;
@@ -210,17 +214,34 @@ class ProductController extends Controller{
                         $newQuantity = $quantity[$i] - $requests[$i];
                         
                         $update = Product::findOrFail($id[$i])->update(['quantity' => $newQuantity]);
+
+                        if($update){
+
+                            $requestModel = new Request();
+        
+                            $requestModel->quantity_request = $requests[$i];
+                            $requestModel->user_id = $user->id;
+
+                            $createRequest = $requestModel->save();
+        
+                            if($createRequest){
+
+                                $productRequest = $requestModel->products()->attach([
+                                    1 => ['product_id' => $id[$i], 'request_id' => $requestModel->id]
+                                ]);
+                            } else{
+
+                                return redirect()->route('home.user')->with('msgError', "Erro ao requisitar um ou mais produtos!");
+                            }
+                        } else{
+            
+                            return redirect()->route('home.user')->with('msgError', "Erro ao requisitar um ou mais produtos!");
+                        }
                     }
                 }
-    
-                if($update){
-    
-                    return redirect()->route('home.user')->with('msg', "Requisição de um ou mais produtos feita com sucesso!");
-    
-                } else{
-    
-                    return redirect()->route('home.user')->with('msgError', "Erro ao requisitar um ou mais produtos!");
-                }
+
+                return redirect()->route('home.user')->with('msg', "Requisição de um ou mais produtos feita com sucesso!");
+                
             }
         } catch(Exception){
             return redirect()->route('home.user')->with('msgError', "Erro ao fazer a requisição!");

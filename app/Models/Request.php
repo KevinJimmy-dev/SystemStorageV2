@@ -9,11 +9,13 @@ class Request extends Model
 {
     use HasFactory;
 
+    protected $dates = ['date'];
+
     public function users(){
         return $this->hasMany('App\Models\User');
     }
 
     public function products(){
-        return $this->belongsToMany('App\Models\Product');
+        return $this->belongsToMany(Product::class);
     }
 }

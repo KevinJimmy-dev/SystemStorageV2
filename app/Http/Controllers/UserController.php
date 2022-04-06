@@ -60,8 +60,6 @@ class UserController extends Controller{
                 'products' => $products
             ]);
         }
-
-        
     }
     
     public function logout(Request $request){
@@ -71,5 +69,83 @@ class UserController extends Controller{
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    public function viewRegister(){
+
+        $userLevel = User::userLevel();
+
+        return view('user.employee.register', [
+            'userLevel' => $userLevel
+        ]);
+
+    }
+
+    public function create(Request $request){
+
+        //dd($request->all());
+
+        if($request->password == $request->passwordConf){
+
+            $info = $request->only(['name', 'username', 'password']);
+            $info['password'] = $request->password;
+            $info['password'] = bcrypt($info['password']);
+            $info['level'] = 1;
+            $info['stats'] = 1;
+
+            //dd($info);
+
+            User::create($info);
+
+            return redirect()->route('home.employee')->with('msg', 'Cadastro de funcionário(a) feito com sucesso!');
+
+        } else{
+            return redirect()->route('viewRegister.employee')->with('msgError', 'As senhas não coincidem!');
+        }
+    }
+
+    public function list(){
+
+        $userLevel = User::userLevel();
+
+        $employees = User::all();
+
+        if($userLevel['level'] == 1){
+            return back()->withInput();
+        }
+
+        return view('user.employee.home', [
+            'userLevel' => $userLevel,
+            'employees' => $employees
+        ]);
+    }
+
+    public function edit($id){
+
+        $userLevel = User::userLevel();
+
+        if(!$employee = User::find($id)){
+            return back()->withInput();
+        }
+
+        if($employee->level != 1){
+            return back()->withInput();
+        }
+
+        return view('user.employee.edit', [
+            'userLevel' => $userLevel,
+            'employee' => $employee
+        ]);
+    }
+
+    public function update(Request $request){
+
+        $user = User::find($request->id);
+
+        $info = $request->only('id', 'name', 'username', 'stats');
+
+        $user->update($info);
+
+        return redirect()->route('home.employee')->with('msg', "Funcionário(a) editado(a) com sucesso!");
     }
 }
