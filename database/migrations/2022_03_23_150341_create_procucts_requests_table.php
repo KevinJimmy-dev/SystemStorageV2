@@ -15,10 +15,8 @@ return new class extends Migration
     {
         Schema::create('product_request', function (Blueprint $table) {
             $table->id();
-            $table->float('quantity_request');
-            $table->foreignId('product_id')->constrained();
-            $table->foreignId('request_id')->constrained();
-            $table->timestamp('created_at');
+            $table->foreignId('product_id')->constrained('products');
+            $table->foreignId('request_id')->constrained('requests');
         });
     }
 
