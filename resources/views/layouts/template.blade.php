@@ -43,7 +43,7 @@
                     @if($userLevel['level'] == 3)
                         <li class="dropdown">
                             <a class="dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                                <strong>Cordenadores <i class="fa-solid fa-address-book"></i> </strong>
+                                <strong>Cordenadores <i class="fa-solid fa-users"></i> </strong>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
@@ -62,16 +62,16 @@
                     @if($userLevel['level'] >= 2)
                         <li class="dropdown">
                             <a class="dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                                <strong>Funcionários <i class="fa-solid fa-address-book"></i> </strong>
+                                <strong>Funcionários <i class="fa-solid fa-users"></i> </strong>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{{ route('home.employee') }}">
                                         Exibir Funcionários
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{{ route('viewRegister.employee') }}">
                                         Cadastrar Funcionário(a)
                                     </a>
                                 </li>

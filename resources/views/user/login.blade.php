@@ -47,8 +47,8 @@
 
                                         {{-- Password --}}
                                         <div class="form-floating mb-3">
-                                            <input type="password" class="form-control" id="senha" required name="password" maxlength="75" placeholder="Digite a senha">
-                                            <label for="senha"> Senha <ion-icon name="key-outline"></ion-icon> </label>
+                                            <input type="password" class="form-control" id="password" required name="password" maxlength="75" placeholder="Digite a senha">
+                                            <label for="password"> Senha <ion-icon name="key-outline"></ion-icon> </label>
                                             <div id="olho">
                                                 <abbr title="Mostrar senha" id="abrev">
                                                     <ion-icon name="eye-outline" id="btn-eye" onclick="mostrar()"></ion-icon>

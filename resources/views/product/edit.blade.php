@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <select name="categorie_id" class="form-select" id="categorie_id" required onkeyup="check();">
+                    <select name="categorie_id" class="form-select" id="categorie_id" required onclick="check();">
                         @foreach($categories as $categorie)
                             <option value="{{ $categorie->id }}" {{ $categorie->id == $product->categorie_id ? "selected='selected'" : "" }}>
                                 {{ $categorie->name_categorie }}
