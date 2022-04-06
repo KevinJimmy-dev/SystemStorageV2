@@ -27,6 +27,10 @@ Route::get('/login', [UserController::class, 'index'])->name('login');
 Route::post('/login/auth', [UserController::class, 'auth'])->name('auth');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
+Route::fallback(function () {
+    return back()->withInput();
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/home', [UserController::class, 'home'])->name('home.user');
 
@@ -41,12 +45,18 @@ Route::middleware('auth')->group(function () {
     Route::post('/produtos/cadastrar/criar', [ProductController::class, 'create'])->name('create.product');
     Route::get('/produtos/pesquisar/', [ProductController::class, 'viewSearch'])->name('viewSearch.product');
     Route::post('/produtos/pesquisar/{search}', [ProductController::class, 'search'])->name('search.product');
+    Route::get('/produtos/editar/{id}', [ProductController::class, 'edit'])->name('edit.product');
+    Route::put('/produtos/atualizar/{id}', [ProductController::class, 'update'])->name('update.product');
+    Route::delete('/produtos/excluir/{id}', [ProductController::class, 'destroy'])->name('delete.product');
 
     Route::get('/requisitar', [ProductController::class, 'requestView'])->name('requestView');
     Route::get('/requisitar/search', [ProductController::class, 'requestSearch'])->name('requestSearch');
     Route::get('/requisitar/request', [ProductController::class, 'request'])->name('request');
 
-    Route::get('/produtos/editar/{id}', [ProductController::class, 'edit'])->name('edit.product');
-    Route::put('/produtos/atualizar/{id}', [ProductController::class, 'update'])->name('update.product');
-    Route::delete('/produtos/excluir/{id}', [ProductController::class, 'destroy'])->name('delete.product');
+    Route::get('/funcionarios', [UserController::class, 'list'])->name('home.employee');
+    Route::get('/funcionarios/cadastrar', [UserController::class, 'viewRegister'])->name('viewRegister.employee');
+    Route::post('/funcionarios/cadastrar/create', [UserController::class, 'create'])->name('create.employee');
+    Route::get('/funcionarios/editar/{id}', [UserController::class, 'edit'])->name('edit.employee');
+    Route::put('/funcionarios/atualizar/{id}', [UserController::class, 'update'])->name('update.employee');
+
 });
