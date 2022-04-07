@@ -6,6 +6,7 @@ use App\Http\Controllers\{
     CategorieController
 };
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,5 +59,5 @@ Route::middleware('auth')->group(function () {
     Route::post('/funcionarios/cadastrar/create', [UserController::class, 'create'])->name('create.employee');
     Route::get('/funcionarios/editar/{id}', [UserController::class, 'edit'])->name('edit.employee');
     Route::put('/funcionarios/atualizar/{id}', [UserController::class, 'update'])->name('update.employee');
-
+    Route::delete('/funcionarios/excluir/{id}', [UserController::class, 'destroy'])->name('delete.employee');
 });
