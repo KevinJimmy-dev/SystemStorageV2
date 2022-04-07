@@ -35,9 +35,10 @@ class UserController extends Controller{
 
         $userLevel = User::userLevel();
 
-        $products = Product::all()->toArray();
+        $products = Product::paginate(10);
 
         $categorie_id = [];
+        $categories = [];
 
         if($products){
             foreach($products as $product){
@@ -83,22 +84,26 @@ class UserController extends Controller{
 
     public function create(Request $request){
 
-        //dd($request->all());
-
         if($request->password == $request->passwordConf){
 
-            $info = $request->only(['name', 'username', 'password']);
-            $info['password'] = $request->password;
-            $info['password'] = bcrypt($info['password']);
-            $info['level'] = 1;
-            $info['stats'] = 1;
+            $exists = User::where('username', $request->username)->first();
 
-            //dd($info);
+            if($exists){
 
-            User::create($info);
+                return redirect()->route('viewRegister.employee')->with('msgError', 'Esse nome de usuário já existe!');
 
-            return redirect()->route('home.employee')->with('msg', 'Cadastro de funcionário(a) feito com sucesso!');
+            } else{
 
+                $info = $request->only(['name', 'username', 'password']);
+                $info['password'] = $request->password;
+                $info['password'] = bcrypt($info['password']);
+                $info['level'] = 1;
+                $info['stats'] = 1;
+
+                User::create($info);
+
+                return redirect()->route('home.employee')->with('msg', 'Cadastro de funcionário(a) feito com sucesso!');
+            }
         } else{
             return redirect()->route('viewRegister.employee')->with('msgError', 'As senhas não coincidem!');
         }
@@ -108,7 +113,7 @@ class UserController extends Controller{
 
         $userLevel = User::userLevel();
 
-        $employees = User::all();
+        $employees = User::paginate(10);
 
         if($userLevel['level'] == 1){
             return back()->withInput();
@@ -128,7 +133,7 @@ class UserController extends Controller{
             return back()->withInput();
         }
 
-        if($employee->level != 1){
+        if($userLevel['level'] != 3 && $employee->level >= 2){
             return back()->withInput();
         }
 
@@ -140,12 +145,41 @@ class UserController extends Controller{
 
     public function update(Request $request){
 
-        $user = User::find($request->id);
+        if($request->level){
 
-        $info = $request->only('id', 'name', 'username', 'stats');
+            $user = User::find($request->id);
 
-        $user->update($info);
+            $info = $request->only('id', 'name', 'username', 'level', 'stats');
 
-        return redirect()->route('home.employee')->with('msg', "Funcionário(a) editado(a) com sucesso!");
+            $user->update($info);
+
+            return redirect()->route('home.employee')->with('msg', "Funcionário(a) editado(a) com sucesso!");
+
+        } else{
+
+            $user = User::find($request->id);
+
+            $info = $request->only('id', 'name', 'username', 'stats');
+
+            $user->update($info);
+
+            return redirect()->route('home.employee')->with('msg', "Funcionário(a) editado(a) com sucesso!");
+        }
+    }
+
+    public function destroy(Request $request){
+
+        $id = $request->id;
+
+        $employee = User::find($id);
+
+        $delete = $employee->delete();
+
+        if($delete){
+            return redirect()->route('home.employee')->with('msg', "Funcionário(a) excluido com sucesso!");
+            
+        } else{
+            return redirect()->route('home.employee')->with('msgError', "Erro ao excluir o(a) funcionário(a)!");
+        }
     }
 }

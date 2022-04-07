@@ -37,38 +37,39 @@ class ProductController extends Controller{
 
         $user = auth()->user();
 
-        $product = new Product();
+        $exists = Product::where('name', $request->name)->first();
 
-        $product->name = $request->name;
-        $product->storageUnity = $request->storageUnity;
-        $product->quantity = $request->quantity;
-        $product->deliveryDate = $request->deliveryDate;
-        $product->expirationDate = $request->expirationDate;
-        $product->observation = $request->observation;
-        $product->categorie_id = $request->categorie_id;
+        if($exists){
 
-        $create = $product->save();
+            return redirect()->route('home.user')->with('msgError', "O produto $request->name já existe!");
 
-        if($create){
-
-            $control = new Control();
-
-            $control->observation_control = $request->observation;
-            $control->user_id = $user->id;
-
-            $createControl = $control->save();
-
-            if($createControl){
-
-                $control->products()->attach([
-                    1 => ['control_id' => $control->id, 'product_id' => $product->id]
-                ]);
-
-                return redirect()->route('home.user')->with('msg', "Produto cadastrado com sucesso!");
-            }
         } else{
-            return redirect()->route('home.user')->with('msgError', "Erro ao cadastrar o produto!");
-        }
+
+            $info = $request->all();
+
+            $create = Product::create($info);
+
+            if($create){
+
+                $control = new Control();
+
+                $control->observation_control = $request->observation;
+                $control->user_id = $user->id;
+
+                $createControl = $control->save();
+
+                if($createControl){
+
+                    $control->products()->attach([
+                        1 => ['control_id' => $control->id, 'product_id' => $create->id]
+                    ]);
+
+                    return redirect()->route('home.user')->with('msg', "Produto cadastrado com sucesso!");
+                }
+            } else{
+                return redirect()->route('home.user')->with('msgError', "Erro ao cadastrar o produto!");
+            }
+        }  
     }
 
     public function viewSearch(){
@@ -88,8 +89,12 @@ class ProductController extends Controller{
         $userLevel = User::userLevel();
 
         $categories = Categorie::all();
-        
+
         $search = request('search');
+        
+        if($search == ""){
+            return redirect()->route('viewSearch.product')->with('msgWarning', 'Pesquise algo para buscar um ou mais produtos!');
+        }
 
         $products = Product::where([
             ['name', 'like', '%' . $search . '%']
@@ -175,9 +180,11 @@ class ProductController extends Controller{
                 echo "
                         <li>
                             $product[name] 
-                            <button class='btn-add' id='$product[id]' name='$product[name]' onclick='add(id, name, $product[quantity], `$product[storageUnity]`);'>
-                                <i class='fa-solid fa-plus direita'></i>
-                            </button>
+                            <abbr title='Adicionar'>
+                                <button class='btn-add' id='$product[id]' name='$product[name]' onclick='add(id, name, $product[quantity], `$product[storageUnity]`);'>
+                                    <i class='fa-solid fa-plus direita'></i>
+                                </button>
+                            </abbr>
                         </li>
                     "; 
             }  

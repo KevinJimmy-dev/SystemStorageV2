@@ -13,7 +13,9 @@ class CategorieController extends Controller
 
         $userLevel = User::userLevel();
 
-        $categories = Categorie::all()->toArray();
+        $categories = Categorie::paginate();
+
+        //dd($categories);
 
         return view('categorie.home', [
             'userLevel' => $userLevel,
@@ -32,16 +34,19 @@ class CategorieController extends Controller
 
     public function create(Request $request){
 
-        $categorie = new Categorie();
+        $exists = Categorie::where('name_categorie', $request->categorie)->first();
 
-        $categorie->name_categorie = $request->categorie;
+        if($exists){
+            
+            return redirect()->route('home.categorie')->with('msgError', "A categoria $request->name_categorie já existe!");
 
-        $read = $categorie->save();
-
-        if($read){
-            return redirect()->route('home.categorie')->with('msg', "Categoria cadastrada com sucesso!");
         } else{
-            return redirect()->route('home.categorie')->with('msgError', "Erro ao cadastrar a Categoria!");
+
+            $info = $request->all();
+
+            Categorie::create($info);
+
+            return redirect()->route('home.categorie')->with('msg', "Categoria cadastrada com sucesso!");
         }
     }
 
