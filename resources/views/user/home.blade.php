@@ -20,7 +20,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @if($products)
+                @if(count($products) > 0)
                     @for($i = 0; $i < count($products); $i++)
                         <tr>
                             <td>{{ $products[$i]['name'] }}</td>
@@ -77,6 +77,10 @@
                 @endif
                 </tbody>
             </table>
-        </div>        
+        </div>
+        
+        <div class="d-flex justify-content-center">
+            {{ $products->appends(['sort' => 'department'])->links() }}
+        </div>
     </div>
 @endsection

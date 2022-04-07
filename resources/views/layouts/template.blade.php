@@ -40,89 +40,86 @@
 
             <div class="navbar-links">
                 <ul>
-                    @if($userLevel['level'] == 3)
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                                <strong>Cordenadores <i class="fa-solid fa-users"></i> </strong>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item" href="#">
-                                        Exibir Cordenadores
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">
-                                        Cadastrar Cordenador(a)
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    @endif
                     @if($userLevel['level'] >= 2)
                         <li class="dropdown">
-                            <a class="dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                                <strong>Funcionários <i class="fa-solid fa-users"></i> </strong>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('home.employee') }}">
-                                        Exibir Funcionários
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('viewRegister.employee') }}">
-                                        Cadastrar Funcionário(a)
-                                    </a>
-                                </li>
-                            </ul>
+                            <abbr title="Menu Funcionários">
+                                <a class="dropdown-toggle li-color" href="#" data-bs-toggle="dropdown">
+                                        <strong>
+                                            Funcionários <i class="fas fa-users"></i>
+                                        </strong>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('home.employee') }}">
+                                            Exibir Funcionários
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('viewRegister.employee') }}">
+                                            Cadastrar Funcionário(a)
+                                        </a>
+                                    </li>
+                                </ul>
+                            </abbr>
                         </li>
                     @endif
                     <li class="dropdown">
-                        <a class="dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                            <strong>Categorias <i class="fa-solid fa-list"></i> </strong>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a class="dropdown-item" href="{{ route('home.categorie') }}">
-                                    Exibir Categorias
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="{{ route('viewRegister.categorie') }}">
-                                    Cadastrar Categoria
-                                </a>
-                            </li>
-                        </ul>
+                        <abbr title="Menu Categorias">
+                            <a class="dropdown-toggle li-color" href="#" data-bs-toggle="dropdown">
+                                <strong>
+                                    Categorias <i class="fas fa-list"></i>
+                                </strong>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('home.categorie') }}" class="li-color">
+                                        Exibir Categorias
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('viewRegister.categorie') }}">
+                                        Cadastrar Categoria
+                                    </a>
+                                </li>
+                            </ul>
+                        </abbr>
                     </li>
                     <li>
-                        <a href="{{ route('viewRegister.product') }}" class="li-color">
-                            <strong>
-                                Cadastrar Produto <i class="fa-solid fa-plus"></i>
-                            </strong>
-                        </a>
+                        <abbr title="Cadastrar Produto">
+                            <a href="{{ route('viewRegister.product') }}" class="li-color">
+                                <strong>
+                                    Cadastrar Produto <i class="fas fa-plus"></i>
+                                </strong>
+                            </a>
+                        </abbr>
                     </li>
                     <li>
-                        <a href="{{ route('viewSearch.product') }}" class="li-color">
-                            <strong>
-                                Pesquisar Produto <i class="fa-solid fa-magnifying-glass"></i>
-                            </strong>
-                        </a>
+                        <abbr title="Pesquisar Produto">
+                            <a href="{{ route('viewSearch.product') }}" class="li-color">
+                                <strong>
+                                    Pesquisar Produto <i class="fas fa-magnifying-glass"></i>
+                                </strong>
+                            </a>
+                        </abbr>
                     </li>
                     <li>
-                        <a href="{{ route('requestView') }}" class="li-color">
-                            <strong>
-                                Requisição <i class="fa-solid fa-utensils"></i>
-                            </strong>
-                        </a>
+                        <abbr title="Fazer Requisição">
+                            <a href="{{ route('requestView') }}" class="li-color">
+                                <strong>
+                                    Requisição <i class="fas fa-utensils"></i>
+                                </strong>
+                            </a>
+                        </abbr>
                     </li>
 
                     <li>
-                        <a class="sair-li" href="{{ route('logout') }}">
-                            <strong class="black-color">
-                                Sair <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                            </strong>
-                        </a>
+                        <abbr title="Sair (logout)">
+                            <a href="{{ route('logout') }}">
+                                <strong>
+                                     Sair <i class="fas fa-arrow-right-from-bracket"></i>
+                                </strong>
+                            </a>
+                        </abbr>
                     </li>
                 </ul>
             </div>

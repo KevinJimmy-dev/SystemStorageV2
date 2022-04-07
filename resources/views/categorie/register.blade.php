@@ -10,7 +10,7 @@
             <form method="POST" action="{{ route('create.categorie') }}">
                 @csrf
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="newCategorie" required name="categorie" maxlength="75" placeholder="Digite o nome da categoria">
+                    <input type="text" class="form-control" id="newCategorie" required name="name_categorie" maxlength="75" placeholder="Digite o nome da categoria">
                     <label for="newCategorie" class="required">Nome da Categoria</label>
                 </div>
                 <div class="row">

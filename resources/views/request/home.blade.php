@@ -88,7 +88,7 @@
             td1.innerHTML = name;
             td2.innerHTML = "<input type='number' required value='" + quantity + "' readonly class='input-req no-background' name='quantity[]'> " + unityStorage + "";
             td3.innerHTML = "<input type='number' required class='input-req' name='request_value[]'>";
-            td4.innerHTML = "<i class='fa-solid fa-circle-minus black-color' onclick='remove(event.target);'></i> <input type='hidden' value='" + id + "' name='id_product[]'> <input type='hidden' value='" + name + "' name='name_product[]'>";
+            td4.innerHTML = "<abbr title='Remover'><i class='fa-solid fa-circle-minus black-color' onclick='remove(event.target);'></i></abbr> <input type='hidden' value='" + id + "' name='id_product[]'> <input type='hidden' value='" + name + "' name='name_product[]'>";
 
             td2.classList.add('format');
 

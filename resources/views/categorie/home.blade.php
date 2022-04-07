@@ -15,7 +15,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @if($categories)
+                @if(count($categories) > 0)
                     @for($i = 0; $i < count($categories); $i++) 
                         <tr>
                             <td class="text-center">{{ $categories[$i]['name_categorie'] }}</td>
@@ -69,5 +69,10 @@
                 </tbody>
             </table>
         </div>
+
+        <div class="d-flex justify-content-center">
+            {{ $categories->appends(['sort' => 'department'])->links() }}
+        </div>
+
     </div>
 @endsection

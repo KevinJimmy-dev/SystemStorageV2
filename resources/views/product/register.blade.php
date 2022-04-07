@@ -32,12 +32,12 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="date" name="deliveryDate" class="form-control" id="deliveryDate" min="2022-01-01" placeholder="Insira a data de entrega" required>
+                    <input type="date" name="deliveryDate" class="form-control" id="deliveryDate" min="2022-01-01" placeholder="Insira a data de entrega" required onblur="validate();">
                     <label for="deliveryDate" class="required">Data de entrega</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="date" name="expirationDate" class="form-control" id="expirationDate" min="2022-01-01" placeholder="Insira a data de validade" required>
+                    <input type="date" name="expirationDate" class="form-control" id="expirationDate" min="2022-01-01" placeholder="Insira a data de validade" required onblur="validate();">
                     <label for="expirationDate" class="required">Data de Validade</label>
                 </div>
 
@@ -59,14 +59,37 @@
                 </div>
 
                 <div class="row">
+                <abbr title="" id="warning">
                     <div class="col text-center">
-                        <input type='submit' class="btn btn-info text-center" id="btn-update" value='Cadastrar'>
+                        
+                            <input type='submit' class="btn btn-info text-center" id="btn-register" value='Cadastrar'>
                     </div>
+                    </abbr>
                 </div>  
 
             </form>
         </div>
     </main>
 
-    <script src="/js/select.js"></script>
+    <script>
+        function validate(){
+            var deliveryDate = document.querySelector('#deliveryDate');
+            var validate = document.querySelector('#expirationDate');
+            const btnRegister = document.querySelector('#btn-register');
+            var abbr = document.querySelector('#warning');
+
+            if(deliveryDate.value >= validate.value){
+                deliveryDate.style.border = "1px solid #ff000044";
+                validate.style.border = "1px solid #ff000044";
+                btnRegister.setAttribute('disabled', 'disabled');
+                abbr.title = 'Atenção! A data de entrega deve ser maior do que a de validade!';
+
+            } else{
+                deliveryDate.style.border = "1px solid #5fcbd7";
+                validate.style.border = "1px solid #5fcbd7";
+                btnRegister.removeAttribute('disabled');
+                abbr.removeAttribute('title');
+            }
+        }
+    </script>
 @endsection
