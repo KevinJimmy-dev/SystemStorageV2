@@ -30,38 +30,6 @@ class UserController extends Controller{
             return redirect()->route('login')->with('msgError', "Credenciais incorretas!"); 
         }
     }
-
-    public function home(){
-
-        $userLevel = User::userLevel();
-
-        $products = Product::paginate(10);
-
-        $categorie_id = [];
-        $categories = [];
-
-        if($products){
-            foreach($products as $product){
-                    $categorie_id[] = $product['categorie_id']; 
-                }
-
-                for($i = 0; $i < count($products); $i++){
-                    $categories[] = Categorie::where('id', $categorie_id[$i])->first()->toArray();   
-                }
-            
-            return view('user.home', [
-                'userLevel' => $userLevel,
-                'products' => $products,
-                'categories' => $categories
-            ]);
-
-        } else{
-            return view('user.home', [
-                'userLevel' => $userLevel,
-                'products' => $products
-            ]);
-        }
-    }
     
     public function logout(Request $request){
         Auth::logout();
@@ -97,7 +65,13 @@ class UserController extends Controller{
                 $info = $request->only(['name', 'username', 'password']);
                 $info['password'] = $request->password;
                 $info['password'] = bcrypt($info['password']);
-                $info['level'] = 1;
+                
+                if($request->level){
+                    $info['level'] = $request->level;
+                } else{
+                    $info['level'] = 1;
+                }
+
                 $info['stats'] = 1;
 
                 User::create($info);

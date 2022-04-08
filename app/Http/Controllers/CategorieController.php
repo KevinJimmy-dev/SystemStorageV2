@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categorie;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Exception;
@@ -13,9 +14,7 @@ class CategorieController extends Controller
 
         $userLevel = User::userLevel();
 
-        $categories = Categorie::paginate();
-
-        //dd($categories);
+        $categories = Categorie::paginate(10);
 
         return view('categorie.home', [
             'userLevel' => $userLevel,
@@ -48,6 +47,21 @@ class CategorieController extends Controller
 
             return redirect()->route('home.categorie')->with('msg', "Categoria cadastrada com sucesso!");
         }
+    }
+
+    public function list($id){
+
+        $userLevel = User::userLevel();
+
+        $products = Product::where('categorie_id', $id)->paginate(10);
+
+        $nameCategorie = Categorie::find($id);
+
+        return view('categorie.list', [
+            'products' => $products,
+            'categorie' => $nameCategorie,
+            'userLevel' => $userLevel
+            ]);
     }
 
     public function edit($id){

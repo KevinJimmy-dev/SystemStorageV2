@@ -21,6 +21,67 @@ class ProductController extends Controller{
         
     }
 
+    public function home(){
+
+        $userLevel = User::userLevel();
+
+        if($search = request('search')){
+
+            $products = Product::where([
+                ['name', 'like', '%' . $search . '%']
+            ])->paginate(10);
+
+            $categories = [];
+            $categories_id = [];
+
+            foreach($products as $product){
+                $categories_id[] = $product['categorie_id'];
+            }
+
+            for($i = 0; $i < count($products); $i++){
+                $categories[] = Categorie::where('id', $categories_id[$i])->first()->toArray();
+            }
+
+            return view('user.home', [
+                'userLevel' => $userLevel,
+                'categories' => $categories,
+                'products' => $products,
+                'search' => $search
+            ]);
+
+        } else{
+            
+            $products = Product::paginate(10);
+
+            $categorie_id = [];
+            $categories = [];
+
+            if($products){
+                foreach($products as $product){
+                        $categorie_id[] = $product['categorie_id']; 
+                    }
+
+                    for($i = 0; $i < count($products); $i++){
+                        $categories[] = Categorie::where('id', $categorie_id[$i])->first()->toArray();   
+                    }
+                
+                return view('user.home', [
+                    'userLevel' => $userLevel,
+                    'products' => $products,
+                    'categories' => $categories,
+                    'search' => $search
+                ]);
+
+            } else{
+                return view('user.home', [
+                    'userLevel' => $userLevel,
+                    'products' => $products,
+                    'search' => $search
+                ]);
+            }
+        }
+    }
+
     public function viewRegister(){
 
         $userLevel = User::userLevel();
@@ -70,42 +131,6 @@ class ProductController extends Controller{
                 return redirect()->route('home.user')->with('msgError', "Erro ao cadastrar o produto!");
             }
         }  
-    }
-
-    public function viewSearch(){
-
-        $userLevel = User::userLevel();
-
-        $categories = Categorie::all();
-
-        return view('product.search', [
-            'userLevel' => $userLevel,
-            'categories' =>$categories
-        ]);
-    }
-
-    public function search(){
-
-        $userLevel = User::userLevel();
-
-        $categories = Categorie::all();
-
-        $search = request('search');
-        
-        if($search == ""){
-            return redirect()->route('viewSearch.product')->with('msgWarning', 'Pesquise algo para buscar um ou mais produtos!');
-        }
-
-        $products = Product::where([
-            ['name', 'like', '%' . $search . '%']
-        ])->get()->toArray();
-
-        return view('product.resultsSearch', [
-            'userLevel' => $userLevel,
-            'categories' => $categories,
-            'products' => $products,
-            'search' => $search
-        ]);
     }
 
     public function edit($id){
@@ -181,7 +206,7 @@ class ProductController extends Controller{
                         <li>
                             $product[name] 
                             <abbr title='Adicionar'>
-                                <button class='btn-add' id='$product[id]' name='$product[name]' onclick='add(id, name, $product[quantity], `$product[storageUnity]`);'>
+                                <button class='btn-add' id='$product[id]' name='$product[name]' onclick='add(id, name, $product[quantity], `$product[storageUnity]`), noFocus()'>
                                     <i class='fa-solid fa-plus direita'></i>
                                 </button>
                             </abbr>
