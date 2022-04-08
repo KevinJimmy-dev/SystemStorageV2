@@ -33,19 +33,18 @@ Route::fallback(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/home', [UserController::class, 'home'])->name('home.user');
+    Route::get('/home/', [ProductController::class, 'home'])->name('home.user');
 
     Route::get('/categorias', [CategorieController::class, 'index'])->name('home.categorie');
     Route::get('/categorias/cadastrar', [CategorieController::class, 'viewRegister'])->name('viewRegister.categorie');
     Route::post('/categorias/cadastrar/criar', [CategorieController::class, 'create'])->name('create.categorie');
+    Route::get('/categorias/produtos/{id}', [CategorieController::class, 'list'])->name('list.categorie');
     Route::get('/categorias/editar/{id}', [CategorieController::class, 'edit'])->name('edit.categorie');
     Route::put('/categorias/atualizar/{id}', [CategorieController::class, 'update'])->name('update.categorie');
     Route::delete('/categorias/excluir/{id}', [CategorieController::class, 'destroy'])->name('delete.categorie');
 
     Route::get('/produtos/cadastrar', [ProductController::class, 'viewRegister'])->name('viewRegister.product');
     Route::post('/produtos/cadastrar/criar', [ProductController::class, 'create'])->name('create.product');
-    Route::get('/produtos/pesquisar/', [ProductController::class, 'viewSearch'])->name('viewSearch.product');
-    Route::post('/produtos/pesquisar/{search}', [ProductController::class, 'search'])->name('search.product');
     Route::get('/produtos/editar/{id}', [ProductController::class, 'edit'])->name('edit.product');
     Route::put('/produtos/atualizar/{id}', [ProductController::class, 'update'])->name('update.product');
     Route::delete('/produtos/excluir/{id}', [ProductController::class, 'destroy'])->name('delete.product');

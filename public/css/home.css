@@ -53,11 +53,6 @@ header{
     opacity: .5;
 }
 
-.img-logo-marista{
-    margin-top: -10px;
-    margin-left: 70px;
-}
-
 .navbar-links ul{
     margin: 0;
     padding: 0;
@@ -305,11 +300,27 @@ textarea:optional{
     display: block;
 }
 
-/* Search */
-.search-group{
-    
+@media (max-width: 986px){
+    .body-content {
+        margin-bottom: -30px;
+    }
 }
 
+/* Search 1 */
+#input-pesq{
+    border-radius: 15px 0 0 15px;
+}
+
+#btn-pesq{
+    border-radius: 0 15px 15px 0;
+    background-color: #5fcbd7;
+}
+
+#btn-pesq:hover{
+    background-color: #19c0d3;
+}
+
+/* Search 2 */
 #search{
     border-right: none !important;
     border-radius: 11px 0 0 0;
@@ -325,7 +336,7 @@ textarea:optional{
     border-radius: 0 11px 0 0;
 }
 
-/* Search Result */
+/* Search Result 2 */
 #list-result{
     margin-top: -15px;
     text-align: left;
@@ -377,10 +388,6 @@ textarea:optional{
     box-shadow: 0 0 0 0 #5fcbd7;
 }
 
-.format{
-    
-}
-
 /* Footer */
 footer {
     position: relative;
@@ -409,22 +416,4 @@ footer .sobre{
 
 footer .titles{
     text-align: initial;
-}
-
-/* .rodape, .page-wrap:after {
-    height: 207px;
-} */
-
-/* Search */
-#input-pesq{
-    border-radius: 15px 0 0 15px;
-}
-
-#btn-pesq{
-    border-radius: 0 15px 15px 0;
-    background-color: #5fcbd7;
-}
-
-#btn-pesq:hover{
-    background-color: #19c0d3;
 }
