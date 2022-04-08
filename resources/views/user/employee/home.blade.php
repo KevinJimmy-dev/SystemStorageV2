@@ -97,15 +97,19 @@
                                     <td class="text-center">{{ date('d/m/Y', strtotime($employees[$i]['created_at'])) }}</td>
                                     
                                     <td class="text-center">
-                                        <a href="{{ route('edit.employee', $employees[$i]['id']) }}">
-                                            <i class="fa-solid fa-user-pen black-color"></i>
-                                        </a>
+                                        <abbr title="Editar">
+                                            <a href="{{ route('edit.employee', $employees[$i]['id']) }}">
+                                                <i class="fa-solid fa-user-pen black-color"></i>
+                                            </a>
+                                        </abbr>
                                         
                                         <strong style="margin: 0 10px;">|</strong>
 
-                                        <a href="{{ route('delete.employee', $employees[$i]['id']  ) }}" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $employees[$i]['id'] }}">
-                                            <i class="fa-solid fa-user-minus black-color"></i>
-                                        </a>
+                                        <abbr title="Excluir">
+                                            <a href="{{ route('delete.employee', $employees[$i]['id']  ) }}" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $employees[$i]['id'] }}">
+                                                <i class="fa-solid fa-user-minus black-color"></i>
+                                            </a>
+                                        </abbr>
 
                                         <form action="{{ route('delete.employee', $employees[$i]['id']) }}" method="POST">
                                             @csrf

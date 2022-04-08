@@ -12,7 +12,7 @@
                     @csrf
                     <div class="input-group mb-3">
 
-                        <input type="text" name="search" class="form-control" placeholder="Pesquisar..." aria-label="search" aria-describedby="basic-addon1" id="search">
+                        <input type="text" name="search" class="form-control" placeholder="Pesquisar..." aria-label="search" aria-describedby="basic-addon1" id="search" onfocus="onFocus();">
                         <span class="input-group-text searchSpan" id="basic-addon1">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </span>
@@ -87,7 +87,7 @@
 
             td1.innerHTML = name;
             td2.innerHTML = "<input type='number' required value='" + quantity + "' readonly class='input-req no-background' name='quantity[]'> " + unityStorage + "";
-            td3.innerHTML = "<input type='number' required class='input-req' name='request_value[]'>";
+            td3.innerHTML = "<input type='number' required class='input-req' name='request_value[]' step='0.1'>";
             td4.innerHTML = "<abbr title='Remover'><i class='fa-solid fa-circle-minus black-color' onclick='remove(event.target);'></i></abbr> <input type='hidden' value='" + id + "' name='id_product[]'> <input type='hidden' value='" + name + "' name='name_product[]'>";
 
             td2.classList.add('format');
@@ -102,6 +102,17 @@
 
         function remove(elementoClicado){
             elementoClicado.closest('tr').remove();
+        }
+
+        var listResult = document.querySelector('#results'); 
+        var search = document.querySelector('#search'); 
+
+        function noFocus(){
+            listResult.style.display = "none";
+        }
+
+        function onFocus(){
+            listResult.style.display = "block";
         }
     </script>
 @endsection

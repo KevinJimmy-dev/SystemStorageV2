@@ -20,6 +20,17 @@
                     <label for="username" class="required">Nome de Usuário</label>
                 </div>
 
+                @if($userLevel['level'] == 3)
+                    <div class="form-floating mb-3">
+                        <select name="level" class="form-select" id="level" required>
+                            <option value="">Selecione a função</option>
+                            <option value="1">Funcionário(a)</option>
+                            <option value="2">Cordenador(a)</option>                           
+                        </select>
+                        <label for="level" class="required">Função</label>
+                    </div>
+                @endif
+
                 <div class="form-floating mb-3">
                     <input type="password" name="password" class="form-control" id="password" placeholder="Insira a senha" required onkeyup="check();">
                     <label for="password" class="required">Senha</label>
