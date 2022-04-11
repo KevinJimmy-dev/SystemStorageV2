@@ -51,6 +51,40 @@
                 </div>
             </div>
         </form>
+
+        @section('modalContent')
+            <div>
+                <h4># O que essa página contém?</h4>
+                <ul>
+                    <li>- Menu de navegação;</li>
+                    <li>- Barra de pesquisa de produto;</li>
+                    <li>- Uma tabela que recebe o produto desejado;</li>
+                    <li>- Um botão na tabela que remove o produto dela;</li>
+                    <li>- Um botão que faz a ação de requisitar;</li>
+                    <li>- E um rodapé;</li>
+                </ul>
+            </div>
+
+            <div>
+                <h4># Qual o Objetivo da página?</h4>
+                <p>
+                    - O principal objetivo é você poder requisitar um ou mais produtos desejados.
+                </p>
+            </div>
+
+            <br>
+        
+            <div>
+                <h4># Como usar a página?</h4>
+                <ul>
+                    <li>- <strong>Barra de Navegação:</strong> Para usa-la é simples, você pode navegar pelo site somente clicando nas opções, que irá te encaminhar para outra página;</li>
+                    <li>- <strong>Barra de Pesquisa:</strong> Para pesquisar basta ir digitando o nome do produto, que atualizara ao decorrer da digitação. Para adicioná-lo a tabela, clique no botão <i class="fa-solid fa-plus"></i>, (podendo adicionar um ou mais produtos);</li>
+                    <li>- <strong>Fazer Requisição:</strong> Para fazer a requisição você precisa ter adicionado um ou mais produtos na tabela, após isso você deve preencher o campo da coluna "Quantidade Requerida", depois disso clique no botão "Requisitar" e se o valor for válido de todas as requisições, irá requisitar!;</li>
+                    <li>- <strong>Remover Produto:</strong> Cada linha possui um botão para remover o produto da tabela, basta clicar nele;</li>
+                </ul>
+            </div>
+        @endsection
+
     </main>
 
     <script>

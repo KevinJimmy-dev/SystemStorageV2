@@ -69,6 +69,36 @@
 
             </form>
         </div>
+
+        @section('modalContent')
+            <div>
+                <h4># O que essa página contém?</h4>
+                <ul>
+                    <li>- Menu de navegação;</li>
+                    <li>- Campos para cadastrar um novo produto;</li>
+                    <li>- Um botão para executar a ação;</li>
+                    <li>- E um rodapé;</li>
+                </ul>
+            </div>
+
+            <div>
+                <h4># Qual o Objetivo da página?</h4>
+                <p>
+                    - O principal objetivo é você poder cadastrar um novo produto.
+                </p>
+            </div>
+
+            <br>
+        
+            <div>
+                <h4># Como usar a página?</h4>
+                <ul>
+                    <li>- <strong>Barra de Navegação:</strong> Para usa-la é simples, você pode navegar pelo site somente clicando nas opções, que irá te encaminhar para outra página;</li>
+                    <li>- <strong>Cadastrar Produto:</strong> Para cadastrar basta preencher todos os campos corretamente e clicar no botão "Cadastrar", e depois disso o produto já será cadastrado no sistema!</li>   
+                </ul>
+            </div>
+        @endsection
+
     </main>
 
     <script>

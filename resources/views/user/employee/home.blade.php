@@ -160,4 +160,42 @@
         </div>
 
     </div>
+
+    @section('modalContent')
+        <div>
+            <h4># O que essa página contém?</h4>
+            <ul>
+                <li>- Menu de navegação;</li>
+                <li>
+                    - Tabela que mostra todos os usuários cadastrados (com paginação), e que possui duas ações também, editar e excluir;
+                </li>
+                <li>- E um rodapé;</li>
+            </ul>
+        </div>
+
+        <div>
+            <h4># Qual o Objetivo da página?</h4>
+            <p>
+                - O principal objetivo é o usuário consiguir visualizar todos os usuários atualmente cadastrados.
+            </p>
+        </div>
+
+        <br>
+        
+        <div>
+            <h4># Como usar a página?</h4>
+            <ul>
+                <li>- <strong>Barra de Navegação:</strong> Para usa-la é simples, você pode navegar pelo site somente clicando nas opções, que irá te encaminhar para outra página;</li>
+                <li>- <strong>Usuários na Tabela:</strong> Você pode visualizar todos os usuários na tabela, vendo até 10 usuários nela, para ver mais você pode usar a paginação que está abaixo dela;</li>
+                <li>- <strong>Editar:</strong> Para editar basta você clicar no icone <i class="fa-solid fa-user-minus black-color"></i> que irá te encaminhar para uma página para editar o usuário que você deseja;</li>
+                <li>- <strong>Excluir:</strong> Para excluir basta você clicar no icone <i class="fa-solid fa-user-minus black-color"></i> que irá apresentar uma janela que perguntará se você realmente quer cometer essa ação, caso queira clique no botão "Excluir";</li>
+
+                <br>
+
+                <hr>
+                
+                <p><strong>OBS:</strong> Excluir um usuário talvez cause alguns problemas, talvez a melhor opção seja deixar ele <strong>inativo</strong>, para isso acesse a função editar <i class="fa-solid fa-user-pen black-color"></i> do usuário selecionado. </p>
+            </ul>
+        </div>
+    @endsection
 @endsection

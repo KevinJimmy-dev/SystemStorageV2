@@ -157,15 +157,46 @@
         </div>
         
         <div class="d-flex justify-content-center">
-           
                 {{ $products->appends([
                     'search' => $search,
                     'sort' => 'department',
                     
                 ])->links() }}
-            
-                
         </div>
-        
     </div>
+
+    @section('modalContent')
+        <div>
+            <h4># O que essa página contém?</h4>
+            <ul>
+                <li>- Menu de navegação;</li>
+                <li>- Barra de pesquisa de produtos;</li>
+                <li>- Tabela que mostra todos os produtos (com paginação);</li>
+                <li>- Botões para editar e excluir;</li>
+                <li>- E um rodapé;</li>
+            </ul>
+        </div>
+
+        <div>
+            <h4># Qual o Objetivo da página?</h4>
+            <p>
+                - O principal objetivo é o usuário consiguir visualizar todos os produtos já cadastrados, vendo na tabela ou até pesquisando.
+            </p>
+        </div>
+
+        <br>
+        
+        <div>
+            <h4># Como usar a página?</h4>
+            <ul>
+                <li>- <strong>Barra de Navegação:</strong> Para usa-la é simples, você pode navegar pelo site somente clicando nas opções, que irá te encaminhar para outra página;</li>
+                <li>- <strong>Produtos na Tabela:</strong> Você pode visualizar todos os produtos na tabela, vendo até 10 produtos nela, para ver mais você pode usar a paginação que está abaixo dela;</li>
+                <li>- <strong>Pesquisar produtos:</strong> Para pesquisar é fácil, basta você clicar na caixa de texto, e escrever o que deseja pesquisar, e depois clicar no botão ao lado ou apertar a tecla 'Enter'. Após isso, se tiver resultados irá mostrar todos dentro da tabela;</li>
+                <li>- <strong>Ações:</strong> Você pode fazer duas ações, sendo elas:
+                    <br> -- <i class="fa-solid fa-pen btn-edit black-color"></i> para editar o produto;
+                    <br> -- <i class="fa-solid fa-trash btn-delete black-color"></i> para excluir o produto;
+                </li>
+            </ul>
+        </div>
+    @endsection
 @endsection

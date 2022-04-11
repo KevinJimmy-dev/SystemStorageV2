@@ -87,4 +87,42 @@
         </div>
 
     </div>
+
+    @section('modalContent')
+        <div>
+            <h4># O que essa página contém?</h4>
+            <ul>
+                <li>- Menu de navegação;</li>
+                <li>- Tabela que mostra todas as categorias (com paginação);</li>
+                <li>- Três botões, para editar, visualizar produtos que estão nessa categoria e excluir;</li>
+                <li>- E um rodapé;</li>
+            </ul>
+        </div>
+
+        <div>
+            <h4># Qual o Objetivo da página?</h4>
+            <p>
+                - O principal objetivo é o usuário consiguir visualizar todos as categorias já cadastradas, vendo na tabela ou até pesquisando.
+            </p>
+        </div>
+
+        <br>
+        
+        <div>
+            <h4># Como usar a página?</h4>
+            <ul>
+                <li>- <strong>Barra de Navegação:</strong> Para usa-la é simples, você pode navegar pelo site somente clicando nas opções, que irá te encaminhar para outra página;</li>
+                <li>- <strong>Categorias na Tabela:</strong> Você pode visualizar todos os produtos na tabela, vendo até 10 produtos nela, para ver mais você pode usar a paginação que está abaixo dela;</li>
+                <li>- <strong>Ações:</strong> Cada categoria possui três ações, sendo: 
+                    <br> -- <i class="fa-solid fa-pen btn-edit black-color"></i> para editar; 
+                    <br> -- <i class="fa-solid fa-clipboard-list black-color"></i> para visualizar produtos cadastrados com essa categoria; 
+                    <br> -- <i class="fa-solid fa-trash btn-delete black-color"></i> para excluir a categoria. 
+                </li>
+
+                <hr>
+
+                <p><strong>OBS:</strong> Talvez você não consigar excluir uma categoria porque ela possui produtos cadastrados com ela. Se você REALMENTE quer excluir ela, você precisará editar a categoria de todos os produtos, alterando para outra!</p>
+            </ul>
+        </div>
+    @endsection
 @endsection

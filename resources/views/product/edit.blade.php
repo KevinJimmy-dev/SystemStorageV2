@@ -66,6 +66,37 @@
 
             </form>
         </div>
+
+        @section('modalContent')
+            <div>
+                <h4># O que essa página contém?</h4>
+                <ul>
+                    <li>- Menu de navegação;</li>
+                    <li>- Campos já preenchidos com os dados do produto selecionado;</li>
+                    <li>- Um botão para executar a ação;</li>
+                    <li>- E um rodapé;</li>
+                </ul>
+            </div>
+
+            <div>
+                <h4># Qual o Objetivo da página?</h4>
+                <p>
+                    - O principal objetivo é você poder editar o produto que selecionou.
+                </p>
+            </div>
+
+            <br>
+        
+            <div>
+                <h4># Como usar a página?</h4>
+                <ul>
+                    <li>- <strong>Barra de Navegação:</strong> Para usa-la é simples, você pode navegar pelo site somente clicando nas opções, que irá te encaminhar para outra página;</li>
+                    <li>- <strong>Podendo Editar:</strong> Você pode editar o nome, a unidade de medida, a quantidade, a data de entrega e validade, a observação e a categoria que ele pertence;</li>
+                    <li>- <strong>Editar Produto:</strong> No começo o botão vem desativado, para ativa-lo você tem que mudar alguma informação dentro do campo, para ficar diferente da original. Depois disso basta clicar no botão "Editar";</li>
+                </ul>
+            </div>
+        @endsection
+
     </main>
 
     <script>
