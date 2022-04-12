@@ -21,6 +21,68 @@
 <p>Atualmente este setor possui poucas colaboradoras, e além de serem responsáveis por toda alimentação da instituição, elas precisam manualmente fazer todos os controles referentes a este estoque.</p>
 <p>Então o objetivo do nosso projeto era fazer um sistema de controle de armazenamento, para facilitar a vida delas. Esse sistema as ajudará a fazer o controle dos alimentos que estão acabando e o que estão chegando.</p>
 
+## ✨ Funcionalidades
+
+- `Login:` Login para entrar no sistema;
+<div align="center">
+    
+![Login](https://user-images.githubusercontent.com/83522758/162970846-b8d34050-91b4-4e90-8f6c-5f203c3472bf.gif)
+    
+</div>
+
+<p> OBS: Temos 3 tipos de usuários, sendo: O funcionário, o cordenador e o administrador. Cada um tem mais funções do que o outro. </p>
+
+### O Funcionário tem acesso
+
+- `Categorias:` Cadastro e exibição de categorias, com paginação;
+<div align="center">
+    
+![Categories](https://user-images.githubusercontent.com/83522758/162972178-da8c36bd-ba70-41ba-a8cc-17ce6d02898d.gif)
+
+    
+</div>
+
+
+- `Produtos:` Cadastro, exibição de produtos e pesquisa de produtos, tudo com paginação;
+<div align="center">
+    
+![Products](https://user-images.githubusercontent.com/83522758/162976592-dd73a7bb-e468-47e3-9fbf-8609972f81ae.gif)
+
+    
+</div>
+
+
+- `Requisições:` Requisitar e exibição de requisições feitas, com paginação;
+<div align="center">
+    
+![Requests](https://user-images.githubusercontent.com/83522758/162976721-9bb3a2c5-f5ac-49f0-bec7-718f7abcb17c.gif)
+
+    
+</div>
+
+
+
+### O Cordenador tem acesso
+
+- `Funcionários:` Exibe todos os funcionários cadastrados, podendo editar, cadastrar um novo ou até excluir;
+<div align="center">
+    
+![Coordinator](https://user-images.githubusercontent.com/83522758/162977475-c538fc96-e4bc-4bc8-93f9-6446091c91a8.gif)
+
+    
+</div>
+
+
+
+### O Administrador tem acesso
+
+- `Funcionários e Cordenadores:` Exibe todos os usuários cadastrados, podendo editar, cadastrar ou excluir;
+<div align="center">
+    
+![Adm](https://user-images.githubusercontent.com/83522758/162977507-23e5e8e9-a5e7-4c5b-956f-de0ba61e5935.gif)
+    
+</div>
+
 ## 📁 Acesso ao projeto
 
 <p>O projeto ainda não foi colocado ao ar.</p>
