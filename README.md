@@ -10,7 +10,7 @@
 
 <h2>Observação</h2>
 <p><strong> Essa é a versão 2 desse projeto: https://github.com/KevinJimmy-dev/systemControlArmazenament </strong></p>
-<p> Como já mencionado vai ser adicionado novas funcionalidades, e mudanças na programação. Sendo sua principal adição o Framework Laravel. </p>
+<p> Como já mencionado foi adicionado novas funcionalidades, e mudanças na programação. Sendo sua principal adição o Framework Laravel. </p>
 
 <hr>
 
@@ -27,7 +27,11 @@
 
 ## 🛠️ Abrir e rodar o projeto
 
-<p>Após baixar o projeto, você pode abrir ele com alguma IDE de edição de código.
+- `1 - XAMP para Apache e MySQL` - https://www.apachefriends.org/pt_br/index.html
+- `2 - Baixe o composer` - https://getcomposer.org
+- `3 - Instale o Laravel por meio de composer`
+
+`Vídeo que demonstra tudo na prática:` https://www.youtube.com/watch?v=4OxYHiEkqBg&list=PLnDvRpP8BnewYKI1n2chQrrR4EYiJKbUG&index=2
   
 ## ✔️ Metodologias e tecnologias usadas
 
