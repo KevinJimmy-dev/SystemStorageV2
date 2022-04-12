@@ -33,7 +33,12 @@
                     @else
                         <tr>
                             <td colspan="7">
-                                <p>Ainda não foi feita nenhuma requisição... <a href="{{ route('home.request') }}">Clique aqui para fazer a primeira.</a></p>
+                                <p>
+                                    Ainda não foi feita nenhuma requisição... 
+                                    <a href="{{ route('requestView') }}">
+                                        Clique aqui para fazer a primeira.
+                                    </a>
+                                </p>
                             </td>
                         </tr>
                     @endif
