@@ -178,11 +178,37 @@ class ProductController extends Controller{
         }
     }
 
+    public function requests(){
+
+        $userLevel = User::userLevel();
+
+        $requests = Request::with('products')->paginate(10);
+
+        //dd($requests);
+
+        $users = [];
+        $users_id = [];
+
+        foreach($requests as $request){
+            $users_id[] = $request['user_id'];
+        }
+
+        for($i = 0; $i < count($requests); $i++){
+            $users[] = User::where('id', $users_id[$i])->first()->toArray();
+        }
+
+        return view('request.home', [
+            'userLevel' => $userLevel,
+            'users' => $users,
+            'requests' => $requests
+        ]); 
+    }
+
     public function requestView(){
 
         $userLevel = User::userLevel();
 
-        return view('request/home', [
+        return view('request/request', [
             'userLevel' => $userLevel
         ]);
     }

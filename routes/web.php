@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/produtos/atualizar/{id}', [ProductController::class, 'update'])->name('update.product');
     Route::delete('/produtos/excluir/{id}', [ProductController::class, 'destroy'])->name('delete.product');
 
+    Route::get('/requisicoes', [ProductController::class, 'requests'])->name('home.requests');
     Route::get('/requisitar', [ProductController::class, 'requestView'])->name('requestView');
     Route::get('/requisitar/search', [ProductController::class, 'requestSearch'])->name('requestSearch');
     Route::get('/requisitar/request', [ProductController::class, 'request'])->name('request');

@@ -86,22 +86,48 @@
                             </ul>
                         </abbr>
                     </li>
-                    <li>
-                        <abbr title="Cadastrar Produto">
-                            <a href="{{ route('viewRegister.product') }}" class="li-color">
+
+                    <li class="dropdown">
+                        <abbr title="Menu Produtos">
+                            <a class="dropdown-toggle li-color" href="#" data-bs-toggle="dropdown">
                                 <strong>
-                                    Cadastrar Produto <i class="fas fa-plus"></i>
+                                    Produtos <i class="fas fa-burger"></i>
                                 </strong>
                             </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('home.user') }}" class="li-color">
+                                        Exibir Produtos
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('viewRegister.product') }}">
+                                        Cadastrar Produto
+                                    </a>
+                                </li>
+                            </ul>
                         </abbr>
                     </li>
-                    <li>
-                        <abbr title="Fazer Requisição">
-                            <a href="{{ route('requestView') }}" class="li-color">
+                
+                    <li class="dropdown">
+                        <abbr title="Menu Requisições">
+                            <a class="dropdown-toggle li-color" href="#" data-bs-toggle="dropdown">
                                 <strong>
-                                    Requisição <i class="fas fa-utensils"></i>
+                                    Requisições <i class="fas fa-utensils"></i>
                                 </strong>
                             </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('home.requests') }}" class="li-color">
+                                        Exibir Requisições
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('requestView') }}">
+                                        Fazer Nova Requisição
+                                    </a>
+                                </li>
+                            </ul>
                         </abbr>
                     </li>
 

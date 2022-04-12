@@ -1,152 +1,77 @@
 @extends('layouts.template')
 
-@section('title', 'Requisição - Storage System')
+@section('title', 'Requisições - Storage System')
 
 @section('content')
-    <h1 class="text-center mt-4 mb-4">Fazer Requisição</h1>
+    <h1 class="text-center mt-4 mb-4">Requisições Feitas</h1>
 
-    <main>
-        <div class="container mt-3 mb-3 my-3 w-50 p-3">
-            <div class="text-center search-group">
-                <form method="get" id="form-search" action="" autocomplete="off">
-                    @csrf
-                    <div class="input-group mb-3">
+    <div class="container mt-3 mb-3 my-3">
 
-                        <input type="text" name="search" class="form-control" placeholder="Pesquisar..." aria-label="search" aria-describedby="basic-addon1" id="search" onfocus="onFocus();">
-                        <span class="input-group-text searchSpan" id="basic-addon1">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </span>
+        <div class="table-responsive" id="tbl">
+            <table class="tabela table table-bordered">
+                <thead>
+                    <tr class="text-center">
+                        <th>Nome Do Produto</th>
+                        <th>Quantidade Requerida</td>
+                        <th>Funcionário(a) Que Fez</td>
+                        <th>Quando Foi Feita</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(count($requests) > 0)
+                    {{-- dd($requests[1]->quantity_request) --}}
+                        @for($i = 0; $i < count($requests); $i++)
+                            @foreach($requests[$i]->products as $product)
+                                <tr class="text-center">
+                                    <td>{{ $product->name }}</td>
+                                    <td>{{ $requests[$i]->quantity_request}} {{$product->storageUnity}}</td>
+                                    <td>{{ $users[$i]['name'] }}</td>
+                                    <td>{{ date('d/m/Y H:i:s', strtotime($requests[$i]->created_at)) }}</td>
+                                </tr>
+                            @endforeach
+                        @endfor
+                    @else
+                        <tr>
+                            <td colspan="7">
+                                <p>Ainda não foi feita nenhuma requisição... <a href="{{ route('home.request') }}">Clique aqui para fazer a primeira.</a></p>
+                            </td>
+                        </tr>
+                    @endif
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="d-flex justify-content-center">
+                {{ $requests->appends([
+                    'sort' => 'department',
+                ])->links() }}
+        </div>
+    </div>
 
-                    </div>
-                </form>
-                <div id="list-result">
-                    <ul id="results">
-
-                    </ul>
-                </div>
-            </div>
+    @section('modalContent')
+        <div>
+            <h4># O que essa página contém?</h4>
+            <ul>
+                <li>- Menu de navegação;</li>
+                <li>- Tabela que mostra todas as requisições (com paginação);</li>
+                <li>- E um rodapé;</li>
+            </ul>
         </div>
 
-        <form action="{{ route('request') }}" method="get">
-            <div class="container mt-3 mb-3 my-3">
-                <div class="table-responsive" id="tbl">
-                    <table class="tabela table table-bordered text-center">
-                        <thead>
-                            <tr class="text-center">
-                                <th>Produto</td>
-                                <th>Quantidade Disponível</td>
-                                <th>Quantidade Requerida</td>
-                                <th>Remover</td>
-                            </tr>
-                        </thead>
-                        <tbody id="tbody">
-            
-                        </tbody>
-                    </table>
-                </div>
-                <div class="row mt-4">
-                    <div class="col text-center">
-                        <input type='submit' class="btn btn-info text-center" id="btn-update" value='Requisitar'>
-                    </div>
-                </div>
-            </div>
-        </form>
+        <div>
+            <h4># Qual o Objetivo da página?</h4>
+            <p>
+                - O principal objetivo é o usuário consiguir visualizar todos as requisições feitas..
+            </p>
+        </div>
 
-        @section('modalContent')
-            <div>
-                <h4># O que essa página contém?</h4>
-                <ul>
-                    <li>- Menu de navegação;</li>
-                    <li>- Barra de pesquisa de produto;</li>
-                    <li>- Uma tabela que recebe o produto desejado;</li>
-                    <li>- Um botão na tabela que remove o produto dela;</li>
-                    <li>- Um botão que faz a ação de requisitar;</li>
-                    <li>- E um rodapé;</li>
-                </ul>
-            </div>
-
-            <div>
-                <h4># Qual o Objetivo da página?</h4>
-                <p>
-                    - O principal objetivo é você poder requisitar um ou mais produtos desejados.
-                </p>
-            </div>
-
-            <br>
+        <br>
         
-            <div>
-                <h4># Como usar a página?</h4>
-                <ul>
-                    <li>- <strong>Barra de Navegação:</strong> Para usa-la é simples, você pode navegar pelo site somente clicando nas opções, que irá te encaminhar para outra página;</li>
-                    <li>- <strong>Barra de Pesquisa:</strong> Para pesquisar basta ir digitando o nome do produto, que atualizara ao decorrer da digitação. Para adicioná-lo a tabela, clique no botão <i class="fa-solid fa-plus"></i>, (podendo adicionar um ou mais produtos);</li>
-                    <li>- <strong>Fazer Requisição:</strong> Para fazer a requisição você precisa ter adicionado um ou mais produtos na tabela, após isso você deve preencher o campo da coluna "Quantidade Requerida", depois disso clique no botão "Requisitar" e se o valor for válido de todas as requisições, irá requisitar!;</li>
-                    <li>- <strong>Remover Produto:</strong> Cada linha possui um botão para remover o produto da tabela, basta clicar nele;</li>
-                </ul>
-            </div>
-        @endsection
-
-    </main>
-
-    <script>
-        $(function() {
-
-            $("#search").keyup(function() {
-
-                var search = $(this).val();
-
-                if (search != "") {
-                    var dados = {
-                        word: search
-                    }
-
-                    $.get("{{ route('requestSearch') }}", dados, function(retorna) {
-                        $('#results').html(retorna);
-                    });
-
-                } else {
-                    $('#results').html('');
-                }
-            });
-        });
-
-        function add(id, name, quantity, unityStorage){
-            var tbody = document.querySelector('#tbody');
-            var tbl = document.querySelector('#tbl');
-
-            var tr  = document.createElement('tr');
-            var td1 = document.createElement('td');
-            var td2 = document.createElement('td');
-            var td3 = document.createElement('td');
-            var td4 = document.createElement('td');
-
-            td1.innerHTML = name;
-            td2.innerHTML = "<input type='number' required value='" + quantity + "' readonly class='input-req no-background' name='quantity[]'> " + unityStorage + "";
-            td3.innerHTML = "<input type='number' required class='input-req' name='request_value[]' step='0.1'>";
-            td4.innerHTML = "<abbr title='Remover'><i class='fa-solid fa-circle-minus black-color' onclick='remove(event.target);'></i></abbr> <input type='hidden' value='" + id + "' name='id_product[]'> <input type='hidden' value='" + name + "' name='name_product[]'>";
-
-            td2.classList.add('format');
-
-            tbody.appendChild(tr);
-
-            tr.appendChild(td1);
-            tr.appendChild(td2);
-            tr.appendChild(td3);
-            tr.appendChild(td4);
-        }
-
-        function remove(elementoClicado){
-            elementoClicado.closest('tr').remove();
-        }
-
-        var listResult = document.querySelector('#results'); 
-        var search = document.querySelector('#search'); 
-
-        function noFocus(){
-            listResult.style.display = "none";
-        }
-
-        function onFocus(){
-            listResult.style.display = "block";
-        }
-    </script>
+        <div>
+            <h4># Como usar a página?</h4>
+            <ul>
+                <li>- <strong>Requisições na Tabela:</strong> Você pode visualizar todos as requisições na tabela, vendo até 10 requisições por página, para ver mais você pode usar a paginação que está abaixo dela;</li>
+            </ul>
+        </div>
+    @endsection
 @endsection
