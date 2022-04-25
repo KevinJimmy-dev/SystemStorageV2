@@ -35,7 +35,7 @@
                             <td colspan="7">
                                 <p>
                                     Ainda não foi feita nenhuma requisição... 
-                                    <a href="{{ route('requestView') }}">
+                                    <a href="{{ route('request.requestView') }}">
                                         Clique aqui para fazer a primeira.
                                     </a>
                                 </p>

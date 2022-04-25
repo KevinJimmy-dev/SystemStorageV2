@@ -7,7 +7,7 @@
 
     <main>
         <div class="container w-50 p-3">
-            <form method="POST" action="{{ route('update.categorie', $categorie->id) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('category.update', $categorie->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-floating mb-3">

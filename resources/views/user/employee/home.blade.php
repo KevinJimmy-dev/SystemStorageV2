@@ -38,17 +38,17 @@
                                     <td class="text-center">{{ date('d/m/Y', strtotime($employees[$i]['created_at'])) }}</td>
                                     
                                     <td class="text-center">
-                                        <a href="{{ route('edit.employee', $employees[$i]['id']) }}">
+                                        <a href="{{ route('employee.edit', $employees[$i]['id']) }}">
                                             <i class="fa-solid fa-user-pen black-color"></i>
                                         </a>
                                         
                                         <strong style="margin: 0 10px;">|</strong>
 
-                                        <a href="{{ route('delete.employee', $employees[$i]['id']  ) }}" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $employees[$i]['id'] }}">
+                                        <a href="{{ route('employee.destroy', $employees[$i]['id']  ) }}" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $employees[$i]['id'] }}">
                                             <i class="fa-solid fa-user-minus black-color"></i>
                                         </a>
 
-                                        <form action="{{ route('delete.employee', $employees[$i]['id']) }}" method="POST">
+                                        <form action="{{ route('employee.destroy', $employees[$i]['id']) }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <input type="hidden" name="_method" value="DELETE">
@@ -98,7 +98,7 @@
                                     
                                     <td class="text-center">
                                         <abbr title="Editar">
-                                            <a href="{{ route('edit.employee', $employees[$i]['id']) }}">
+                                            <a href="{{ route('employee.edit', $employees[$i]['id']) }}">
                                                 <i class="fa-solid fa-user-pen black-color"></i>
                                             </a>
                                         </abbr>
@@ -106,12 +106,12 @@
                                         <strong style="margin: 0 10px;">|</strong>
 
                                         <abbr title="Excluir">
-                                            <a href="{{ route('delete.employee', $employees[$i]['id']  ) }}" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $employees[$i]['id'] }}">
+                                            <a href="{{ route('employee.destroy', $employees[$i]['id']  ) }}" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $employees[$i]['id'] }}">
                                                 <i class="fa-solid fa-user-minus black-color"></i>
                                             </a>
                                         </abbr>
 
-                                        <form action="{{ route('delete.employee', $employees[$i]['id']) }}" method="POST">
+                                        <form action="{{ route('employee.destroy', $employees[$i]['id']) }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <input type="hidden" name="_method" value="DELETE">

@@ -27,7 +27,7 @@
             </div>
         </div>
 
-        <form action="{{ route('request') }}" method="get">
+        <form action="{{ route('request.request') }}" method="get">
             <div class="container mt-3 mb-3 my-3">
                 <div class="table-responsive" id="tbl">
                     <table class="tabela table table-bordered text-center">
@@ -99,7 +99,7 @@
                         word: search
                     }
 
-                    $.get("{{ route('requestSearch') }}", dados, function(retorna) {
+                    $.get("{{ route('request.requestSearch') }}", dados, function(retorna) {
                         $('#results').html(retorna);
                     });
 

@@ -26,7 +26,7 @@ class CategorieController extends Controller
 
         $userLevel = User::userLevel();
 
-        return view('categorie.register', [
+        return view('categorie.create', [
             'userLevel' => $userLevel
         ]);
     }
@@ -37,7 +37,7 @@ class CategorieController extends Controller
 
         if($exists){
             
-            return redirect()->route('home.categorie')->with('msgError', "A categoria $request->name_categorie já existe!");
+            return redirect()->route('category.index')->with('msgError', "A categoria $request->name_categorie já existe!");
 
         } else{
 
@@ -45,7 +45,7 @@ class CategorieController extends Controller
 
             Categorie::create($info);
 
-            return redirect()->route('home.categorie')->with('msg', "Categoria cadastrada com sucesso!");
+            return redirect()->route('category.index')->with('msg', "Categoria cadastrada com sucesso!");
         }
     }
 
@@ -83,9 +83,10 @@ class CategorieController extends Controller
         $update = Categorie::findOrFail($request->id)->update($data);
 
         if($update){
-            return redirect()->route('home.categorie')->with('msg', "Categoria editada com sucesso!");
+            return redirect()->route('category.index')->with('msg', "Categoria editada com sucesso!");
+            
         } else{
-            return redirect()->route('home.categorie')->with('msgError', "Erro ao editar a Categoria!");
+            return redirect()->route('category.index')->with('msgError', "Erro ao editar a Categoria!");
         }
     }
 
@@ -98,11 +99,11 @@ class CategorieController extends Controller
         try{
             $categorie->delete();
 
-            return redirect()->route('home.categorie')->with('msg', "Categoria excluida com sucesso!");
+            return redirect()->route('category.index')->with('msg', "Categoria excluida com sucesso!");
 
         } catch(Exception $e){
 
-            return redirect()->route('home.categorie')->with('msgError', "Você não pode excluir essa categoria, porque possui produtos cadastrados com ela!");  
+            return redirect()->route('category.index')->with('msgError', "Você não pode excluir essa categoria, porque possui produtos cadastrados com ela!");  
         }
     }
 }

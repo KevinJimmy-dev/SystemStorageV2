@@ -9,16 +9,6 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,31 +23,31 @@ Route::fallback(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/home/', [ProductController::class, 'home'])->name('home.user');
+    Route::get('/home/', [ProductController::class, 'index'])->name('user.index');
 
-    Route::get('/categorias', [CategorieController::class, 'index'])->name('home.categorie');
-    Route::get('/categorias/cadastrar', [CategorieController::class, 'viewRegister'])->name('viewRegister.categorie');
-    Route::post('/categorias/cadastrar/criar', [CategorieController::class, 'create'])->name('create.categorie');
-    Route::get('/categorias/produtos/{id}', [CategorieController::class, 'list'])->name('list.categorie');
-    Route::get('/categorias/editar/{id}', [CategorieController::class, 'edit'])->name('edit.categorie');
-    Route::put('/categorias/atualizar/{id}', [CategorieController::class, 'update'])->name('update.categorie');
-    Route::delete('/categorias/excluir/{id}', [CategorieController::class, 'destroy'])->name('delete.categorie');
+    Route::get('/categorias', [CategorieController::class, 'index'])->name('category.index');
+    Route::get('/categorias/cadastrar', [CategorieController::class, 'viewRegister'])->name('category.viewRegister');
+    Route::post('/categorias/cadastrar/criar', [CategorieController::class, 'create'])->name('category.create');
+    Route::get('/categorias/produtos/{id}', [CategorieController::class, 'list'])->name('category.list');
+    Route::get('/categorias/editar/{id}', [CategorieController::class, 'edit'])->name('category.edit');
+    Route::put('/categorias/atualizar/{id}', [CategorieController::class, 'update'])->name('category.update');
+    Route::delete('/categorias/excluir/{id}', [CategorieController::class, 'destroy'])->name('category.destroy');
 
-    Route::get('/produtos/cadastrar', [ProductController::class, 'viewRegister'])->name('viewRegister.product');
-    Route::post('/produtos/cadastrar/criar', [ProductController::class, 'create'])->name('create.product');
-    Route::get('/produtos/editar/{id}', [ProductController::class, 'edit'])->name('edit.product');
-    Route::put('/produtos/atualizar/{id}', [ProductController::class, 'update'])->name('update.product');
-    Route::delete('/produtos/excluir/{id}', [ProductController::class, 'destroy'])->name('delete.product');
+    Route::get('/produtos/cadastrar', [ProductController::class, 'viewRegister'])->name('product.viewRegister');
+    Route::post('/produtos/cadastrar/criar', [ProductController::class, 'create'])->name('product.create');
+    Route::get('/produtos/editar/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::put('/produtos/atualizar/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::delete('/produtos/excluir/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
 
-    Route::get('/requisicoes', [ProductController::class, 'requests'])->name('home.requests');
-    Route::get('/requisitar', [ProductController::class, 'requestView'])->name('requestView');
-    Route::get('/requisitar/search', [ProductController::class, 'requestSearch'])->name('requestSearch');
-    Route::get('/requisitar/request', [ProductController::class, 'request'])->name('request');
+    Route::get('/requisicoes', [ProductController::class, 'HomeRequests'])->name('request.HomeRequests');
+    Route::get('/requisitar', [ProductController::class, 'requestView'])->name('request.requestView');
+    Route::get('/requisitar/search', [ProductController::class, 'requestSearch'])->name('request.requestSearch');
+    Route::get('/requisitar/request', [ProductController::class, 'request'])->name('request.request');
 
-    Route::get('/funcionarios', [UserController::class, 'list'])->name('home.employee');
-    Route::get('/funcionarios/cadastrar', [UserController::class, 'viewRegister'])->name('viewRegister.employee');
-    Route::post('/funcionarios/cadastrar/create', [UserController::class, 'create'])->name('create.employee');
-    Route::get('/funcionarios/editar/{id}', [UserController::class, 'edit'])->name('edit.employee');
-    Route::put('/funcionarios/atualizar/{id}', [UserController::class, 'update'])->name('update.employee');
-    Route::delete('/funcionarios/excluir/{id}', [UserController::class, 'destroy'])->name('delete.employee');
+    Route::get('/funcionarios', [UserController::class, 'list'])->name('employee.list');
+    Route::get('/funcionarios/cadastrar', [UserController::class, 'viewRegister'])->name('employee.viewRegister');
+    Route::post('/funcionarios/cadastrar/create', [UserController::class, 'create'])->name('employee.create');
+    Route::get('/funcionarios/editar/{id}', [UserController::class, 'edit'])->name('employee.edit');
+    Route::put('/funcionarios/atualizar/{id}', [UserController::class, 'update'])->name('employee.update');
+    Route::delete('/funcionarios/excluir/{id}', [UserController::class, 'destroy'])->name('employee.destroy');
 });

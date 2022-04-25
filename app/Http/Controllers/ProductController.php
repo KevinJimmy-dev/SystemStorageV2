@@ -18,10 +18,6 @@ use Illuminate\Support\Facades\Auth;
 class ProductController extends Controller{
 
     public function index(){
-        
-    }
-
-    public function home(){
 
         $userLevel = User::userLevel();
 
@@ -102,7 +98,7 @@ class ProductController extends Controller{
 
         if($exists){
 
-            return redirect()->route('home.user')->with('msgError', "O produto $request->name já existe!");
+            return redirect()->route('user.index')->with('msgError', "O produto $request->name já existe!");
 
         } else{
 
@@ -125,10 +121,10 @@ class ProductController extends Controller{
                         1 => ['control_id' => $control->id, 'product_id' => $create->id]
                     ]);
 
-                    return redirect()->route('home.user')->with('msg', "Produto cadastrado com sucesso!");
+                    return redirect()->route('user.index')->with('msg', "Produto cadastrado com sucesso!");
                 }
             } else{
-                return redirect()->route('home.user')->with('msgError', "Erro ao cadastrar o produto!");
+                return redirect()->route('user.index')->with('msgError', "Erro ao cadastrar o produto!");
             }
         }  
     }
@@ -155,10 +151,10 @@ class ProductController extends Controller{
         $update = Product::findOrFail($request->id)->update($data);
 
         if($update){
-            return redirect()->route('home.user')->with('msg', "Produto editado com sucesso!");
+            return redirect()->route('user.index')->with('msg', "Produto editado com sucesso!");
 
         } else{
-            return redirect()->route('home.user')->with('msgError', "Erro ao editar o produto!");
+            return redirect()->route('user.index')->with('msgError', "Erro ao editar o produto!");
         }
     }
 
@@ -171,20 +167,18 @@ class ProductController extends Controller{
         $delete = $product->delete();
 
         if($delete){
-            return redirect()->route('home.user')->with('msg', "Produto excluido com sucesso!");
+            return redirect()->route('user.index')->with('msg', "Produto excluido com sucesso!");
             
         } else{
-            return redirect()->route('home.user')->with('msgError', "Erro ao excluir o produto!");
+            return redirect()->route('user.index')->with('msgError', "Erro ao excluir o produto!");
         }
     }
 
-    public function requests(){
+    public function HomeRequests(){
 
         $userLevel = User::userLevel();
 
         $requests = Request::with('products')->paginate(10);
-
-        //dd($requests);
 
         $users = [];
         $users_id = [];
@@ -289,20 +283,20 @@ class ProductController extends Controller{
                                 ]);
                             } else{
 
-                                return redirect()->route('home.user')->with('msgError', "Erro ao requisitar um ou mais produtos!");
+                                return redirect()->route('user.index')->with('msgError', "Erro ao requisitar um ou mais produtos!");
                             }
                         } else{
             
-                            return redirect()->route('home.user')->with('msgError', "Erro ao requisitar um ou mais produtos!");
+                            return redirect()->route('user.index')->with('msgError', "Erro ao requisitar um ou mais produtos!");
                         }
                     }
                 }
 
-                return redirect()->route('home.user')->with('msg', "Requisição de um ou mais produtos feita com sucesso!");
+                return redirect()->route('user.index')->with('msg', "Requisição de um ou mais produtos feita com sucesso!");
                 
             }
         } catch(Exception){
-            return redirect()->route('home.user')->with('msgError', "Erro ao fazer a requisição!");
+            return redirect()->route('user.index')->with('msgError', "Erro ao fazer a requisição!");
         }
     }
 }

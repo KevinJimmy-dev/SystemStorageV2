@@ -26,7 +26,7 @@
         <nav class="navbar navbar-expand">
             <div class="brand-title">
                 <abbr title="Página Inicial">
-                    <a href="{{ route('home.user') }}">
+                    <a href="{{ route('user.index') }}">
                         <img class="img-logo" src="/img/logo-storage1.png" alt="Logo 'Storage System', duas palavras em inglês: Storage = Armazenameto e System = Sistema. Storage está acima do system, fazendo uma espécie de degrau, do lado do storage possui um chapéu de cozinheiro." width="120px">
                     </a>
                 </abbr>
@@ -52,12 +52,12 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('home.employee') }}">
+                                        <a class="dropdown-item" href="{{ route('employee.list') }}">
                                             Exibir Funcionários
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('viewRegister.employee') }}">
+                                        <a class="dropdown-item" href="{{ route('employee.viewRegister') }}">
                                             Cadastrar Funcionário(a)
                                         </a>
                                     </li>
@@ -74,12 +74,12 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('home.categorie') }}" class="li-color">
+                                    <a class="dropdown-item" href="{{ route('category.index') }}" class="li-color">
                                         Exibir Categorias
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('viewRegister.categorie') }}">
+                                    <a class="dropdown-item" href="{{ route('category.viewRegister') }}">
                                         Cadastrar Categoria
                                     </a>
                                 </li>
@@ -96,12 +96,12 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('home.user') }}" class="li-color">
+                                    <a class="dropdown-item" href="{{ route('user.index') }}" class="li-color">
                                         Exibir Produtos
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('viewRegister.product') }}">
+                                    <a class="dropdown-item" href="{{ route('product.viewRegister') }}">
                                         Cadastrar Produto
                                     </a>
                                 </li>
@@ -118,12 +118,12 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('home.requests') }}" class="li-color">
+                                    <a class="dropdown-item" href="{{ route('request.HomeRequests') }}" class="li-color">
                                         Exibir Requisições
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('requestView') }}">
+                                    <a class="dropdown-item" href="{{ route('request.requestView') }}">
                                         Fazer Nova Requisição
                                     </a>
                                 </li>

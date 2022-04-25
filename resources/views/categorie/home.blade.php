@@ -22,7 +22,7 @@
                             <td class="text-center">
 
                                 <abbr title="Editar">
-                                    <a href="{{ route('edit.categorie', $categories[$i]['id']) }}">
+                                    <a href="{{ route('category.edit', $categories[$i]['id']) }}">
                                         <i class="fa-solid fa-pen btn-edit black-color"></i>
                                     </a>
                                 </abbr>
@@ -30,7 +30,7 @@
                                 <strong style="margin: 0 10px;">|</strong>
 
                                 <abbr title="Produtos pertencentes">
-                                    <a href="{{ route('list.categorie', $categories[$i]['id']) }}">
+                                    <a href="{{ route('category.list', $categories[$i]['id']) }}">
                                         <i class="fa-solid fa-clipboard-list black-color"></i>
                                     </a>
                                 </abbr>
@@ -38,12 +38,12 @@
                                 <strong style="margin: 0 10px;">|</strong>
 
                                 <abbr title="Excluir">
-                                    <a href="{{ route('delete.categorie', $categories[$i]['id']) }}" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $categories[$i]['id']}}">
+                                    <a href="{{ route('category.destroy', $categories[$i]['id']) }}" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $categories[$i]['id']}}">
                                         <i class="fa-solid fa-trash btn-delete black-color"></i>
                                     </a>
                                 </abbr>
 
-                                <form action="{{ route('delete.categorie', $categories[$i]['id']) }}" method="POST">
+                                <form action="{{ route('category.destroy', $categories[$i]['id']) }}" method="POST">
                                     @csrf
                                     @method('delete')
                                     <input type="hidden" name="_method" value="DELETE">
@@ -74,7 +74,7 @@
                 @else
                     <tr>
                         <td colspan="2">
-                            <p>Ainda não há nenhuma categoria cadastrada... <a href="{{ route('viewRegister.categorie') }}">Clique aqui para cadastrar a primeira.</a></p>
+                            <p>Ainda não há nenhuma categoria cadastrada... <a href="{{ route('category.viewRegister') }}">Clique aqui para cadastrar a primeira.</a></p>
                         </td>
                     </tr>
                 @endif

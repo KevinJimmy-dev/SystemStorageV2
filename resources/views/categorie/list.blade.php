@@ -30,7 +30,7 @@
                             <td>{{ $products[$i]['observation'] }}</td>
                             <td class="text-center">
                                 <abbr title="Editar">
-                                    <a href="{{ route('edit.product', $products[$i]['id']) }}">
+                                    <a href="{{ route('product.edit', $products[$i]['id']) }}">
                                         <i class="fa-solid fa-pen btn-edit black-color"></i>
                                     </a>
                                 </abbr>
@@ -38,12 +38,12 @@
                                 <strong style="margin: 0 10px;">|</strong>
 
                                 <abbr title="Excluir">
-                                    <a href="{{ route('delete.product', $products[$i]['id']) }}" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $products[$i]['id']}}">
+                                    <a href="{{ route('product.destroy', $products[$i]['id']) }}" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $products[$i]['id']}}">
                                         <i class="fa-solid fa-trash btn-delete black-color"></i>
                                     </a>
                                 </abbr>
 
-                                <form action="{{ route('delete.product', $products[$i]['id']) }}" method="POST">
+                                <form action="{{ route('product.destroy', $products[$i]['id']) }}" method="POST">
                                     @csrf
                                     @method('delete')
                                     <input type="hidden" name="_method" value="DELETE">
@@ -74,7 +74,7 @@
                 @else
                     <tr>
                         <td colspan="7">
-                            <p>Ainda não há nenhum produto cadastrado... <a href="{{ route('viewRegister.product') }}">Clique aqui para cadastrar o primeiro.</a></p>
+                            <p>Ainda não há nenhum produto cadastrado... <a href="{{ route('product.viewRegister') }}">Clique aqui para cadastrar o primeiro.</a></p>
                         </td>
                     </tr>
                 @endif

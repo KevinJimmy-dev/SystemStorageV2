@@ -7,7 +7,7 @@
 
     <main>
         <div class="container w-50 p-3">
-            <form method="POST" action="{{ route('update.product', $product->id) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('product.update', $product->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <input type="hidden" name="id" value="{{ $product->id }}">

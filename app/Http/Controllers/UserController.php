@@ -21,7 +21,7 @@ class UserController extends Controller{
         if(Auth::attempt(['username' => $request->username, 'password' => $request->password])){
 
             if(auth()->check() && auth()->user()->stats == 1){
-                return redirect()->route('home.user'); 
+                return redirect()->route('user.index'); 
 
             } else{
                 return redirect()->route('login')->with('msgWarning', "Usuário inativo!"); 
@@ -58,7 +58,7 @@ class UserController extends Controller{
 
             if($exists){
 
-                return redirect()->route('viewRegister.employee')->with('msgError', 'Esse nome de usuário já existe!');
+                return redirect()->route('employee.viewRegister')->with('msgError', 'Esse nome de usuário já existe!');
 
             } else{
 
@@ -76,10 +76,10 @@ class UserController extends Controller{
 
                 User::create($info);
 
-                return redirect()->route('home.employee')->with('msg', 'Cadastro de funcionário(a) feito com sucesso!');
+                return redirect()->route('employee.list')->with('msg', 'Cadastro de funcionário(a) feito com sucesso!');
             }
         } else{
-            return redirect()->route('viewRegister.employee')->with('msgError', 'As senhas não coincidem!');
+            return redirect()->route('employee.viewRegister')->with('msgError', 'As senhas não coincidem!');
         }
     }
 
@@ -127,7 +127,7 @@ class UserController extends Controller{
 
             $user->update($info);
 
-            return redirect()->route('home.employee')->with('msg', "Funcionário(a) editado(a) com sucesso!");
+            return redirect()->route('employee.list')->with('msg', "Funcionário(a) editado(a) com sucesso!");
 
         } else{
 
@@ -137,7 +137,7 @@ class UserController extends Controller{
 
             $user->update($info);
 
-            return redirect()->route('home.employee')->with('msg', "Funcionário(a) editado(a) com sucesso!");
+            return redirect()->route('employee.list')->with('msg', "Funcionário(a) editado(a) com sucesso!");
         }
     }
 
@@ -150,10 +150,10 @@ class UserController extends Controller{
         $delete = $employee->delete();
 
         if($delete){
-            return redirect()->route('home.employee')->with('msg', "Funcionário(a) excluido com sucesso!");
+            return redirect()->route('employee.list')->with('msg', "Funcionário(a) excluido com sucesso!");
             
         } else{
-            return redirect()->route('home.employee')->with('msgError', "Erro ao excluir o(a) funcionário(a)!");
+            return redirect()->route('employee.list')->with('msgError', "Erro ao excluir o(a) funcionário(a)!");
         }
     }
 }
