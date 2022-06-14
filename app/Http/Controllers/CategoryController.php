@@ -2,108 +2,105 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categorie;
-use App\Models\Product;
+use App\Http\Requests\CategoryRequest;
+use App\Models\{
+    Category,
+    Product,
+    User
+};
 use Illuminate\Http\Request;
-use App\Models\User;
 use Exception;
 
-class CategorieController extends Controller
-{
+class CategoryController extends Controller{
+    
+    // Retorna todas as categorias cadastradas
     public function index(){
-
         $userLevel = User::userLevel();
 
-        $categories = Categorie::paginate(10);
+        $categories = Category::paginate(10);
 
-        return view('categorie.home', [
+        return view('category.index', [
             'userLevel' => $userLevel,
             'categories' => $categories
         ]);
     }
 
+    // Retorna a view para cadastrar
     public function viewRegister(){
-
         $userLevel = User::userLevel();
 
-        return view('categorie.create', [
+        return view('category.create', [
             'userLevel' => $userLevel
         ]);
     }
 
-    public function create(Request $request){
-
-        $exists = Categorie::where('name_categorie', $request->categorie)->first();
+    // Cria uma nova categoria se tudo estiver correto
+    public function create(CategoryRequest $request){
+        $exists = Category::where('name_categorie', $request->categorie)->first();
 
         if($exists){
-            
             return redirect()->route('category.index')->with('msgError', "A categoria $request->name_categorie já existe!");
-
         } else{
-
             $info = $request->all();
 
-            Categorie::create($info);
+            Category::create($info);
 
             return redirect()->route('category.index')->with('msg', "Categoria cadastrada com sucesso!");
         }
     }
 
+    // Lista todos os produtos pertencentes a X categoria
     public function list($id){
-
         $userLevel = User::userLevel();
 
         $products = Product::where('categorie_id', $id)->paginate(10);
 
-        $nameCategorie = Categorie::find($id);
+        $nameCategorie = Category::find($id);
 
-        return view('categorie.list', [
+        return view('category.list', [
             'products' => $products,
             'categorie' => $nameCategorie,
             'userLevel' => $userLevel
-            ]);
+        ]);
     }
 
+    // Retorna a view para editar
     public function edit($id){
-
         $userLevel = User::userLevel();
 
-        $categorie = Categorie::findOrFail($id);
+        $categorie = Category::findOrFail($id);
 
-        return view('categorie.edit', [
+        return view('category.edit', [
             'categorie' => $categorie,
             'userLevel' => $userLevel
         ]);
     }
 
-    public function update(Request $request){
-
+    // Faz o update no banco
+    public function update(CategoryRequest $request){
         $data = $request->all();
 
-        $update = Categorie::findOrFail($request->id)->update($data);
+        $update = Category::findOrFail($request->id)->update($data);
 
         if($update){
             return redirect()->route('category.index')->with('msg', "Categoria editada com sucesso!");
-            
         } else{
             return redirect()->route('category.index')->with('msgError', "Erro ao editar a Categoria!");
         }
     }
 
+    // Remove categoria do banco
     public function destroy(Request $request){
-
         $id = $request['id'];
 
-        $categorie = Categorie::find($id);
+        $categorie = Category::find($id);
 
         try{
             $categorie->delete();
 
             return redirect()->route('category.index')->with('msg', "Categoria excluida com sucesso!");
-
         } catch(Exception $e){
-
-            return redirect()->route('category.index')->with('msgError', "Você não pode excluir essa categoria, porque possui produtos cadastrados com ela!");  
+            return redirect()->route('category.index')->with('msgError', "Você não pode excluir essa categoria, porque ela possui produtos cadastrados com ela!");  
         }
     }
 }

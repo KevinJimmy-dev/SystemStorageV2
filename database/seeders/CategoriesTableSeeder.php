@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Categorie;
+use App\Models\Category;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,47 +15,47 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        Categorie::create([
+        Category::create([
             'name_categorie' => 'Hortifruti'
         ]);
 
-        Categorie::create([
+        Category::create([
             'name_categorie' => 'Açougue'
         ]);
 
-        Categorie::create([
+        Category::create([
             'name_categorie' => 'Padaria'
         ]);
 
-        Categorie::create([
+        Category::create([
             'name_categorie' => 'Bebidas'
         ]);
 
-        Categorie::create([
+        Category::create([
             'name_categorie' => 'Mercearia'
         ]);
 
-        Categorie::create([
+        Category::create([
             'name_categorie' => 'Frios e Laticínios'
         ]);
 
-        Categorie::create([
+        Category::create([
             'name_categorie' => 'Categoria 7'
         ]);
 
-        Categorie::create([
+        Category::create([
             'name_categorie' => 'Categoria 8'
         ]);
 
-        Categorie::create([
+        Category::create([
             'name_categorie' => 'Categoria 9'
         ]);
 
-        Categorie::create([
+        Category::create([
             'name_categorie' => 'Categoria 10'
         ]);
 
-        Categorie::create([
+        Category::create([
             'name_categorie' => 'Categoria 11'
         ]);
     }

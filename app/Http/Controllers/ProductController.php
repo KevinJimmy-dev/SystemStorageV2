@@ -4,138 +4,70 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request as HttpRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use App\Models\{
     Product,
     User,
-    Categorie,
-    Control,
-    Request
+    Category,    
 };
-use Exception;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller{
 
+    // Retorna todos os produtos na view 
     public function index(){
-
         $userLevel = User::userLevel();
 
         if($search = request('search')){
-
             $products = Product::where([
                 ['name', 'like', '%' . $search . '%']
-            ])->paginate(10);
-
-            $categories = [];
-            $categories_id = [];
-
-            foreach($products as $product){
-                $categories_id[] = $product['categorie_id'];
-            }
-
-            for($i = 0; $i < count($products); $i++){
-                $categories[] = Categorie::where('id', $categories_id[$i])->first()->toArray();
-            }
-
-            return view('user.home', [
-                'userLevel' => $userLevel,
-                'categories' => $categories,
-                'products' => $products,
-                'search' => $search
-            ]);
-
+            ])->with('category')->paginate(10);
         } else{
-            
-            $products = Product::paginate(10);
-
-            $categorie_id = [];
-            $categories = [];
-
-            if($products){
-                foreach($products as $product){
-                        $categorie_id[] = $product['categorie_id']; 
-                    }
-
-                    for($i = 0; $i < count($products); $i++){
-                        $categories[] = Categorie::where('id', $categorie_id[$i])->first()->toArray();   
-                    }
-                
-                return view('user.home', [
-                    'userLevel' => $userLevel,
-                    'products' => $products,
-                    'categories' => $categories,
-                    'search' => $search
-                ]);
-
-            } else{
-                return view('user.home', [
-                    'userLevel' => $userLevel,
-                    'products' => $products,
-                    'search' => $search
-                ]);
-            }
+            $products = Product::with('category')->paginate(10);
         }
+
+        return view('user.index', [
+            'userLevel' => $userLevel,
+            'products' => $products,
+            'search' => $search
+        ]);
     }
-
+    
+    // Retorna a view de cadastro
     public function viewRegister(){
-
         $userLevel = User::userLevel();
 
-        $categories = Categorie::all();
+        $categories = Category::all();
 
         return view('product.register', [
             'userLevel' => $userLevel,
-            'categories' =>$categories
+            'categories' => $categories
         ]);
     }
 
-    public function create(HttpRequest $request){
-
+    // Cria um novo produto
+    public function create(ProductRequest $request){
         $user = auth()->user();
 
         $exists = Product::where('name', $request->name)->first();
 
         if($exists){
-
             return redirect()->route('user.index')->with('msgError', "O produto $request->name já existe!");
-
         } else{
-
-            $info = $request->all();
-
-            $create = Product::create($info);
-
-            if($create){
-
-                $control = new Control();
-
-                $control->observation_control = $request->observation;
-                $control->user_id = $user->id;
-
-                $createControl = $control->save();
-
-                if($createControl){
-
-                    $control->products()->attach([
-                        1 => ['control_id' => $control->id, 'product_id' => $create->id]
-                    ]);
-
-                    return redirect()->route('user.index')->with('msg', "Produto cadastrado com sucesso!");
-                }
+            if(Product::newProduct($request, $user)){
+                return redirect()->route('user.index')->with('msg', "Produto cadastrado com sucesso!");
             } else{
                 return redirect()->route('user.index')->with('msgError', "Erro ao cadastrar o produto!");
             }
         }  
     }
 
+    // Retorna a view para editar o produto
     public function edit($id){
-
         $userLevel = User::userLevel();
 
         $product = Product::findOrFail($id);
 
-        $categories = Categorie::all();
+        $categories = Category::all();
 
         return view('product/edit', [
             'userLevel' => $userLevel,
@@ -144,22 +76,21 @@ class ProductController extends Controller{
         ]);
     }
 
-    public function update(HttpRequest $request){
-
+    // Faz o update no banco de X produto
+    public function update(ProductRequest $request){
         $data = $request->all();
 
         $update = Product::findOrFail($request->id)->update($data);
 
         if($update){
             return redirect()->route('user.index')->with('msg', "Produto editado com sucesso!");
-
         } else{
             return redirect()->route('user.index')->with('msgError', "Erro ao editar o produto!");
         }
     }
 
+    // Exclui X produto do banco
     public function destroy(HttpRequest $request){
-
         $id = $request['id'];
 
         $product = Product::find($id);
@@ -168,135 +99,8 @@ class ProductController extends Controller{
 
         if($delete){
             return redirect()->route('user.index')->with('msg', "Produto excluido com sucesso!");
-            
         } else{
             return redirect()->route('user.index')->with('msgError', "Erro ao excluir o produto!");
-        }
-    }
-
-    public function HomeRequests(){
-
-        $userLevel = User::userLevel();
-
-        $requests = Request::with('products')->paginate(10);
-
-        $users = [];
-        $users_id = [];
-
-        foreach($requests as $request){
-            $users_id[] = $request['user_id'];
-        }
-
-        for($i = 0; $i < count($requests); $i++){
-            $users[] = User::where('id', $users_id[$i])->first()->toArray();
-        }
-
-        return view('request.home', [
-            'userLevel' => $userLevel,
-            'users' => $users,
-            'requests' => $requests
-        ]); 
-    }
-
-    public function requestView(){
-
-        $userLevel = User::userLevel();
-
-        return view('request/request', [
-            'userLevel' => $userLevel
-        ]);
-    }
-
-    public function requestSearch(HttpRequest $request){
-
-        $products = $request->word;
-
-        $products = Product::where([
-            ['name', 'like', '%' . $products . '%']
-        ])->get()->toArray();
-
-        if(count($products) <= 0){
-            echo "<li>Nenhum produto encontrado...</li>";
-
-        } else{
-
-            foreach($products as $product){  
-
-                echo "
-                        <li>
-                            $product[name] 
-                            <abbr title='Adicionar'>
-                                <button class='btn-add' id='$product[id]' name='$product[name]' onclick='add(id, name, $product[quantity], `$product[storageUnity]`), noFocus()'>
-                                    <i class='fa-solid fa-plus direita'></i>
-                                </button>
-                            </abbr>
-                        </li>
-                    "; 
-            }  
-        }
-    }
-
-    public function request(HttpRequest $request){
-
-        $user = auth()->user();
-        
-        $quantity = $request->quantity;
-        $requests = $request->request_value;
-        $id = $request->id_product;
-        $name = $request->name_product;
-
-        try{
-            if(empty($quantity)){
-
-                return redirect()->route('requestView')->with('msgWarning', "Você precisa selecionar um ou mais produtos para fazer uma requisição!");
-    
-            } else{
-                
-                for($i = 0; $i < count($requests); $i++){
-                    if($requests[$i] <= 0){
-    
-                        return redirect()->route('requestView')->with('msgError', "A requisição do produto $name[$i] não foi feita, pois o valor inserido era invalido!");
-    
-                    } elseif($quantity[$i] < $requests[$i]){
-                         
-                        return redirect()->route('requestView')->with('msgError', "A quantidade requerida do produto $name[$i] é maior do que a quantidade disponível!");
-    
-                    } else{
-    
-                        $newQuantity = $quantity[$i] - $requests[$i];
-                        
-                        $update = Product::findOrFail($id[$i])->update(['quantity' => $newQuantity]);
-
-                        if($update){
-
-                            $requestModel = new Request();
-        
-                            $requestModel->quantity_request = $requests[$i];
-                            $requestModel->user_id = $user->id;
-
-                            $createRequest = $requestModel->save();
-        
-                            if($createRequest){
-
-                                $productRequest = $requestModel->products()->attach([
-                                    1 => ['product_id' => $id[$i], 'request_id' => $requestModel->id]
-                                ]);
-                            } else{
-
-                                return redirect()->route('user.index')->with('msgError', "Erro ao requisitar um ou mais produtos!");
-                            }
-                        } else{
-            
-                            return redirect()->route('user.index')->with('msgError', "Erro ao requisitar um ou mais produtos!");
-                        }
-                    }
-                }
-
-                return redirect()->route('user.index')->with('msg', "Requisição de um ou mais produtos feita com sucesso!");
-                
-            }
-        } catch(Exception){
-            return redirect()->route('user.index')->with('msgError', "Erro ao fazer a requisição!");
         }
     }
 }

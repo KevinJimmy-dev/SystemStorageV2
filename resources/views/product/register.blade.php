@@ -11,7 +11,7 @@
                 @csrf
 
                 <div class="form-floating mb-3">
-                    <input type="text" name="name" class="form-control" id="name" placeholder="Nome do Produto" required>
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Nome do Produto" required minlength="2" maxlength="20">
                     <label for="name" class="required">Produto</label>
                 </div>
 
@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="number" name="quantity" class="form-control" id="quantity" step=".01" placeholder="Insira a quantidade" required>
+                    <input type="number" name="quantity" class="form-control" id="quantity" step=".01" placeholder="Insira a quantidade" required minlength="1" maxlength="9">
                     <label for="quantity" class="required">Quantidade</label>
                 </div>
 
@@ -42,12 +42,12 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <textarea type="text" name="observation" class="form-control" id="observation" placeholder="Insira uma obsevação (se tiver)"></textarea>
+                    <textarea type="text" name="observation" class="form-control" id="observation" placeholder="Insira uma obsevação (se tiver)" maxlength="250"></textarea>
                     <label for="obsevation">Observação</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <select name="categorie_id" class="form-select select" id="categorie_id" required oninvalid="this.setCustomValidity('Selecione uma categoria!')" onchange="try{setCustomValidity('')}catch(e){}">
+                    <select name="category_id" class="form-select select" id="category_id" required oninvalid="this.setCustomValidity('Selecione uma categoria!')" onchange="try{setCustomValidity('')}catch(e){}">
                         <option value="">Selecione uma categoria</option> 
                         @foreach($categories as $categorie)
                             <option value="{{ $categorie->id }}">
@@ -55,7 +55,7 @@
                             </option>
                         @endforeach            
                     </select>
-                    <label for="categorie_id" class="required">Categoria</label>
+                    <label for="category_id" class="required">Categoria</label>
                 </div>
 
                 <div class="row">

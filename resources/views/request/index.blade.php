@@ -25,7 +25,7 @@
                                 <tr class="text-center">
                                     <td>{{ $product->name }}</td>
                                     <td>{{ $requests[$i]->quantity_request}} {{$product->storageUnity}}</td>
-                                    <td>{{ $users[$i]['name'] }}</td>
+                                    <td>{{ $requests[$i]['user']['name'] }}</td>
                                     <td>{{ date('d/m/Y H:i:s', strtotime($requests[$i]->created_at)) }}</td>
                                 </tr>
                             @endforeach

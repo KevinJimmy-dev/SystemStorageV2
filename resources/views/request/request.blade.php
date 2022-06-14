@@ -10,19 +10,18 @@
             <div class="text-center search-group">
                 <form method="get" id="form-search" action="" autocomplete="off">
                     @csrf
-                    <div class="input-group mb-3">
 
+                    <div class="input-group mb-3">
                         <input type="text" name="search" class="form-control" placeholder="Pesquisar..." aria-label="search" aria-describedby="basic-addon1" id="search" onfocus="onFocus();">
+
                         <span class="input-group-text searchSpan" id="basic-addon1">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </span>
-
                     </div>
                 </form>
-                <div id="list-result">
-                    <ul id="results">
 
-                    </ul>
+                <div id="list-result">
+                    <ul id="results"></ul>
                 </div>
             </div>
         </div>
@@ -39,9 +38,7 @@
                                 <th>Remover</td>
                             </tr>
                         </thead>
-                        <tbody id="tbody">
-            
-                        </tbody>
+                        <tbody id="tbody"></tbody>
                     </table>
                 </div>
                 <div class="row mt-4">

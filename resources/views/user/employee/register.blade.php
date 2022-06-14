@@ -11,12 +11,12 @@
                 @csrf
 
                 <div class="form-floating mb-3">
-                    <input type="text" name="name" class="form-control" id="name" placeholder="Nome completo do funcionário(a)" required>
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Nome completo do funcionário(a)" required minlength="4" maxlength="20">
                     <label for="name" class="required">Nome Completo</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="text" name="username" class="form-control" id="username" placeholder="Nome de usuário" required>
+                    <input type="text" name="username" class="form-control" id="username" placeholder="Nome de usuário" required minlength="4" maxlength="16">
                     <label for="username" class="required">Nome de Usuário</label>
                 </div>
 
@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="password" name="passwordConf" class="form-control" id="passwordConf" placeholder="Confirme a senha" required onkeyup="check();">
+                    <input type="password" name="passwordConf" class="form-control" id="passwordConf" placeholder="Confirme a senha" required minlength="3" maxlength="16" onkeyup="check();">
                     <label for="passwordConf" class="required">Confirme a Senha</label>
                 </div>
 
@@ -81,18 +81,5 @@
 
     </main>
 
-    <script>
-        var btnRegister = document.querySelector('#btn-register');
-
-        function check(){
-            var password = document.querySelector('#password').value;
-            var passwordConf = document.querySelector('#passwordConf').value;
-
-            if(password != passwordConf || password == "" || passwordConf == ""){
-                btnRegister.setAttribute('disabled', 'disabled');
-            } else{
-                btnRegister.removeAttribute("disabled");
-            }
-        }
-    </script>
+    <script src="/js/password.js"></script>
 @endsection

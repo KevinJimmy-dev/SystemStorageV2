@@ -13,8 +13,8 @@ class Product extends Model
 
     public $timestamps = false;
 
-    public function categories(){
-        return $this->hasMany('App\Models\Categorie');
+    public function category(){
+        return $this->belongsTo('App\Models\Category');
     }
 
     public function requests(){
@@ -23,5 +23,30 @@ class Product extends Model
 
     public function controls(){
         return $this->belongsToMany(Control::class);
+    }
+
+    public static function newProduct($request, $user){
+        $info = $request->all();
+
+            $create = Product::create($info);
+
+            if($create){
+                $control = new Control();
+
+                $control->observation_control = $request->observation;
+                $control->user_id = $user->id;
+
+                $createControl = $control->save();
+
+                if($createControl){
+                    $control->products()->attach([
+                        1 => ['control_id' => $control->id, 'product_id' => $create->id]
+                    ]);
+
+                    return true;
+                }
+            } else{
+                return false;
+            }
     }
 }

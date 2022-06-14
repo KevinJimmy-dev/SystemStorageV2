@@ -44,8 +44,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function request(){
-        return $this->belongsTo('App\Models\Request');
+    public function requests(){
+        return $this->hasMany('App\Models\Request');
     }
 
     public function control(){
@@ -61,5 +61,26 @@ class User extends Authenticatable
         }
 
         return $userLevel;
+    }
+
+    public static function createEmployee($request, $exists){
+        //dd($exists);
+
+        if($exists->username != $request->username || $exists == null){
+            $info = $request->only(['name', 'username', 'password']);
+            $info['password'] = bcrypt($info['password']);
+            
+            if($request->level){
+                $info['level'] = $request->level;
+            } else{
+                $info['level'] = 1;
+            }
+
+            $info['stats'] = 1;
+
+            User::create($info);
+
+            return true;
+        }
     }
 }

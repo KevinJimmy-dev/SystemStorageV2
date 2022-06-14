@@ -118,7 +118,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('request.HomeRequests') }}" class="li-color">
+                                    <a class="dropdown-item" href="{{ route('request.index') }}" class="li-color">
                                         Exibir Requisições
                                     </a>
                                 </li>

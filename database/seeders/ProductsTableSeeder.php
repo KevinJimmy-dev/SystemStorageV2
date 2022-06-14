@@ -22,7 +22,7 @@ class ProductsTableSeeder extends Seeder
             'deliveryDate' => '2022-03-20',
             'expirationDate' => '2022-05-01',
             'observation' => 'batatinhas',
-            'categorie_id' => '1'
+            'category_id' => '1'
         ]);
 
         Product::create([
@@ -32,7 +32,7 @@ class ProductsTableSeeder extends Seeder
             'deliveryDate' => '2022-03-20',
             'expirationDate' => '2022-05-01',
             'observation' => 'Desnatado',
-            'categorie_id' => '6'
+            'category_id' => '6'
         ]);
 
         Product::create([
@@ -42,7 +42,7 @@ class ProductsTableSeeder extends Seeder
             'deliveryDate' => '2022-03-20',
             'expirationDate' => '2022-05-01',
             'observation' => '',
-            'categorie_id' => '3'
+            'category_id' => '3'
         ]);
 
         Product::create([
@@ -52,7 +52,7 @@ class ProductsTableSeeder extends Seeder
             'deliveryDate' => '2022-03-20',
             'expirationDate' => '2022-05-01',
             'observation' => '',
-            'categorie_id' => '1'
+            'category_id' => '1'
         ]);
 
         Product::create([
@@ -62,7 +62,7 @@ class ProductsTableSeeder extends Seeder
             'deliveryDate' => '2022-03-20',
             'expirationDate' => '2022-05-01',
             'observation' => '',
-            'categorie_id' => '2'
+            'category_id' => '2'
         ]);
 
         Product::create([
@@ -72,7 +72,7 @@ class ProductsTableSeeder extends Seeder
             'deliveryDate' => '2022-03-20',
             'expirationDate' => '2022-05-01',
             'observation' => '',
-            'categorie_id' => '2'
+            'category_id' => '2'
         ]);
 
         Product::create([
@@ -82,7 +82,7 @@ class ProductsTableSeeder extends Seeder
             'deliveryDate' => '2022-03-20',
             'expirationDate' => '2022-05-01',
             'observation' => '',
-            'categorie_id' => '2'
+            'category_id' => '2'
         ]);
 
         Product::create([
@@ -92,7 +92,7 @@ class ProductsTableSeeder extends Seeder
             'deliveryDate' => '2022-03-20',
             'expirationDate' => '2022-05-01',
             'observation' => '',
-            'categorie_id' => '6'
+            'category_id' => '6'
         ]);
 
         Product::create([
@@ -102,7 +102,7 @@ class ProductsTableSeeder extends Seeder
             'deliveryDate' => '2022-03-20',
             'expirationDate' => '2022-05-01',
             'observation' => 'Marca: Seara',
-            'categorie_id' => '6'
+            'category_id' => '6'
         ]);
 
         Product::create([
@@ -112,7 +112,7 @@ class ProductsTableSeeder extends Seeder
             'deliveryDate' => '2022-03-20',
             'expirationDate' => '2022-05-01',
             'observation' => 'Marca: Seara',
-            'categorie_id' => '6'
+            'category_id' => '6'
         ]);
 
         Product::create([
@@ -122,7 +122,7 @@ class ProductsTableSeeder extends Seeder
             'deliveryDate' => '2022-03-20',
             'expirationDate' => '2022-05-01',
             'observation' => 'Sem gordura, fatiada',
-            'categorie_id' => '3'
+            'category_id' => '3'
         ]);
 
         Product::create([
@@ -132,7 +132,7 @@ class ProductsTableSeeder extends Seeder
             'deliveryDate' => '2022-03-20',
             'expirationDate' => '2022-05-01',
             'observation' => '',
-            'categorie_id' => '1'
+            'category_id' => '1'
         ]);
 
         Product::create([
@@ -142,7 +142,7 @@ class ProductsTableSeeder extends Seeder
             'deliveryDate' => '2022-03-20',
             'expirationDate' => '2022-05-01',
             'observation' => 'Nanica',
-            'categorie_id' => '1'
+            'category_id' => '1'
         ]);
 
         Product::create([
@@ -152,7 +152,7 @@ class ProductsTableSeeder extends Seeder
             'deliveryDate' => '2022-03-20',
             'expirationDate' => '2022-05-01',
             'observation' => '',
-            'categorie_id' => '1'
+            'category_id' => '1'
         ]);
 
         Product::create([
@@ -162,7 +162,7 @@ class ProductsTableSeeder extends Seeder
             'deliveryDate' => '2022-03-20',
             'expirationDate' => '2022-05-01',
             'observation' => '',
-            'categorie_id' => '7'
+            'category_id' => '7'
         ]);
 
         Product::create([
@@ -172,7 +172,7 @@ class ProductsTableSeeder extends Seeder
             'deliveryDate' => '2022-03-20',
             'expirationDate' => '2022-05-01',
             'observation' => '',
-            'categorie_id' => '1'
+            'category_id' => '1'
         ]);
 
         Product::create([
@@ -182,7 +182,7 @@ class ProductsTableSeeder extends Seeder
             'deliveryDate' => '2022-03-20',
             'expirationDate' => '2022-05-01',
             'observation' => '',
-            'categorie_id' => '2'
+            'category_id' => '2'
         ]);
 
         Product::create([
@@ -192,7 +192,7 @@ class ProductsTableSeeder extends Seeder
             'deliveryDate' => '2022-03-20',
             'expirationDate' => '2022-05-01',
             'observation' => '',
-            'categorie_id' => '5'
+            'category_id' => '5'
         ]);
 
         Product::create([
@@ -202,7 +202,7 @@ class ProductsTableSeeder extends Seeder
             'deliveryDate' => '2022-03-20',
             'expirationDate' => '2022-05-01',
             'observation' => '',
-            'categorie_id' => '5'
+            'category_id' => '5'
         ]);
 
         Product::create([
@@ -212,7 +212,7 @@ class ProductsTableSeeder extends Seeder
             'deliveryDate' => '2022-03-20',
             'expirationDate' => '2022-05-01',
             'observation' => '',
-            'categorie_id' => '5'
+            'category_id' => '5'
         ]);
     }
 }
