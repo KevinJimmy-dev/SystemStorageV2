@@ -16,47 +16,47 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         Category::create([
-            'name_categorie' => 'Hortifruti'
+            'name_category' => 'Hortifruti'
         ]);
 
         Category::create([
-            'name_categorie' => 'Açougue'
+            'name_category' => 'Açougue'
         ]);
 
         Category::create([
-            'name_categorie' => 'Padaria'
+            'name_category' => 'Padaria'
         ]);
 
         Category::create([
-            'name_categorie' => 'Bebidas'
+            'name_category' => 'Bebidas'
         ]);
 
         Category::create([
-            'name_categorie' => 'Mercearia'
+            'name_category' => 'Mercearia'
         ]);
 
         Category::create([
-            'name_categorie' => 'Frios e Laticínios'
+            'name_category' => 'Frios e Laticínios'
         ]);
 
         Category::create([
-            'name_categorie' => 'Categoria 7'
+            'name_category' => 'Categoria 7'
         ]);
 
         Category::create([
-            'name_categorie' => 'Categoria 8'
+            'name_category' => 'Categoria 8'
         ]);
 
         Category::create([
-            'name_categorie' => 'Categoria 9'
+            'name_category' => 'Categoria 9'
         ]);
 
         Category::create([
-            'name_categorie' => 'Categoria 10'
+            'name_category' => 'Categoria 10'
         ]);
 
         Category::create([
-            'name_categorie' => 'Categoria 11'
+            'name_category' => 'Categoria 11'
         ]);
     }
 }

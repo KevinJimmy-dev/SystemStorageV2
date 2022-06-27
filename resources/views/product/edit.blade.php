@@ -48,14 +48,14 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <select name="categorie_id" class="form-select" id="categorie_id" required onclick="check();">
+                    <select name="category_id" class="form-select" id="category_id" required onclick="check();">
                         @foreach($categories as $categorie)
-                            <option value="{{ $categorie->id }}" {{ $categorie->id == $product->categorie_id ? "selected='selected'" : "" }}>
-                                {{ $categorie->name_categorie }}
+                            <option value="{{ $categorie->id }}" {{ $categorie->id == $product->category_id ? "selected='selected'" : "" }}>
+                                {{ $categorie->name_category }}
                             </option>
                         @endforeach            
                     </select>
-                    <label for="categorie_id" class="required">Categoria</label>
+                    <label for="category_id" class="required">Categoria</label>
                 </div>
 
                 <div class="row">
@@ -106,7 +106,7 @@
         const deliveryDateValue = "{{$product->deliveryDate}}";
         const expirationDateValue = "{{$product->expirationDate}}";
         const obsevationValue = "{{$product->observation}}";
-        const categorieValue = "{{$product->categorie_id}}";
+        const categoryValue = "{{$product->category_id}}";
         const btnSubmit = document.querySelector("#btn-update");
 
         function check(){
@@ -116,9 +116,9 @@
             var newDeliveryDate = document.querySelector("#deliveryDate").value;
             var newExpirationDate = document.querySelector("#expirationDate").value;
             var newObservation = document.querySelector("#observation").value;
-            var newCategorie = document.querySelector("#categorie_id").value;
+            var newCategory = document.querySelector("#category_id").value;
 
-            if(productValue != newProduct || storageUnityValue != newStorageUnity || quantityValue != newQuantity || deliveryDateValue != newDeliveryDate || expirationDateValue != newExpirationDate || obsevationValue != newObservation || categorieValue != newCategorie){
+            if(productValue != newProduct || storageUnityValue != newStorageUnity || quantityValue != newQuantity || deliveryDateValue != newDeliveryDate || expirationDateValue != newExpirationDate || obsevationValue != newObservation || categoryValue != newCategory){
                btnSubmit.removeAttribute("disabled");
             } else{
                 btnSubmit.setAttribute("disabled", "disabled");

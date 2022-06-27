@@ -18,7 +18,7 @@
                 @if(count($categories) > 0)
                     @for($i = 0; $i < count($categories); $i++) 
                         <tr>
-                            <td class="text-center">{{ $categories[$i]['name_categorie'] }}</td>
+                            <td class="text-center">{{ $categories[$i]['name_category'] }}</td>
                             <td class="text-center">
 
                                 <abbr title="Editar">
@@ -56,7 +56,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    Deseja realmente excluir a categoria <strong>{{ $categories[$i]['name_categorie'] }}</strong>?
+                                                    Deseja realmente excluir a categoria <strong>{{ $categories[$i]['name_category'] }}</strong>?
                                                 <input type="hidden" name="id" id="id" value="{{ $categories[$i]['id'] }}">
                                                 </div>
                                                 <div class="modal-footer">

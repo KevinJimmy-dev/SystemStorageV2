@@ -45,7 +45,7 @@
                                 <td class="text-center">{{ date('d/m/Y', strtotime($products[$i]['deliveryDate'])) }}</td>
                                 <td class="text-center">{{ date('d/m/Y', strtotime($products[$i]['expirationDate'])) }}</td>
                                 <td>{{ $products[$i]['observation'] }}</td>
-                                <td>{{ $products[$i]['category']['name_categorie'] }}</td>
+                                <td>{{ $products[$i]['category']['name_category'] }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('product.edit', $products[$i]['id']) }}">
                                         <i class="fa-solid fa-pen btn-edit black-color"></i> 
@@ -100,7 +100,7 @@
                                 <td class="text-center">{{ date('d/m/Y', strtotime($products[$i]['deliveryDate'])) }}</td>
                                 <td class="text-center">{{ date('d/m/Y', strtotime($products[$i]['expirationDate'])) }}</td>
                                 <td>{{ $products[$i]['observation'] }}</td>
-                                <td>{{ $products[$i]['category']['name_categorie'] }}</td>
+                                <td>{{ $products[$i]['category']['name_category'] }}</td>
                                 <td class="text-center">
                                     <abbr title="Editar">
                                         <a href="{{ route('product.edit', $products[$i]['id']) }}">
@@ -160,7 +160,6 @@
                 {{ $products->appends([
                     'search' => $search,
                     'sort' => 'department',
-                    
                 ])->links() }}
         </div>
     </div>

@@ -36,10 +36,10 @@ class CategoryController extends Controller{
 
     // Cria uma nova categoria se tudo estiver correto
     public function create(CategoryRequest $request){
-        $exists = Category::where('name_categorie', $request->categorie)->first();
+        $exists = Category::where('name_category', $request->name_category)->first();
 
         if($exists){
-            return redirect()->route('category.index')->with('msgError', "A categoria $request->name_categorie já existe!");
+            return redirect()->route('category.index')->with('msgError', "A categoria $request->name_category já existe!");
         } else{
             $info = $request->all();
 
@@ -53,13 +53,13 @@ class CategoryController extends Controller{
     public function list($id){
         $userLevel = User::userLevel();
 
-        $products = Product::where('categorie_id', $id)->paginate(10);
+        $products = Product::where('category_id', $id)->paginate(10);
 
-        $nameCategorie = Category::find($id);
+        $nameCategory = Category::find($id);
 
         return view('category.list', [
             'products' => $products,
-            'categorie' => $nameCategorie,
+            'category' => $nameCategory,
             'userLevel' => $userLevel
         ]);
     }
@@ -68,10 +68,10 @@ class CategoryController extends Controller{
     public function edit($id){
         $userLevel = User::userLevel();
 
-        $categorie = Category::findOrFail($id);
+        $category = Category::findOrFail($id);
 
         return view('category.edit', [
-            'categorie' => $categorie,
+            'category' => $category,
             'userLevel' => $userLevel
         ]);
     }
@@ -93,10 +93,10 @@ class CategoryController extends Controller{
     public function destroy(Request $request){
         $id = $request['id'];
 
-        $categorie = Category::find($id);
+        $category = Category::find($id);
 
         try{
-            $categorie->delete();
+            $category->delete();
 
             return redirect()->route('category.index')->with('msg', "Categoria excluida com sucesso!");
         } catch(Exception $e){

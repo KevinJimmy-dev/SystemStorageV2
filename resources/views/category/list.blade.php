@@ -1,10 +1,10 @@
 @extends('layouts.template')
 
-@section('title', 'Produtos cadastrados - Categoria ' . $categorie->name_categorie . ' - Storage System')
+@section('title', 'Produtos cadastrados - Categoria ' . $category->name_category . ' - Storage System')
 
 @section('content')
 
-    <h1 class="text-center mt-4 mb-4">Produtos cadastrados com a categoria {{ $categorie->name_categorie }}</h1>
+    <h1 class="text-center mt-4 mb-4">Produtos cadastrados com a categoria {{ $category->name_category }}</h1>
 
     <div class="container mt-3 mb-3 my-3">
         <div class="table-responsive" id="tbl">

@@ -21,7 +21,7 @@ class CategoryRequest extends FormRequest{
      */
     public function rules(){
         return [
-            'name_categorie' => [
+            'name_category' => [
                 'required',
                 'string',
                 'min:3',
@@ -32,9 +32,9 @@ class CategoryRequest extends FormRequest{
 
     public function messages(){
         return [
-            'name_categorie.required' => 'Preencha o campo com o nome da categoria!',
-            'name_categorie.min' => 'O minimo de caracteres é 3!',
-            'name_categorie.max' => 'O maximo de caracteres é 20!',
+            'name_category.required' => 'Preencha o campo com o nome da categoria!',
+            'name_category.min' => 'O minimo de caracteres é 3!',
+            'name_category.max' => 'O maximo de caracteres é 20!',
         ];
     }
 }

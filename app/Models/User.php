@@ -64,9 +64,7 @@ class User extends Authenticatable
     }
 
     public static function createEmployee($request, $exists){
-        //dd($exists);
-
-        if($exists->username != $request->username || $exists == null){
+        if($exists == null || $exists->username != $request->username){
             $info = $request->only(['name', 'username', 'password']);
             $info['password'] = bcrypt($info['password']);
             
