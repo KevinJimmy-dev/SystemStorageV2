@@ -13,7 +13,7 @@
                         <th>Nome</td>
                         <th>Nome de Usuário</td>
                         <th>Status</td>
-                        @if($userLevel['level'] == 3)
+                        @if($userLevel == 3)
                             <th>Função</th>
                         @endif
                         <th>Data de Cadastro</th>
@@ -22,7 +22,7 @@
                 </thead>
                 <tbody>
                 @if(count($employees) > 0)
-                    @if($userLevel['level'] == 2)
+                    @if($userLevel == 2)
                         @for($i = 0; $i < count($employees); $i++)
                             @if($employees[$i]['level'] == 1)
                                 <tr>
@@ -76,7 +76,7 @@
                                 </tr>
                             @endif
                         @endfor
-                    @elseif($userLevel['level'] == 3)
+                    @elseif($userLevel == 3)
                         @for($i = 0; $i < count($employees); $i++)
                             @if($employees[$i]['level'] != 3)
                                 <tr>

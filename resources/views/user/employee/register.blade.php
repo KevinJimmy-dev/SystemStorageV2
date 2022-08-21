@@ -20,7 +20,7 @@
                     <label for="username" class="required">Nome de Usuário</label>
                 </div>
 
-                @if($userLevel['level'] == 3)
+                @if($userLevel == 3)
                     <div class="form-floating mb-3">
                         <select name="level" class="form-select" id="level" required>
                             <option value="">Selecione a função</option>

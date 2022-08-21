@@ -29,7 +29,7 @@ class UserController extends Controller{
         return redirect()->route('login')->with('msgError', "Credenciais incorretas!"); 
     }
     
-    // Faz o logout do usuario e direciona ele pra pagina inicial
+    // Logout
     public function logout(Request $request){
         Auth::logout();
 
@@ -39,7 +39,7 @@ class UserController extends Controller{
         return redirect()->route('welcome');
     }
 
-    // Retorna a view de registro de funcionario
+    // Return view for create employee
     public function create(){
         $userLevel = User::userLevel();
 
@@ -70,7 +70,7 @@ class UserController extends Controller{
     public function show(){
         $userLevel = User::userLevel();
 
-        if($userLevel['level'] == 1){
+        if($userLevel == 1){
             return back()->withInput();
         }
 
@@ -90,7 +90,7 @@ class UserController extends Controller{
             return back()->withInput();
         }
 
-        if($userLevel['level'] != 3 && $employee->level >= 2){
+        if($userLevel != 3 && $employee->level >= 2){
             return back()->withInput();
         }
 

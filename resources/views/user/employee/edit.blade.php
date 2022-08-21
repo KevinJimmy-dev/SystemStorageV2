@@ -22,7 +22,7 @@
                     <label for="username" class="required">Nome de Usuário</label>
                 </div>
 
-                @if($userLevel['level'] == 3)
+                @if($userLevel == 3)
                     <div class="form-floating mb-3">
                         <select name="level" class="form-select" id="level" required onclick="check();">
                             <option value="1" {{ $employee->level == 1 ? "selected='selected'" : "" }}>Funcionário(a)</option>

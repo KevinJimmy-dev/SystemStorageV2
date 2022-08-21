@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -53,14 +54,13 @@ class User extends Authenticatable
     }
 
     public static function userLevel(){
-
         $user = auth()->user();
 
-        if($user){
-            $userLevel = User::where('level', $user->level)->first()->toArray();
+        if(is_null($user)){
+            throw new Exception('Usuário não autenticado');
         }
 
-        return $userLevel;
+        return $user->level;
     }
 
     public static function createEmployee($request, $exists){
