@@ -11,24 +11,22 @@ use App\Models\{
 
 class UserController extends Controller{
 
-    // Retorna a view de login para o usuario
+    // Return login page
     public function index(){
         return view('user.login');
     }
 
-    // Verifica as credenciais e ou autentica ele, ou recebera uma mensagem de invalidação
+    // Authenticate
     public function auth(Request $request){
         if(Auth::attempt(['username' => $request->username, 'password' => $request->password])){
-
-            if(auth()->check() && auth()->user()->stats == 1){
-                return redirect()->route('user.index'); 
-            } else{
-                return redirect()->route('login')->with('msgWarning', "Usuário inativo!"); 
+            if(auth()->check() && auth()->user()->stats != 1){
+                return redirect()->route('login')->with('msgWarning', "Usuário inativo!");
             }
 
-        } else{
-            return redirect()->route('login')->with('msgError', "Credenciais incorretas!"); 
-        }
+            return redirect()->route('user.index'); 
+        } 
+
+        return redirect()->route('login')->with('msgError', "Credenciais incorretas!"); 
     }
     
     // Faz o logout do usuario e direciona ele pra pagina inicial
