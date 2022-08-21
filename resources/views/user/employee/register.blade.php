@@ -7,7 +7,7 @@
 
     <main>
         <div class="container w-50 p-3 form">
-            <form method="POST" action="{{ route('employee.create') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('employee.store') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-floating mb-3">

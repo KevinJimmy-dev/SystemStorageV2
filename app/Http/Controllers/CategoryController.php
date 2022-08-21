@@ -26,7 +26,7 @@ class CategoryController extends Controller{
     }
 
     // Retorna a view para cadastrar
-    public function viewRegister(){
+    public function create(){
         $userLevel = User::userLevel();
 
         return view('category.create', [
@@ -35,7 +35,7 @@ class CategoryController extends Controller{
     }
 
     // Cria uma nova categoria se tudo estiver correto
-    public function create(CategoryRequest $request){
+    public function store(CategoryRequest $request){
         $exists = Category::where('name_category', $request->name_category)->first();
 
         if($exists){
@@ -50,14 +50,14 @@ class CategoryController extends Controller{
     }
 
     // Lista todos os produtos pertencentes a X categoria
-    public function list($id){
+    public function show($id){
         $userLevel = User::userLevel();
 
         $products = Product::where('category_id', $id)->paginate(10);
 
         $nameCategory = Category::find($id);
 
-        return view('category.list', [
+        return view('category.show', [
             'products' => $products,
             'category' => $nameCategory,
             'userLevel' => $userLevel

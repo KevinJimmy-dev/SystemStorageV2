@@ -147,7 +147,7 @@
                     @else
                         <tr>
                             <td colspan="7">
-                                <p>Ainda não há nenhum produto cadastrado... <a href="{{ route('product.viewRegister') }}">Clique aqui para cadastrar o primeiro.</a></p>
+                                <p>Ainda não há nenhum produto cadastrado... <a href="{{ route('product.create') }}">Clique aqui para cadastrar o primeiro.</a></p>
                             </td>
                         </tr>
                     @endif

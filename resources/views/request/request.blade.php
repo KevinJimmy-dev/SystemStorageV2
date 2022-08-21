@@ -96,7 +96,7 @@
                         word: search
                     }
 
-                    $.get("{{ route('request.requestSearch') }}", dados, function(retorna) {
+                    $.get("{{ route('request.search') }}", dados, function(retorna) {
                         $('#results').html(retorna);
                     });
 

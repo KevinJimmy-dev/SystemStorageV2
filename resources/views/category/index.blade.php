@@ -30,7 +30,7 @@
                                 <strong style="margin: 0 10px;">|</strong>
 
                                 <abbr title="Produtos pertencentes">
-                                    <a href="{{ route('category.list', $categories[$i]['id']) }}">
+                                    <a href="{{ route('category.show', $categories[$i]['id']) }}">
                                         <i class="fa-solid fa-clipboard-list black-color"></i>
                                     </a>
                                 </abbr>
@@ -74,7 +74,7 @@
                 @else
                     <tr>
                         <td colspan="2">
-                            <p>Ainda não há nenhuma categoria cadastrada... <a href="{{ route('category.viewRegister') }}">Clique aqui para cadastrar a primeira.</a></p>
+                            <p>Ainda não há nenhuma categoria cadastrada... <a href="{{ route('category.create') }}">Clique aqui para cadastrar a primeira.</a></p>
                         </td>
                     </tr>
                 @endif

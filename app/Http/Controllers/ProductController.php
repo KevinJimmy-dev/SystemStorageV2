@@ -33,7 +33,7 @@ class ProductController extends Controller{
     }
     
     // Retorna a view de cadastro
-    public function viewRegister(){
+    public function create(){
         $userLevel = User::userLevel();
 
         $categories = Category::all();
@@ -45,7 +45,7 @@ class ProductController extends Controller{
     }
 
     // Cria um novo produto
-    public function create(ProductRequest $request){
+    public function store(ProductRequest $request){
         $user = auth()->user();
 
         $exists = Product::where('name', $request->name)->first();

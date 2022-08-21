@@ -52,12 +52,12 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('employee.list') }}">
+                                        <a class="dropdown-item" href="{{ route('employee.show') }}">
                                             Exibir Funcionários
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('employee.viewRegister') }}">
+                                        <a class="dropdown-item" href="{{ route('employee.create') }}">
                                             Cadastrar Funcionário(a)
                                         </a>
                                     </li>
@@ -79,7 +79,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('category.viewRegister') }}">
+                                    <a class="dropdown-item" href="{{ route('category.create') }}">
                                         Cadastrar Categoria
                                     </a>
                                 </li>
@@ -101,7 +101,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('product.viewRegister') }}">
+                                    <a class="dropdown-item" href="{{ route('product.create') }}">
                                         Cadastrar Produto
                                     </a>
                                 </li>
@@ -123,7 +123,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('request.requestView') }}">
+                                    <a class="dropdown-item" href="{{ route('request.create') }}">
                                         Fazer Nova Requisição
                                     </a>
                                 </li>

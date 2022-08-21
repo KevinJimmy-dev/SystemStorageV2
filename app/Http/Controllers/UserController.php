@@ -42,7 +42,7 @@ class UserController extends Controller{
     }
 
     // Retorna a view de registro de funcionario
-    public function viewRegister(){
+    public function create(){
         $userLevel = User::userLevel();
 
         return view('user.employee.register', [
@@ -52,24 +52,24 @@ class UserController extends Controller{
     }
 
     // Cria um novo funcionario(a) se tudo estiver correto
-    public function create(EmployeeRequest $request){
+    public function store(EmployeeRequest $request){
         if($request->password == $request->passwordConf){
             $exists = User::where('username', $request->username)->first();
 
             $newEmployee = User::createEmployee($request, $exists);
 
             if($newEmployee){
-                return redirect()->route('employee.list')->with('msg', 'Cadastro de funcionário(a) feito com sucesso!');
+                return redirect()->route('employee.show')->with('msg', 'Cadastro de funcionário(a) feito com sucesso!');
             } else{
-                return redirect()->route('employee.viewRegister')->with('msgError', 'Esse nome de usuário já existe!');
+                return redirect()->route('employee.create')->with('msgError', 'Esse nome de usuário já existe!');
             }
         } else{
-            return redirect()->route('employee.viewRegister')->with('msgError', 'Esse nome de usuário já existe!');
+            return redirect()->route('employee.create')->with('msgError', 'Esse nome de usuário já existe!');
         }
     }
 
     // Retorna todos os funcionarios cadastrados
-    public function list(){
+    public function show(){
         $userLevel = User::userLevel();
 
         if($userLevel['level'] == 1){
@@ -114,7 +114,7 @@ class UserController extends Controller{
 
         $user->update($info);
 
-        return redirect()->route('employee.list')->with('msg', "Funcionário(a) editado(a) com sucesso!");
+        return redirect()->route('employee.show')->with('msg', "Funcionário(a) editado(a) com sucesso!");
     }
 
     // Exclui do banco o usuario selecionado
@@ -126,9 +126,9 @@ class UserController extends Controller{
         $delete = $employee->delete();
 
         if($delete){
-            return redirect()->route('employee.list')->with('msg', "Funcionário(a) excluido com sucesso!");
+            return redirect()->route('employee.show')->with('msg', "Funcionário(a) excluido com sucesso!");
         } else{
-            return redirect()->route('employee.list')->with('msgError', "Erro ao excluir o(a) funcionário(a)!");
+            return redirect()->route('employee.show')->with('msgError', "Erro ao excluir o(a) funcionário(a)!");
         }
     }
 }

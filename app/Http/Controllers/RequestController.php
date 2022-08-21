@@ -25,7 +25,7 @@ class RequestController extends Controller{
     }
 
     // Retorna a view para fazer uma nova requisicao
-    public function requestView(){
+    public function create(){
         $userLevel = User::userLevel();
 
         return view('request.request', [
@@ -34,7 +34,7 @@ class RequestController extends Controller{
     }
 
     // Faz a busca dos produtos pra requisicao e mostra na hora (sem refresh)
-    public function requestSearch(HttpRequest $request){
+    public function search(HttpRequest $request){
         $products = $request->word;
 
         $products = Product::where([
@@ -66,7 +66,7 @@ class RequestController extends Controller{
 
         switch($newRequest){
             case 0: 
-                return redirect()->route('request.requestView')->with('msgWarning', "Você precisa selecionar um ou mais produtos para fazer uma requisição!");
+                return redirect()->route('request.create')->with('msgWarning', "Você precisa selecionar um ou mais produtos para fazer uma requisição!");
                 break;
             
             case 1:
