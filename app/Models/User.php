@@ -62,23 +62,4 @@ class User extends Authenticatable
 
         return $user->level;
     }
-
-    public static function createEmployee($request, $exists){
-        if($exists == null || $exists->username != $request->username){
-            $info = $request->only(['name', 'username', 'password']);
-            $info['password'] = bcrypt($info['password']);
-            
-            if($request->level){
-                $info['level'] = $request->level;
-            } else{
-                $info['level'] = 1;
-            }
-
-            $info['stats'] = 1;
-
-            User::create($info);
-
-            return true;
-        }
-    }
 }

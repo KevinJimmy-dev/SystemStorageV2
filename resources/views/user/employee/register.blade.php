@@ -11,12 +11,12 @@
                 @csrf
 
                 <div class="form-floating mb-3">
-                    <input type="text" name="name" class="form-control" id="name" placeholder="Nome completo do funcionário(a)" required minlength="4" maxlength="20">
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Nome completo do funcionário(a)" required minlength="4" maxlength="20" value="{{ old('name') }}">
                     <label for="name" class="required">Nome Completo</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="text" name="username" class="form-control" id="username" placeholder="Nome de usuário" required minlength="4" maxlength="16">
+                    <input type="text" name="username" class="form-control" id="username" placeholder="Nome de usuário" required minlength="4" maxlength="16" value="{{ old('username') }}">
                     <label for="username" class="required">Nome de Usuário</label>
                 </div>
 
@@ -24,8 +24,8 @@
                     <div class="form-floating mb-3">
                         <select name="level" class="form-select" id="level" required>
                             <option value="">Selecione a função</option>
-                            <option value="1">Funcionário(a)</option>
-                            <option value="2">Cordenador(a)</option>                           
+                            <option value="1" {{ old('level') == 1 ? 'selected' : '' }}>Funcionário(a)</option>
+                            <option value="2" {{ old('level') == 2 ? 'selected' : '' }}>Cordenador(a)</option>                           
                         </select>
                         <label for="level" class="required">Função</label>
                     </div>
@@ -37,8 +37,8 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="password" name="passwordConf" class="form-control" id="passwordConf" placeholder="Confirme a senha" required minlength="3" maxlength="16" onkeyup="check();">
-                    <label for="passwordConf" class="required">Confirme a Senha</label>
+                    <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" placeholder="Confirme a senha" required minlength="3" maxlength="16" onkeyup="check();">
+                    <label for="password_confirmation" class="required">Confirme a Senha</label>
                 </div>
 
                 <div class="row">
