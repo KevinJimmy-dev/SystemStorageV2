@@ -19,9 +19,9 @@ return new class extends Migration
             $table->unsignedBigInteger('coordinator_id')->nullable();
             $table->unsignedBigInteger('employee_id')->nullable();
             $table->string('name');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('password');
-            $table->string('cpf');
+            $table->string('cpf')->unique();
             $table->string('phone')->nullable();
             $table->boolean('status')->default(1);
             $table->timestamps();
