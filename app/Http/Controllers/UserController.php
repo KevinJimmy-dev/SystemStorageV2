@@ -72,8 +72,7 @@ class UserController extends Controller
         return redirect()->route('employee.show')->with('msg', 'Cadastro de funcionário(a) realizado com sucesso!');
     }
 
-
-    // Retorna todos os funcionarios cadastrados
+    // Return employees
     public function show()
     {
         $userLevel = User::userLevel();
@@ -90,7 +89,7 @@ class UserController extends Controller
         ]);
     }
 
-    // Retorna a view para editar um funcionario
+    // Return view to edit
     public function edit($id)
     {
         $userLevel = User::userLevel();
@@ -109,18 +108,12 @@ class UserController extends Controller
         ]);
     }
 
-    // Faz o update no banco com as novos valores
+    // Update employee
     public function update(EmployeeRequest $request)
     {
         $user = User::find($request->id);
 
-        if ($request->level) {
-            $info = $request->only('id', 'name', 'username', 'level', 'stats');
-        } else {
-            $info = $request->only('id', 'name', 'username', 'stats');
-        }
-
-        $user->update($info);
+        $user->update($request->all());
 
         return redirect()->route('employee.show')->with('msg', "Funcionário(a) editado(a) com sucesso!");
     }

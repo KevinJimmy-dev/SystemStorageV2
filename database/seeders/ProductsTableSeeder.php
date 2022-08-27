@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+
 use App\Models\Product;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ProductsTableSeeder extends Seeder
@@ -17,202 +17,222 @@ class ProductsTableSeeder extends Seeder
     {
         Product::create([
             'name' => 'Batata',
-            'storageUnity' => 'Kg',
+            'user_id' => 1,
+            'category_id' => 1,
+            'storage_unity' => 'Kg',
             'quantity' => '35',
-            'deliveryDate' => '2022-03-20',
-            'expirationDate' => '2022-05-01',
-            'observation' => 'batatinhas',
-            'category_id' => '1'
+            'delivery' => '2022-03-20',
+            'expiration' => '2022-05-01',
+            'observation' => 'batatinhas frescas',
         ]);
 
         Product::create([
             'name' => 'Leite',
-            'storageUnity' => 'L',
+            'user_id' => 1,
+            'category_id' => 6,
+            'storage_unity' => 'L',
             'quantity' => '25',
-            'deliveryDate' => '2022-03-20',
-            'expirationDate' => '2022-05-01',
+            'delivery' => '2022-03-20',
+            'expiration' => '2022-05-01',
             'observation' => 'Desnatado',
-            'category_id' => '6'
         ]);
 
         Product::create([
             'name' => 'Pão Francês',
-            'storageUnity' => 'Un',
+            'user_id' => 1,
+            'category_id' => 3,
+            'storage_unity' => 'Un',
             'quantity' => '100',
-            'deliveryDate' => '2022-03-20',
-            'expirationDate' => '2022-05-01',
+            'delivery' => '2022-03-20',
+            'expiration' => '2022-05-01',
             'observation' => '',
-            'category_id' => '3'
         ]);
 
         Product::create([
             'name' => 'Kiwi',
-            'storageUnity' => 'Kg',
+            'user_id' => 1,
+            'category_id' => 1,
+            'storage_unity' => 'Kg',
             'quantity' => '15',
-            'deliveryDate' => '2022-03-20',
-            'expirationDate' => '2022-05-01',
+            'delivery' => '2022-03-20',
+            'expiration' => '2022-05-01',
             'observation' => '',
-            'category_id' => '1'
         ]);
 
         Product::create([
             'name' => 'Carne bovina',
-            'storageUnity' => 'Kg',
+            'user_id' => 1,
+            'category_id' => 2,
+            'storage_unity' => 'Kg',
             'quantity' => '10',
-            'deliveryDate' => '2022-03-20',
-            'expirationDate' => '2022-05-01',
+            'delivery' => '2022-03-20',
+            'expiration' => '2022-05-01',
             'observation' => '',
-            'category_id' => '2'
         ]);
 
         Product::create([
             'name' => 'Carne suína',
-            'storageUnity' => 'Kg',
+            'user_id' => 1,
+            'category_id' => 2,
+            'storage_unity' => 'Kg',
             'quantity' => '15',
-            'deliveryDate' => '2022-03-20',
-            'expirationDate' => '2022-05-01',
+            'delivery' => '2022-03-20',
+            'expiration' => '2022-05-01',
             'observation' => '',
-            'category_id' => '2'
         ]);
 
         Product::create([
             'name' => 'Frango',
-            'storageUnity' => 'Kg',
+            'user_id' => 1,
+            'category_id' => 2,
+            'storage_unity' => 'Kg',
             'quantity' => '20',
-            'deliveryDate' => '2022-03-20',
-            'expirationDate' => '2022-05-01',
+            'delivery' => '2022-03-20',
+            'expiration' => '2022-05-01',
             'observation' => '',
-            'category_id' => '2'
         ]);
 
         Product::create([
             'name' => 'Apresuntado',
-            'storageUnity' => 'Kg',
+            'user_id' => 1,
+            'category_id' => 6,
+            'storage_unity' => 'Kg',
             'quantity' => '5',
-            'deliveryDate' => '2022-03-20',
-            'expirationDate' => '2022-05-01',
+            'delivery' => '2022-03-20',
+            'expiration' => '2022-05-01',
             'observation' => '',
-            'category_id' => '6'
         ]);
 
         Product::create([
             'name' => 'Presunto',
-            'storageUnity' => 'Kg',
+            'user_id' => 1,
+            'category_id' => 6,
+            'storage_unity' => 'Kg',
             'quantity' => '3',
-            'deliveryDate' => '2022-03-20',
-            'expirationDate' => '2022-05-01',
+            'delivery' => '2022-03-20',
+            'expiration' => '2022-05-01',
             'observation' => 'Marca: Seara',
-            'category_id' => '6'
         ]);
 
         Product::create([
             'name' => 'Mussarela',
-            'storageUnity' => 'Kg',
+            'user_id' => 1,
+            'category_id' => 6,
+            'storage_unity' => 'Kg',
             'quantity' => '3',
-            'deliveryDate' => '2022-03-20',
-            'expirationDate' => '2022-05-01',
+            'delivery' => '2022-03-20',
+            'expiration' => '2022-05-01',
             'observation' => 'Marca: Seara',
-            'category_id' => '6'
         ]);
 
         Product::create([
             'name' => 'Mortandela',
-            'storageUnity' => 'Kg',
+            'user_id' => 1,
+            'category_id' => 3,
+            'storage_unity' => 'Kg',
             'quantity' => '7',
-            'deliveryDate' => '2022-03-20',
-            'expirationDate' => '2022-05-01',
+            'delivery' => '2022-03-20',
+            'expiration' => '2022-05-01',
             'observation' => 'Sem gordura, fatiada',
-            'category_id' => '3'
         ]);
 
         Product::create([
             'name' => 'Abacate',
-            'storageUnity' => 'Kg',
+            'user_id' => 1,
+            'category_id' => 1,
+            'storage_unity' => 'Kg',
             'quantity' => '2',
-            'deliveryDate' => '2022-03-20',
-            'expirationDate' => '2022-05-01',
+            'delivery' => '2022-03-20',
+            'expiration' => '2022-05-01',
             'observation' => '',
-            'category_id' => '1'
         ]);
 
         Product::create([
             'name' => 'Banana',
-            'storageUnity' => 'Kg',
+            'user_id' => 1,
+            'category_id' => 1,
+            'storage_unity' => 'Kg',
             'quantity' => '4',
-            'deliveryDate' => '2022-03-20',
-            'expirationDate' => '2022-05-01',
+            'delivery' => '2022-03-20',
+            'expiration' => '2022-05-01',
             'observation' => 'Nanica',
-            'category_id' => '1'
         ]);
 
         Product::create([
             'name' => 'Tomate',
-            'storageUnity' => 'Kg',
+            'user_id' => 1,
+            'category_id' => 1,
+            'storage_unity' => 'Kg',
             'quantity' => '2',
-            'deliveryDate' => '2022-03-20',
-            'expirationDate' => '2022-05-01',
+            'delivery' => '2022-03-20',
+            'expiration' => '2022-05-01',
             'observation' => '',
-            'category_id' => '1'
         ]);
 
         Product::create([
             'name' => 'Leite condensado',
-            'storageUnity' => 'Un',
+            'user_id' => 1,
+            'category_id' => 7,
+            'storage_unity' => 'Un',
             'quantity' => '20',
-            'deliveryDate' => '2022-03-20',
-            'expirationDate' => '2022-05-01',
+            'delivery' => '2022-03-20',
+            'expiration' => '2022-05-01',
             'observation' => '',
-            'category_id' => '7'
         ]);
 
         Product::create([
             'name' => 'Repolho',
-            'storageUnity' => 'Un',
+            'user_id' => 1,
+            'category_id' => 1,
+            'storage_unity' => 'Un',
             'quantity' => '20',
-            'deliveryDate' => '2022-03-20',
-            'expirationDate' => '2022-05-01',
+            'delivery' => '2022-03-20',
+            'expiration' => '2022-05-01',
             'observation' => '',
-            'category_id' => '1'
         ]);
 
         Product::create([
             'name' => 'Carne moida',
-            'storageUnity' => 'Kg',
+            'user_id' => 1,
+            'category_id' => 2,
+            'storage_unity' => 'Kg',
             'quantity' => '5',
-            'deliveryDate' => '2022-03-20',
-            'expirationDate' => '2022-05-01',
+            'delivery' => '2022-03-20',
+            'expiration' => '2022-05-01',
             'observation' => '',
-            'category_id' => '2'
         ]);
 
         Product::create([
             'name' => 'Chocolate em barra',
-            'storageUnity' => 'Un',
+            'user_id' => 1,
+            'category_id' => 5,
+            'storage_unity' => 'Un',
             'quantity' => '100',
-            'deliveryDate' => '2022-03-20',
-            'expirationDate' => '2022-05-01',
+            'delivery' => '2022-03-20',
+            'expiration' => '2022-05-01',
             'observation' => '',
-            'category_id' => '5'
         ]);
 
         Product::create([
             'name' => 'Chocolate em pó',
-            'storageUnity' => 'Kg',
+            'user_id' => 1,
+            'category_id' => 5,
+            'storage_unity' => 'Kg',
             'quantity' => '10',
-            'deliveryDate' => '2022-03-20',
-            'expirationDate' => '2022-05-01',
+            'delivery' => '2022-03-20',
+            'expiration' => '2022-05-01',
             'observation' => '',
-            'category_id' => '5'
         ]);
 
         Product::create([
             'name' => 'Café',
-            'storageUnity' => 'Kg',
+            'user_id' => 1,
+            'category_id' => 5,
+            'storage_unity' => 'Kg',
             'quantity' => '20',
-            'deliveryDate' => '2022-03-20',
-            'expirationDate' => '2022-05-01',
+            'delivery' => '2022-03-20',
+            'expiration' => '2022-05-01',
             'observation' => '',
-            'category_id' => '5'
         ]);
     }
 }
