@@ -89,11 +89,45 @@
 
 ## 🛠️ Abrir e rodar o projeto
 
-- `1 - XAMP para Apache e MySQL` - https://www.apachefriends.org/pt_br/index.html
-- `2 - Baixe o composer` - https://getcomposer.org
-- `3 - Instale o Laravel por meio de composer`
+Para executar o projeto você precisará instalar em seu computador o GIT, Docker CE e Docker Compose.
 
-`Vídeo que demonstra tudo na prática:` https://www.youtube.com/watch?v=4OxYHiEkqBg&list=PLnDvRpP8BnewYKI1n2chQrrR4EYiJKbUG&index=2
+* GIT (https://git-scm.com/downloads)
+* Docker CE (https://docs.docker.com/install/)
+* Docker Compose (https://docs.docker.com/compose/install/)
+
+Após instar essas ferramentas, siga os seguintes passos:
+
+#### 1) Faça o clone desse repoitório:
+
+```shell
+ git clone <REPO_URL>
+```
+
+#### 2) Suba o(s) container(s):
+
+```shell
+ docker-compose up -d
+```
+
+#### 3) Instale as dependencias do projeto:
+
+```shell
+ docker-compose exec storage-system composer create-project -vvv
+```
+
+#### 4) Acesse o MySQL e crie os bancos de dados do projeto:
+
+```shell
+ docker-compose exec mysql-database mysql -uroot -proot -e "CREATE DATABASE storage_system;"
+```
+
+#### 5) Execute o comando abaixo para criar as tabelas com alguns dados iniciais.
+
+```shell
+ docker-compose exec storage-system php artisan migrate --seed
+```
+
+Agora basta acessar pelo browser o endereço http://localhost:8080
   
 ## ✔️ Metodologias e tecnologias usadas
 
