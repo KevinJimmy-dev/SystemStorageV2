@@ -1,0 +1,32 @@
+version: '3'
+
+volumes:
+  system-storage:
+    driver: local
+
+services:
+
+  mysql-database:
+    image: mysql:5.7.22
+    volumes:
+      - .:/app:delegated
+      - system-storage:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - TZ=America/Sao_Paulo
+
+  storage-system:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/var/www/app:delegated
+      - ~/.composer:/home/ambientum/.composer:delegated
+    environment:
+      - XDEBUG_ENABLED=true
+    links:
+      - mysql-database
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
