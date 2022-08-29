@@ -19,7 +19,6 @@
                 </thead>
                 <tbody>
                     @if(count($requests) > 0)
-                    {{-- dd($requests[1]->quantity_request) --}}
                         @for($i = 0; $i < count($requests); $i++)
                             @foreach($requests[$i]->products as $product)
                                 <tr class="text-center">

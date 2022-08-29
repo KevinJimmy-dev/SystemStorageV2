@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\{
+    AuthController,
     UserController,
     ProductController,
     CategoryController,
@@ -14,9 +15,11 @@ Route::get('/', function () {
 })->name('welcome');
 
 // Routes of authentication
-Route::get('/login', [UserController::class, 'index'])->name('login');
-Route::post('/login/auth', [UserController::class, 'auth'])->name('auth');
-Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
+Route::post('/login/auth', [AuthController::class, 'auth'])->name('auth');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::fallback(function () {
     return back()->withInput();

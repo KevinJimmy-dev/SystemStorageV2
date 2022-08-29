@@ -42,7 +42,7 @@
 
             <div class="navbar-links">
                 <ul>
-                    @if($userLevel >= 2)
+                    @if(is_null($user->employee_id))
                         <li class="dropdown">
                             <abbr title="Menu Funcionários">
                                 <a class="dropdown-toggle li-color" href="#" data-bs-toggle="dropdown">

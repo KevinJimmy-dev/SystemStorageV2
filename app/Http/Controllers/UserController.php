@@ -3,46 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EmployeeRequest;
+use App\Http\Traits\CheckAuth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\{
     User,
 };
 
 class UserController extends Controller
 {
-
-    // Return login page
-    public function index()
-    {
-        return view('user.login');
-    }
-
-    // Authenticate
-    public function auth(Request $request)
-    {
-        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
-            if (auth()->check() && auth()->user()->stats != 1) {
-                return redirect()->route('login')->with('msgWarning', "Usuário inativo!");
-            }
-
-            return redirect()->route('user.index');
-        }
-
-        return redirect()->route('login')->with('msgError', "Credenciais incorretas!");
-    }
-
-    // Logout
-    public function logout(Request $request)
-    {
-        Auth::logout();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return redirect()->route('welcome');
-    }
-
     // Return view for create employee
     public function create()
     {
