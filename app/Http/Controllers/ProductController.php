@@ -58,11 +58,15 @@ class ProductController extends Controller
 
     // Retorna a view para editar o produto
     public function edit($id){
-        $product = Product::findOrFail($id);
+        $product = Product::find($id);
+
+        if(is_null($product)){
+            return redirect()->back();
+        }
 
         $categories = Category::all();
 
-        return view('product/edit', [
+        return view('product.edit', [
             'user' => $this->getUser(),
             'product' => $product,
             'categories' => $categories   
