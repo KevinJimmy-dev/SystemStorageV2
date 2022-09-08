@@ -4,6 +4,7 @@
 
 @section('content')
     <h1 class="text-center mt-4 mb-5">Editar Produto: {{  $product->name }} </h1>
+    {{-- <p>Criado por {{ $product->user }}</p> --}}
 
     <main>
         <div class="container w-50 p-3">
@@ -33,12 +34,12 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="date" name="deliveryDate" class="form-control" id="deliveryDate" value="{{ $product->deliveryDate }}" min="2022-01-01" placeholder="Insira a data de entrega" required onkeyup="check();">
+                    <input type="date" name="deliveryDate" class="form-control" id="deliveryDate" value="{{ $product->delivery }}" min="2022-01-01" placeholder="Insira a data de entrega" required onkeyup="check();">
                     <label for="deliveryDate" class="required">Data de entrega</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="date" name="expirationDate" class="form-control" id="expirationDate" value="{{ $product->expirationDate }}" min="2022-01-01" placeholder="Insira a data de validade" required onkeyup="check();">
+                    <input type="date" name="expirationDate" class="form-control" id="expirationDate" value="{{ $product->expiration }}" min="2022-01-01" placeholder="Insira a data de validade" required onkeyup="check();">
                     <label for="expirationDate" class="required">Data de Validade</label>
                 </div>
 
