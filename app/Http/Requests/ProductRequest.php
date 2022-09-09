@@ -28,7 +28,7 @@ class ProductRequest extends FormRequest
                 'min:2',
                 'max:20'
             ],
-            'storageUnity' => [
+            'storage_unity' => [
                 'required'
             ],
             'quantity' => [
@@ -36,11 +36,11 @@ class ProductRequest extends FormRequest
                 'min:1',
                 'max:9'
             ],
-            'deliveryDate' => [
+            'delivery' => [
                 'required',
                 'date'
             ],
-            'expirationDate' => [
+            'expiration' => [
                 'required',
                 'date'
             ],
@@ -57,15 +57,15 @@ class ProductRequest extends FormRequest
             'name.required' => 'Preencha o campo nome!',
             'name.min' => 'O minimo de caracteres do campo nome é 2!',
             'name.max' => 'O maximo de caracteres do campo nome é 20!',
-            'storageUnity.required' => 'Selecione uma das opções!',
+            'storage_unity.required' => 'Selecione uma das opções!',
             'quantity.required' => 'Preencha o campo com uma quantidade!',
             'quantity.number' => 'O campo deve conter somente números!',
             'quantity.min' => 'O minimo de caracteres do campo quantidade é 1!',
             'quantity.max' => 'O maximo de caracteres do campo quantidade é 9!',
-            'deliveryDate.required' => 'Insira a data em que foi entregue!',
-            'deliveryDate.date' => 'Insira uma data!',
-            'expirationDate.required' => 'Insira a data de validade!',
-            'expirationDate.date' => 'Insira uma data!',
+            'delivery.required' => 'Insira a data em que foi entregue!',
+            'delivery.date' => 'Insira uma data!',
+            'expiration.required' => 'Insira a data de validade!',
+            'expiration.date' => 'Insira uma data!',
             'observation.max' => 'O maximo de caracteres do campo de observação é 250!'
         ];
     }

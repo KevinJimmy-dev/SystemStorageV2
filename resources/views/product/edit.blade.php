@@ -19,13 +19,13 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <select name="storageUnity" class="form-select" id="storageUnity" required onkeyup="check();">
-                        <option value="Kg" {{ $product->storageUnity == "Kg" ? "selected='selected'" : "" }}>Kg - Quilograma</option>
-                        <option value="g" {{ $product->storageUnity == "g" ? "selected='selected'" : "" }}>g - Grama</option>        
-                        <option value="L" {{ $product->storageUnity == "L" ? "selected='selected'" : "" }}>L - Litro</option>
-                        <option value="Un" {{ $product->storageUnity == "Un" ? "selected='selected'" : "" }}>Un - Unidades</option>                    
+                    <select name="storage_unity" class="form-select" id="storage_unity" required onchange="check();">
+                        <option value="Kg" {{ $product->storage_unity == "Kg" ? "selected='selected'" : "" }}>Kg - Quilograma</option>
+                        <option value="g" {{ $product->storage_unity == "g" ? "selected='selected'" : "" }}>g - Grama</option>        
+                        <option value="L" {{ $product->storage_unity == "L" ? "selected='selected'" : "" }}>L - Litro</option>
+                        <option value="Un" {{ $product->storage_unity == "Un" ? "selected='selected'" : "" }}>Un - Unidades</option>                    
                     </select>
-                    <label for="storageUnity" class="required">Unidade de medida</label>
+                    <label for="storage_unity" class="required">Unidade de medida</label>
                 </div>
 
                 <div class="form-floating mb-3">
@@ -34,13 +34,13 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="date" name="deliveryDate" class="form-control" id="deliveryDate" value="{{ $product->delivery }}" min="2022-01-01" placeholder="Insira a data de entrega" required onkeyup="check();">
-                    <label for="deliveryDate" class="required">Data de entrega</label>
+                    <input type="date" name="delivery" class="form-control" id="delivery" value="{{ $product->delivery }}" min="2022-01-01" placeholder="Insira a data de entrega" required onchange="check();">
+                    <label for="delivery" class="required">Data de entrega</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="date" name="expirationDate" class="form-control" id="expirationDate" value="{{ $product->expiration }}" min="2022-01-01" placeholder="Insira a data de validade" required onkeyup="check();">
-                    <label for="expirationDate" class="required">Data de Validade</label>
+                    <input type="date" name="expiration" class="form-control" id="expiration" value="{{ $product->expiration }}" min="2022-01-01" placeholder="Insira a data de validade" required onchange="check();">
+                    <label for="expiration" class="required">Data de Validade</label>
                 </div>
 
                 <div class="form-floating mb-3">
@@ -101,25 +101,25 @@
     </main>
 
     <script>
-        const productValue = "{{$product->name}}";
-        const storageUnityValue = "{{$product->storageUnity}}";
-        const quantityValue = "{{$product->quantity}}";
-        const deliveryDateValue = "{{$product->deliveryDate}}";
-        const expirationDateValue = "{{$product->expirationDate}}";
-        const obsevationValue = "{{$product->observation}}";
-        const categoryValue = "{{$product->category_id}}";
+        const productValue = "{{ $product->name }}";
+        const storageUnityValue = "{{ $product->storage_unity }}";
+        const quantityValue = "{{ $product->quantity }}";
+        const deliveryValue = "{{ $product->delivery }}";
+        const expirationValue = "{{ $product->expiration }}";
+        const obsevationValue = "{{ $product->observation }}";
+        const categoryValue = "{{ $product->category_id }}";
         const btnSubmit = document.querySelector("#btn-update");
 
         function check(){
             var newProduct = document.querySelector("#name").value;
-            var newStorageUnity = document.querySelector("#storageUnity").value;
+            var newStorageUnity = document.querySelector("#storage_unity").value;
             var newQuantity = document.querySelector("#quantity").value;
-            var newDeliveryDate = document.querySelector("#deliveryDate").value;
-            var newExpirationDate = document.querySelector("#expirationDate").value;
+            var newDeliveryDate = document.querySelector("#delivery").value;
+            var newExpirationDate = document.querySelector("#expiration").value;
             var newObservation = document.querySelector("#observation").value;
             var newCategory = document.querySelector("#category_id").value;
 
-            if(productValue != newProduct || storageUnityValue != newStorageUnity || quantityValue != newQuantity || deliveryDateValue != newDeliveryDate || expirationDateValue != newExpirationDate || obsevationValue != newObservation || categoryValue != newCategory){
+            if(productValue != newProduct || storageUnityValue != newStorageUnity || quantityValue != newQuantity || deliveryValue != newDeliveryDate || expirationValue != newExpirationDate || obsevationValue != newObservation || categoryValue != newCategory){
                btnSubmit.removeAttribute("disabled");
             } else{
                 btnSubmit.setAttribute("disabled", "disabled");
