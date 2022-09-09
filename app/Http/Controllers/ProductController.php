@@ -16,10 +16,10 @@ class ProductController extends Controller
     use CheckAuth;
 
     public function index(){
-        if($search = request('search')){
-            $products = Product::where([
-                ['name', 'like', '%' . $search . '%']
-            ])->paginate(10);
+        $search = request('search');
+
+        if(!is_null($search)) {
+            $products = Product::where('name', 'like', "%$search%")->paginate(10);
         } else{
             $products = Product::paginate(10);
         }
@@ -31,32 +31,29 @@ class ProductController extends Controller
         ]);
     }
     
-    // Retorna a view de cadastro
     public function create(){
-        $categories = Category::all();
-
         return view('product.register', [
             'user' => $this->getUser(),
-            'categories' => $categories
+            'categories' => Category::all(),
         ]);
     }
 
-    // Cria um novo produto
     public function store(ProductRequest $request){
-        $exists = Product::where('name', $request->name)->first();
+        $product = Product::where('name', $request->name)->first();
 
-        if($exists){
+        if(!is_null($product)) {
             return redirect()->route('user.index')->with('msgError', "O produto $request->name já existe!");
+        } 
+        
+        $newProduct = Product::newProduct($request, $this->getUser());
+
+        if($newProduct) {
+            return redirect()->route('user.index')->with('msg', "Produto cadastrado com sucesso!");
         } else{
-            if(Product::newProduct($request, $this->getUser())){
-                return redirect()->route('user.index')->with('msg', "Produto cadastrado com sucesso!");
-            } else{
-                return redirect()->route('user.index')->with('msgError', "Erro ao cadastrar o produto!");
-            }
-        }  
+            return redirect()->route('user.index')->with('msgError', "Erro ao cadastrar o produto!");
+        }
     }
 
-    // Retorna a view para editar o produto
     public function edit($id){
         $product = Product::find($id);
 
@@ -73,28 +70,28 @@ class ProductController extends Controller
         ]);
     }
 
-    // Faz o update no banco de X produto
     public function update(ProductRequest $request){
-        $data = $request->all();
+        $product = Product::find($request->id);
 
-        $update = Product::findOrFail($request->id)->update($data);
+        if(is_null($product)) {
+            return redirect()->back();
+        }
 
-        if($update){
+        if($product->update($request->all())){
             return redirect()->route('user.index')->with('msg', "Produto editado com sucesso!");
         } else{
             return redirect()->route('user.index')->with('msgError', "Erro ao editar o produto!");
         }
     }
 
-    // Exclui X produto do banco
     public function destroy(HttpRequest $request){
-        $id = $request['id'];
+        $product = Product::find($request->id);
 
-        $product = Product::find($id);
+        if(is_null($product)) {
+            return redirect()->back();
+        }
 
-        $delete = $product->delete();
-
-        if($delete){
+        if($product->delete()){
             return redirect()->route('user.index')->with('msg', "Produto excluido com sucesso!");
         } else{
             return redirect()->route('user.index')->with('msgError', "Erro ao excluir o produto!");

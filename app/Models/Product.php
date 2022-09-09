@@ -21,40 +21,46 @@ class Product extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo('App\Models\Category');
     }
 
-    public function requests(){
+    public function requests()
+    {
         return $this->belongsToMany('App\Models\Request');
     }
 
-    public function controls(){
+    public function controls()
+    {
         return $this->belongsToMany(Control::class);
     }
 
-    public static function newProduct($request, $user){
+    public static function newProduct($request, $user)
+    {
         $info = $request->all();
 
-            $create = Product::create($info);
+        $info['user_id'] = $user->id;
 
-            if($create){
-                $control = new Control();
+        $create = Product::create($info);
 
-                $control->observation_control = $request->observation;
-                $control->user_id = $user->id;
+        if ($create) {
+            $control = new Control();
 
-                $createControl = $control->save();
+            $control->observation_control = $request->observation;
+            $control->user_id = $user->id;
 
-                if($createControl){
-                    $control->products()->attach([
-                        1 => ['control_id' => $control->id, 'product_id' => $create->id]
-                    ]);
+            $createControl = $control->save();
 
-                    return true;
-                }
-            } else{
-                return false;
+            if ($createControl) {
+                $control->products()->attach([
+                    1 => ['control_id' => $control->id, 'product_id' => $create->id]
+                ]);
+
+                return true;
             }
+        } else {
+            return false;
+        }
     }
 }

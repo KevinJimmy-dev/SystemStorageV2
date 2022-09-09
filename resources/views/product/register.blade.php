@@ -16,14 +16,14 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <select name="storageUnity" class="form-select select" id="storageUnity" required>
+                    <select name="storage_unity" class="form-select select" id="storage_unity" required>
                         <option value="">Selecione uma unidade de medida</option>
                         <option value="Kg">Kg - Quilograma</option>
                         <option value="g">g - Grama</option>        
                         <option value="L">L - Litro</option>
                         <option value="Un">Un - Unidades</option>                    
                     </select>
-                    <label for="storageUnity" class="required">Unidade de medida</label>
+                    <label for="storage_unity" class="required">Unidade de medida</label>
                 </div>
 
                 <div class="form-floating mb-3">
@@ -32,13 +32,13 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="date" name="deliveryDate" class="form-control" id="deliveryDate" min="2022-01-01" placeholder="Insira a data de entrega" required onblur="validate();">
-                    <label for="deliveryDate" class="required">Data de entrega</label>
+                    <input type="date" name="delivery" class="form-control" id="delivery" min="2022-01-01" placeholder="Insira a data de entrega" required onblur="validate();">
+                    <label for="delivery" class="required">Data de entrega</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="date" name="expirationDate" class="form-control" id="expirationDate" min="2022-01-01" placeholder="Insira a data de validade" required onblur="validate();">
-                    <label for="expirationDate" class="required">Data de Validade</label>
+                    <input type="date" name="expiration" class="form-control" id="expiration" min="2022-01-01" placeholder="Insira a data de validade" required onblur="validate();">
+                    <label for="expiration" class="required">Data de Validade</label>
                 </div>
 
                 <div class="form-floating mb-3">
@@ -61,8 +61,7 @@
                 <div class="row">
                 <abbr title="" id="warning">
                     <div class="col text-center">
-                        
-                            <input type='submit' class="btn btn-info text-center" id="btn-register" value='Cadastrar'>
+                        <input type='submit' class="btn btn-info text-center" id="btn-register" value='Cadastrar'>
                     </div>
                     </abbr>
                 </div>  
@@ -103,19 +102,19 @@
 
     <script>
         function validate(){
-            var deliveryDate = document.querySelector('#deliveryDate');
-            var validate = document.querySelector('#expirationDate');
+            var delivery = document.querySelector('#delivery');
+            var validate = document.querySelector('#expiration');
             const btnRegister = document.querySelector('#btn-register');
             var abbr = document.querySelector('#warning');
 
-            if(deliveryDate.value >= validate.value){
-                deliveryDate.style.border = "1px solid #ff000044";
+            if(delivery.value >= validate.value){
+                delivery.style.border = "1px solid #ff000044";
                 validate.style.border = "1px solid #ff000044";
                 btnRegister.setAttribute('disabled', 'disabled');
                 abbr.title = 'Atenção! A data de entrega deve ser maior do que a de validade!';
 
             } else{
-                deliveryDate.style.border = "1px solid #5fcbd7";
+                delivery.style.border = "1px solid #5fcbd7";
                 validate.style.border = "1px solid #5fcbd7";
                 btnRegister.removeAttribute('disabled');
                 abbr.removeAttribute('title');
