@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest;
+use App\Http\Traits\CheckAuth;
 use App\Models\{
     Category,
     Product,
@@ -12,47 +13,42 @@ use Illuminate\Http\Request;
 use Exception;
 
 class CategoryController extends Controller{
-    
-    // Retorna todas as categorias cadastradas
-    public function index(){
-        $userLevel = User::userLevel();
 
+    use CheckAuth;
+    
+    public function index(){
         $categories = Category::paginate(10);
 
         return view('category.index', [
-            'userLevel' => $userLevel,
+            'user' => $this->getUser(),
             'categories' => $categories
         ]);
     }
 
-    // Retorna a view para cadastrar
     public function create(){
-        $userLevel = User::userLevel();
-
         return view('category.create', [
-            'userLevel' => $userLevel
+            'user' => $this->getUser(),
         ]);
     }
 
     // Cria uma nova categoria se tudo estiver correto
     public function store(CategoryRequest $request){
-        $exists = Category::where('name_category', $request->name_category)->first();
+        $category = Category::where('name_category', $request->name_category)->first();
 
-        if($exists){
+        if(!is_null($category)){
             return redirect()->route('category.index')->with('msgError', "A categoria $request->name_category já existe!");
-        } else{
-            $info = $request->all();
-
-            Category::create($info);
-
-            return redirect()->route('category.index')->with('msg', "Categoria cadastrada com sucesso!");
         }
+
+        Category::create([
+            'user_id' => $request->user_id,
+            'name_category' => $request->name_category,
+        ]);
+
+        return redirect()->route('category.index')->with('msg', "Categoria cadastrada com sucesso!");
     }
 
     // Lista todos os produtos pertencentes a X categoria
     public function show($id){
-        $userLevel = User::userLevel();
-
         $products = Product::where('category_id', $id)->paginate(10);
 
         $nameCategory = Category::find($id);
@@ -60,19 +56,17 @@ class CategoryController extends Controller{
         return view('category.show', [
             'products' => $products,
             'category' => $nameCategory,
-            'userLevel' => $userLevel
+            'user' => $this->getUser(),
         ]);
     }
 
     // Retorna a view para editar
     public function edit($id){
-        $userLevel = User::userLevel();
-
         $category = Category::findOrFail($id);
 
         return view('category.edit', [
             'category' => $category,
-            'userLevel' => $userLevel
+            'user' => $this->getUser()
         ]);
     }
 
