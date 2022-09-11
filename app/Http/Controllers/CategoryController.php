@@ -7,21 +7,17 @@ use App\Http\Traits\CheckAuth;
 use App\Models\{
     Category,
     Product,
-    User
 };
 use Illuminate\Http\Request;
-use Exception;
 
 class CategoryController extends Controller{
 
     use CheckAuth;
     
     public function index(){
-        $categories = Category::paginate(10);
-
         return view('category.index', [
             'user' => $this->getUser(),
-            'categories' => $categories
+            'categories' => Category::paginate(10)
         ]);
     }
 
@@ -31,7 +27,6 @@ class CategoryController extends Controller{
         ]);
     }
 
-    // Cria uma nova categoria se tudo estiver correto
     public function store(CategoryRequest $request){
         $category = Category::where('name_category', $request->name_category)->first();
 
@@ -40,29 +35,31 @@ class CategoryController extends Controller{
         }
 
         Category::create([
-            'user_id' => $request->user_id,
+            'user_id' => $this->getUser()->id,
             'name_category' => $request->name_category,
         ]);
 
         return redirect()->route('category.index')->with('msg', "Categoria cadastrada com sucesso!");
     }
 
-    // Lista todos os produtos pertencentes a X categoria
     public function show($id){
         $products = Product::where('category_id', $id)->paginate(10);
 
-        $nameCategory = Category::find($id);
+        $category = Category::find($id);
 
         return view('category.show', [
             'products' => $products,
-            'category' => $nameCategory,
+            'category' => $category,
             'user' => $this->getUser(),
         ]);
     }
 
-    // Retorna a view para editar
     public function edit($id){
-        $category = Category::findOrFail($id);
+        $category = Category::find($id);
+
+        if(is_null($category)) {
+            return redirect()->back();
+        }
 
         return view('category.edit', [
             'category' => $category,
@@ -70,31 +67,29 @@ class CategoryController extends Controller{
         ]);
     }
 
-    // Faz o update no banco
     public function update(CategoryRequest $request){
-        $data = $request->all();
+        $category = Category::find($request->id);
 
-        $update = Category::findOrFail($request->id)->update($data);
-
-        if($update){
-            return redirect()->route('category.index')->with('msg', "Categoria editada com sucesso!");
-        } else{
-            return redirect()->route('category.index')->with('msgError', "Erro ao editar a Categoria!");
+        if(is_null($category)) {
+            return redirect()->back();
         }
+
+        $category->update([
+            'name_category' => $request->name_category,
+        ]);
+
+        return redirect()->route('category.index')->with('msg', "Categoria editada com sucesso!");
     }
 
-    // Remove categoria do banco
     public function destroy(Request $request){
-        $id = $request['id'];
+        $category = Category::find($request->id);
 
-        $category = Category::find($id);
-
-        try{
-            $category->delete();
-
-            return redirect()->route('category.index')->with('msg', "Categoria excluida com sucesso!");
-        } catch(Exception $e){
-            return redirect()->route('category.index')->with('msgError', "Você não pode excluir essa categoria, porque ela possui produtos cadastrados com ela!");  
+        if(is_null($category)) {
+            return redirect()->back();
         }
+
+        $category->delete();
+
+        return redirect()->route('category.index')->with('msg', "Categoria excluida com sucesso!");
     }
 }
