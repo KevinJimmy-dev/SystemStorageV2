@@ -6,99 +6,120 @@ use App\Http\Requests\EmployeeRequest;
 use App\Http\Traits\CheckAuth;
 use Illuminate\Http\Request;
 use App\Models\{
+    Coordinator,
+    Employee,
     User,
 };
 
 class UserController extends Controller
 {
-    // Return view for create employee
+    use CheckAuth;
+
     public function create()
     {
-        $userLevel = User::userLevel();
-
         return view('user.employee.register', [
-            'userLevel' => $userLevel
+            'user' => $this->getUser()
         ]);
     }
 
-    // Create the new employee
     public function store(EmployeeRequest $request)
     {
-        $exists = User::where('username', $request->username)->first();
-
-        if(!is_null($exists)){
-            return redirect()->route('employee.create')->with('msgError', 'Esse nome de usuário já existe!');
+        if(!is_null(User::where('email', $request->email)->first())) {
+            return redirect()->route('employee.create')->with('msgError', 'Esse email já está sendo utilizado!')->withInput();
         }
 
-        $info = $request->only(['name', 'username', 'password']);
-        $info['password'] = bcrypt($info['password']);
+        if(!is_null(User::where('cpf', $request->cpf)->first())) {
+            return redirect()->route('employee.create')->with('msgError', 'Esse cpf já está sendo utilizado!')->withInput();
+        }
 
-        $info['level'] = $request->level ?? 1;
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'cpf' => $request->cpf,
+            'phone' => $request->phone,
+        ]);
 
-        User::query()->create($info);
+        switch($request->function) {
+            case 'employee':
+                $employee = Employee::create([
+                    'user_id' => $user->id 
+                ]);
+
+                $user->update(['employee_id' => $employee->id]);
+            break;
+
+            case 'coordinator':
+                $coordinator = Coordinator::create(['user_id' => $user->id]);
+
+                $user->update(['coordinator' => $coordinator->id]);
+            break;
+        }
 
         return redirect()->route('employee.show')->with('msg', 'Cadastro de funcionário(a) realizado com sucesso!');
     }
 
-    // Return employees
     public function show()
     {
-        $userLevel = User::userLevel();
-
-        if ($userLevel == 1) {
-            return back()->withInput();
+        if (!is_null($this->getUser()->employee_id)) {
+            return redirect()->back();
         }
 
-        $employees = User::orderBy('level')->paginate(10);
-
         return view('user.employee.home', [
-            'userLevel' => $userLevel,
-            'employees' => $employees
+            'user' => $this->getUser(),
+            'employees' => User::whereNull('admin_id')->orderBy('employee_id', 'asc')->orderBy('coordinator_id', 'asc')->paginate(10)
         ]);
     }
 
-    // Return view to edit
     public function edit($id)
     {
-        $userLevel = User::userLevel();
+        $employee = User::find($id);
 
-        if (!$employee = User::find($id)) {
-            return back()->withInput();
+        if(is_null($employee)) {
+            return redirect()->back();
         }
 
-        if ($userLevel != 3 && $employee->level >= 2) {
-            return back()->withInput();
+        if(!is_null($this->getUser()->employee_id) || !is_null($this->getUser()->coordinator_id) && !is_null($employee->coordinator_id)) {
+            return redirect()->back();
         }
 
         return view('user.employee.edit', [
-            'userLevel' => $userLevel,
+            'user' => $this->getUser(),
             'employee' => $employee
         ]);
     }
 
-    // Update employee
-    public function update(EmployeeRequest $request)
+    public function update(Request $request)
     {
         $user = User::find($request->id);
+
+        if(is_null($user)) {
+            return redirect()->back();
+        }
 
         $user->update($request->all());
 
         return redirect()->route('employee.show')->with('msg', "Funcionário(a) editado(a) com sucesso!");
     }
 
-    // Exclui do banco o usuario selecionado
     public function destroy(Request $request)
     {
-        $id = $request->id;
+        $employee = User::find($request->id);
 
-        $employee = User::find($id);
-
-        $delete = $employee->delete();
-
-        if ($delete) {
-            return redirect()->route('employee.show')->with('msg', "Funcionário(a) excluido com sucesso!");
-        } else {
-            return redirect()->route('employee.show')->with('msgError', "Erro ao excluir o(a) funcionário(a)!");
+        if(is_null($employee)) {
+            return redirect()->back();
         }
+
+        if(!is_null($employee->employee_id)) {
+            $employee->employee->delete();
+        } elseif(!is_null($employee->coordinator_id)) {
+            $employee->coordinator->delete();
+        } else{
+            $employee->admin->delete();
+        }
+
+        $employee->delete();
+
+        return redirect()->route('employee.show')->with('msg', "Funcionário(a) excluido com sucesso!");
     }
 }

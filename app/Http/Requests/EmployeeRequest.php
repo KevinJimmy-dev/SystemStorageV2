@@ -28,11 +28,19 @@ class EmployeeRequest extends FormRequest
                 'min:4',
                 'max:45'
             ],
-            'username' => [
+            'email' => [
                 'required',
-                'string',
-                'min:4',
-                'max:16'
+                'email',
+            ],
+            'cpf' => [
+                'required',
+                'min:11',
+                'max:11',
+            ],
+            'phone' => [
+                'required',
+                'min:9',
+                'max:9',
             ],
             'password' => [
                 'required',
@@ -45,16 +53,22 @@ class EmployeeRequest extends FormRequest
 
     public function messages(){
         return [
-            'name.required' => 'Preencha o campo com seu nome completo!',
-            'name.min' => 'O seu nome completo deve conter no minimo 3 caracteres!',
-            'name.max' => 'O seu nome completo deve conter no maximo 45 caracteres!',
+            'name.required' => 'Preencha o campo com o nome completo!',
+            'name.min' => 'O nome completo deve conter no minimo 3 caracteres!',
+            'name.max' => 'O nome completo deve conter no maximo 45 caracteres!',
 
-            'username.required' => 'Preencha o campo de nome de usuário!',
-            'username.min' => 'O seu nome de usuário deve conter no minimo 4 caracteres!',
-            'username.max' => 'O seu nome de usuário deve conter no maximo 16 caracteres!',
+            'email.required' => 'Preencha o campo de email do usuário!',
+
+            'cpf.required' => 'Preencha o campo cpf!',
+            'cpf.min' => 'Cpf inválido!',
+            'cpf.max' => 'Cpf inválido',
+
+            'phone.required' => 'Preencha o campo telefone!',
+            'phone.min' => 'Telefone inválido!',
+            'phone.max' => 'Telefone inválido',
 
             'password.required' => 'Preencha o campo com uma senha!',
-            'password.confirmation' => 'As senhas não são iguais!',
+            'password.confirmed' => 'As senhas não são coincidem!',
             'password.min' => 'Sua senha deve conter no minimo 3 caracteres!',
             'password.max' => 'Sua senha deve conter no maximo 16 caracteres!',
         ];

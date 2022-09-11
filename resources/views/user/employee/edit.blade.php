@@ -3,41 +3,38 @@
 @section('title', 'Editar ' . $employee->name . ' - Storage System')
 
 @section('content')
-    <h1 class="text-center mt-4 mb-5">Editar {{ $employee->level == 1 ? "Funcionário(a):" : "Cordenador(a):"}} {{  $employee->name }} </h1>
+    <h1 class="text-center mt-4 mb-5">
+        Editar {{ !is_null($employee->employee_id) ? "Funcionário(a):" : "Cordenador(a):"}} 
+        {{  $employee->name }} 
+    </h1>
 
     <main>
         <div class="container w-50 p-3">
             <form method="POST" action="{{ route('employee.update', $employee->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <input type="hidden" name="id" value="{{ $employee->id }}">
 
                 <div class="form-floating mb-3">
-                    <input type="text" name="name" class="form-control" id="name" value="{{ $employee->name }}" placeholder="Nome do Funcionário(a)" required onkeyup="check();">
-                    <label for="name" class="required">Nome</label>
+                    <input type="text" name="name" class="form-control" id="name" value="{{ $employee->name }}" placeholder="Nome do Funcionário(a)" required onkeyup="check()">
+                    <label for="name" class="required">Nome Completo</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="text" name="username" class="form-control" id="username" value="{{ $employee->username }}" placeholder="Nome de Usuário do Funcionário(a)" required onkeyup="check();">
-                    <label for="username" class="required">Nome de Usuário</label>
+                    <input type="number" name="cpf" class="form-control" id="cpf" placeholder="Cpf" required minlength="1" maxlength="11" value="{{ $employee->cpf }}" onkeyup="check()">
+                    <label for="cpf" class="required">Cpf</label>
                 </div>
 
-                @if($userLevel == 3)
-                    <div class="form-floating mb-3">
-                        <select name="level" class="form-select" id="level" required onclick="check();">
-                            <option value="1" {{ $employee->level == 1 ? "selected='selected'" : "" }}>Funcionário(a)</option>
-                            <option value="2" {{ $employee->level == 2 ? "selected='selected'" : "" }}>Cordenador(a)</option>                           
-                        </select>
-                        <label for="level" class="required">Função</label>
-                    </div>
-                @endif
+                <div class="form-floating mb-3">
+                    <input type="number" name="phone" class="form-control" id="phone" placeholder="Telefone" required minlength="1" maxlength="15" value="{{ $employee->phone }}" onkeyup="check()">
+                    <label for="phone" class="required">Número de telefone</label>
+                </div>
 
                 <div class="form-floating mb-3">
-                    <select name="stats" class="form-select" id="stats" required onclick="check();">
-                        <option value="0" {{ $employee->stats == 0 ? "selected='selected'" : "" }}>Inativo</option>
-                        <option value="1" {{ $employee->stats == 1 ? "selected='selected'" : "" }}>Ativo</option>                           
+                    <select name="status" class="form-select" id="status" required onchange="check();">
+                        <option value="0" {{ $employee->status == 0 ? 'selected' : "" }}>Inativo</option>
+                        <option value="1" {{ $employee->status == 1 ? 'selected' : "" }}>Ativo</option>                           
                     </select>
-                    <label for="stats" class="required">Status</label>
+                    <label for="status" class="required">Status</label>
                 </div>
 
                 <div class="row">
@@ -90,29 +87,21 @@
 
     <script>
         const name = "{{ $employee->name }}";
-        const username = "{{ $employee->username }}";
-        const func = "{{ $employee->level }}";
-        const stats = "{{ $employee->stats }}";
+        const cpf = "{{ $employee->cpf }}";
+        const phone = "{{ $employee->phone }}";
+        const status = "{{ $employee->status }}";
         const btnSubmit = document.querySelector("#btn-update");
 
         function check(){
             var newName = document.querySelector("#name").value;
-            var newUsername = document.querySelector("#username").value;
-            var newFunc = document.querySelector("#level");
-            var newStats = document.querySelector("#stats").value;
+            var newCpf = document.querySelector("#cpf").value;
+            var newPhone = document.querySelector("#phone").value;
+            var newStatus = document.querySelector("#status").value;
 
-            if(newFunc){
-                if(name != newName || username != newUsername || func != newFunc.value || stats != newStats){
-                    btnSubmit.removeAttribute("disabled");
-                } else{
-                    btnSubmit.setAttribute("disabled", "disabled");
-                }
+            if(name != newName || cpf != newCpf || phone != newPhone || status != newStatus){
+                btnSubmit.removeAttribute("disabled");
             } else{
-                if(name != newName || username != newUsername || stats != newStats){
-                    btnSubmit.removeAttribute("disabled");
-                } else{
-                    btnSubmit.setAttribute("disabled", "disabled");
-                }
+                btnSubmit.setAttribute("disabled", "disabled");
             }
         }
     </script>

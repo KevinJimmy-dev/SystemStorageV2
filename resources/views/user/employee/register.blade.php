@@ -1,6 +1,6 @@
 @extends('layouts.template')
 
-@section('title', 'Cadastrar Funcionário(a) - Storage System')
+@section('title', 'Cadastrar Funcionário(a)')
 
 @section('content')
     <h1 class="text-center mt-4 mb-5">Cadastrar Funcionário</h1>
@@ -16,18 +16,28 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="text" name="username" class="form-control" id="username" placeholder="Nome de usuário" required minlength="4" maxlength="16" value="{{ old('username') }}">
-                    <label for="username" class="required">Nome de Usuário</label>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="Email" required minlength="4" maxlength="16" value="{{ old('email') }}">
+                    <label for="email" class="required">Email</label>
                 </div>
 
-                @if($userLevel == 3)
+                <div class="form-floating mb-3">
+                    <input type="number" name="cpf" class="form-control" id="cpf" placeholder="Cpf" required minlength="1" maxlength="11" value="{{ old('cpf') }}">
+                    <label for="cpf" class="required">Cpf</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="number" name="phone" class="form-control" id="phone" placeholder="Telefone" required minlength="1" maxlength="15" value="{{ old('phone') }}">
+                    <label for="phone" class="required">Número de telefone</label>
+                </div>
+
+                @if(!is_null($user->admin_id))
                     <div class="form-floating mb-3">
-                        <select name="level" class="form-select" id="level" required>
+                        <select name="function" class="form-select" id="function" required>
                             <option value="">Selecione a função</option>
-                            <option value="1" {{ old('level') == 1 ? 'selected' : '' }}>Funcionário(a)</option>
-                            <option value="2" {{ old('level') == 2 ? 'selected' : '' }}>Cordenador(a)</option>                           
+                            <option value="employee" {{ old('function') == 'employee' ? 'selected' : '' }}>Funcionário(a)</option>
+                            <option value="coordinator" {{ old('function') == 'coordinator' ? 'selected' : '' }}>Cordenador(a)</option>                           
                         </select>
-                        <label for="level" class="required">Função</label>
+                        <label for="function" class="required">Função</label>
                     </div>
                 @endif
 
