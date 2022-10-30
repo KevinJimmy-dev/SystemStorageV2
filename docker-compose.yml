@@ -24,9 +24,5 @@ services:
     volumes:
       - .:/var/www/app:delegated
       - ~/.composer:/home/ambientum/.composer:delegated
-    environment:
-      - XDEBUG_ENABLED=true
     links:
       - mysql-database
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
