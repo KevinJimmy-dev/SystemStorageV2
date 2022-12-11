@@ -22,13 +22,13 @@ class UserController extends Controller
         ]);
     }
 
-    public function store(EmployeeRequest $request)
+    public function store(Request $request)
     {
-        if(!is_null(User::where('email', $request->email)->first())) {
+        if (!is_null(User::where('email', $request->email)->first())) {
             return redirect()->route('employee.create')->with('msgError', 'Esse email já está sendo utilizado!')->withInput();
         }
 
-        if(!is_null(User::where('cpf', $request->cpf)->first())) {
+        if (!is_null(User::where('cpf', $request->cpf)->first())) {
             return redirect()->route('employee.create')->with('msgError', 'Esse cpf já está sendo utilizado!')->withInput();
         }
 
@@ -40,20 +40,20 @@ class UserController extends Controller
             'phone' => $request->phone,
         ]);
 
-        switch($request->function) {
+        switch ($request->function) {
             case 'employee':
                 $employee = Employee::create([
-                    'user_id' => $user->id 
+                    'user_id' => $user->id
                 ]);
 
                 $user->update(['employee_id' => $employee->id]);
-            break;
+                break;
 
             case 'coordinator':
                 $coordinator = Coordinator::create(['user_id' => $user->id]);
 
                 $user->update(['coordinator' => $coordinator->id]);
-            break;
+                break;
         }
 
         return redirect()->route('employee.show')->with('msg', 'Cadastro de funcionário(a) realizado com sucesso!');
@@ -75,11 +75,11 @@ class UserController extends Controller
     {
         $employee = User::find($id);
 
-        if(is_null($employee)) {
+        if (is_null($employee)) {
             return redirect()->back();
         }
 
-        if(!is_null($this->getUser()->employee_id) || !is_null($this->getUser()->coordinator_id) && !is_null($employee->coordinator_id)) {
+        if (!is_null($this->getUser()->employee_id) || !is_null($this->getUser()->coordinator_id) && !is_null($employee->coordinator_id)) {
             return redirect()->back();
         }
 
@@ -93,7 +93,7 @@ class UserController extends Controller
     {
         $user = User::find($request->id);
 
-        if(is_null($user)) {
+        if (is_null($user)) {
             return redirect()->back();
         }
 
@@ -106,15 +106,17 @@ class UserController extends Controller
     {
         $employee = User::find($request->id);
 
-        if(is_null($employee)) {
+        $user = auth()->user();
+
+        if (is_null($employee)) {
             return redirect()->back();
         }
-
-        if(!is_null($employee->employee_id)) {
-            $employee->employee->delete();
-        } elseif(!is_null($employee->coordinator_id)) {
+        
+        if (!is_null($employee->coordinator_id) && is_null($user->coordinator_id) && is_null($user->employee_id)) {
             $employee->coordinator->delete();
-        } else{
+        } 
+        
+        if (!is_null($employee->admin_id) && is_null($user->coordinator_id) && is_null($user->employee_id)){
             $employee->admin->delete();
         }
 

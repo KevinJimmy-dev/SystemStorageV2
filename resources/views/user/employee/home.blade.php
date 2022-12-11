@@ -16,8 +16,6 @@
                                 <th>Função</th>
                             @endif
                             <th>Email</td>
-                            <td>Cpf</td>
-                            <td>Telefone</td>
                             <th>Status</td>
                             <th>Data de Cadastro</th>
                             <th>Ações</td>
@@ -39,9 +37,6 @@
                                 @endif
 
                                 <td>{{ $employee->email }}</td>
-
-                                <td class="text-center">{{ $employee->cpf }}</td>
-                                <td class="text-center">{{ $employee->phone }}</td>
 
                                 @if($employee->status == 0)
                                     <td class="text-center">Inativo</td>

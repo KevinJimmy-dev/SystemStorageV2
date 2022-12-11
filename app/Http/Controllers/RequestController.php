@@ -40,7 +40,9 @@ class RequestController extends Controller
 
         if (count($products) <= 0) {
             echo "<li>Nenhum produto encontrado...</li>";
-        } else {
+        }
+
+        if (count($products) > 0) {
             foreach ($products as $product) {
                 echo "
                       <li>
