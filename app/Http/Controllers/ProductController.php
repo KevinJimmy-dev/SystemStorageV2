@@ -15,14 +15,17 @@ class ProductController extends Controller
 {
     use CheckAuth;
 
-    public function index(){
+    public function index()
+    {
         $search = request('search');
 
-        if(!is_null($search)) {
-            $products = Product::where('name', 'like', "%$search%")->paginate(10);
-        } else{
-            $products = Product::paginate(10);
+        $builder = Product::query();
+
+        if (!is_null($search)) {
+            $builder = $builder->where('name', 'like', "%$search%");
         }
+
+        $products = $builder->paginate(10);
 
         return view('user.index', [
             'products' => $products,
