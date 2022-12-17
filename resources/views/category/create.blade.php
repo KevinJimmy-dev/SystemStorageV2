@@ -7,7 +7,7 @@
 
     <main>
         <div class="container w-50 p-3">
-            <form method="POST" action="{{ route('category.store', ['user_id' => $user->id]) }}">
+            <form method="POST" action="{{ route('category.store', ['user_id' => auth()->user()->id]) }}">
                 @csrf
 
                 <div class="form-floating mb-3">

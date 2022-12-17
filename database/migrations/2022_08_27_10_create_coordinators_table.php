@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('coordinators', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('coordinator');
+        Schema::dropIfExists('coordinators');
     }
 };

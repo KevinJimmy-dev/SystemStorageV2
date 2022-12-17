@@ -15,17 +15,17 @@
                 @method('PUT')
 
                 <div class="form-floating mb-3">
-                    <input type="text" name="name" class="form-control" id="name" value="{{ $employee->name }}" placeholder="Nome do Funcionário(a)" required onkeyup="check()">
+                    <input type="text" name="name" class="form-control" id="name" value="{{ old('name') ?? $employee->name }}" placeholder="Nome do Funcionário(a)" required onkeyup="check()">
                     <label for="name" class="required">Nome Completo</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="number" name="cpf" class="form-control" id="cpf" placeholder="Cpf" required minlength="1" maxlength="11" value="{{ $employee->cpf }}" onkeyup="check()">
+                    <input type="number" name="cpf" class="form-control" id="cpf" placeholder="Cpf" required minlength="1" maxlength="11" value="{{ old('cpf') ?? $employee->cpf }}" onkeyup="check()">
                     <label for="cpf" class="required">Cpf</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="number" name="phone" class="form-control" id="phone" placeholder="Telefone" required minlength="1" maxlength="15" value="{{ $employee->phone }}" onkeyup="check()">
+                    <input type="number" name="phone" class="form-control" id="phone" placeholder="Telefone" required minlength="1" maxlength="15" value="{{ old('phone') ?? $employee->phone }}" onkeyup="check()">
                     <label for="phone" class="required">Número de telefone</label>
                 </div>
 

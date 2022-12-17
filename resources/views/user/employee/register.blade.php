@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="email" name="email" class="form-control" id="email" placeholder="Email" required minlength="4" maxlength="16" value="{{ old('email') }}">
+                    <input type="email" name="email" class="form-control" id="email" placeholder="Email" required minlength="4" value="{{ old('email') }}">
                     <label for="email" class="required">Email</label>
                 </div>
 
@@ -30,7 +30,7 @@
                     <label for="phone" class="required">Número de telefone</label>
                 </div>
 
-                @if(!is_null($user->admin_id))
+                @if(!is_null(auth()->user()->admin_id))
                     <div class="form-floating mb-3">
                         <select name="function" class="form-select" id="function" required>
                             <option value="">Selecione a função</option>

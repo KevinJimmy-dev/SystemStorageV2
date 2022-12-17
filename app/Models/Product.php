@@ -23,17 +23,17 @@ class Product extends Model
 
     public function category()
     {
-        return $this->belongsTo('App\Models\Category');
+        return $this->belongsTo(Category::class);
     }
 
     public function requests()
     {
-        return $this->belongsToMany('App\Models\Request');
+        return $this->belongsToMany(\App\Models\Request::class, 'request_products');
     }
 
     public function controls()
     {
-        return $this->belongsToMany(Control::class);
+        return $this->belongsToMany(Control::class, 'control_products');
     }
 
     public static function newProduct($request, $user)

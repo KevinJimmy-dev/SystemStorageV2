@@ -16,15 +16,12 @@ class CategoryController extends Controller{
     
     public function index(){
         return view('category.index', [
-            'user' => $this->getUser(),
             'categories' => Category::paginate(10)
         ]);
     }
 
     public function create(){
-        return view('category.create', [
-            'user' => $this->getUser(),
-        ]);
+        return view('category.create');
     }
 
     public function store(CategoryRequest $request){
@@ -49,8 +46,7 @@ class CategoryController extends Controller{
 
         return view('category.show', [
             'products' => $products,
-            'category' => $category,
-            'user' => $this->getUser(),
+            'category' => $category
         ]);
     }
 
@@ -62,8 +58,7 @@ class CategoryController extends Controller{
         }
 
         return view('category.edit', [
-            'category' => $category,
-            'user' => $this->getUser()
+            'category' => $category
         ]);
     }
 
@@ -86,6 +81,10 @@ class CategoryController extends Controller{
 
         if(is_null($category)) {
             return redirect()->back();
+        }
+
+        if (count($category->products) > 0) {
+            return redirect()->back()->with('msgError', 'Você não pode excluir essa categoria, pois possui produtos vinculados a ela!');
         }
 
         $category->delete();

@@ -12,7 +12,7 @@
                     <thead>
                         <tr class="text-center">
                             <th>Nome</td>
-                            @if(!is_null($user->admin_id))
+                            @if(!is_null(auth()->user()->admin_id))
                                 <th>Função</th>
                             @endif
                             <th>Email</td>
@@ -26,7 +26,7 @@
                             <tr>
                                 <td>{{ $employee->name }}</td>
 
-                                @if(!is_null($user->admin_id))
+                                @if(!is_null(auth()->user()->admin_id))
                                     @if (!is_null($employee->employee_id))
                                         <td class="text-center">Funcionário(a)</td> 
                                     @elseif(!is_null($employee->coordinator_id))   

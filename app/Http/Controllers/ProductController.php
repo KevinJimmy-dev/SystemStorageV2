@@ -25,7 +25,6 @@ class ProductController extends Controller
         }
 
         return view('user.index', [
-            'user' => $this->getUser(),
             'products' => $products,
             'search' => $search
         ]);
@@ -33,7 +32,6 @@ class ProductController extends Controller
     
     public function create(){
         return view('product.register', [
-            'user' => $this->getUser(),
             'categories' => Category::all(),
         ]);
     }
@@ -41,13 +39,13 @@ class ProductController extends Controller
     public function store(ProductRequest $request){
         $product = Product::where('name', $request->name)->first();
 
-        if(!is_null($product)) {
+        if (!is_null($product)) {
             return redirect()->route('user.index')->with('msgError', "O produto $request->name já existe!");
         } 
         
         $newProduct = Product::newProduct($request, $this->getUser());
 
-        if($newProduct) {
+        if ($newProduct) {
             return redirect()->route('user.index')->with('msg', "Produto cadastrado com sucesso!");
         } else{
             return redirect()->route('user.index')->with('msgError', "Erro ao cadastrar o produto!");
@@ -64,7 +62,6 @@ class ProductController extends Controller
         $categories = Category::all();
 
         return view('product.edit', [
-            'user' => $this->getUser(),
             'product' => $product,
             'categories' => $categories   
         ]);

@@ -17,9 +17,7 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('user.employee.register', [
-            'user' => $this->getUser()
-        ]);
+        return view('user.employee.register');
     }
 
     public function store(Request $request)
@@ -39,6 +37,10 @@ class UserController extends Controller
             'cpf' => $request->cpf,
             'phone' => $request->phone,
         ]);
+
+        if (!$request->function) {
+            $request->function = 'employee';
+        }
 
         switch ($request->function) {
             case 'employee':
@@ -65,9 +67,18 @@ class UserController extends Controller
             return redirect()->back();
         }
 
+        $users = User::query();
+
+        if (!is_null($this->user->coordinator_id)) {
+            $users = $users->whereNotNull('employee_id');
+        }
+
+        if (!is_null($this->user->admin_id)) {
+            $users = $users->whereNull('admin_id');
+        }
+
         return view('user.employee.home', [
-            'user' => $this->getUser(),
-            'employees' => User::whereNull('admin_id')->orderBy('employee_id', 'asc')->orderBy('coordinator_id', 'asc')->paginate(10)
+            'employees' => $users->orderBy('employee_id', 'asc')->orderBy('coordinator_id', 'asc')->paginate(10)
         ]);
     }
 
@@ -84,7 +95,6 @@ class UserController extends Controller
         }
 
         return view('user.employee.edit', [
-            'user' => $this->getUser(),
             'employee' => $employee
         ]);
     }
@@ -95,6 +105,12 @@ class UserController extends Controller
 
         if (is_null($user)) {
             return redirect()->back();
+        }
+
+        $exists = User::where('cpf', $request->cpf)->first();
+
+        if (!is_null($exists) && $user->id != $exists->id) {
+            return redirect()->back()->withInput()->with('msgError', 'Este cpf já está em uso!');
         }
 
         $user->update($request->all());

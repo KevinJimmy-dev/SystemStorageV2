@@ -42,7 +42,7 @@
 
             <div class="navbar-links">
                 <ul>
-                    @if(is_null($user->employee_id))
+                    @if(is_null(auth()->user()->employee_id))
                         <li class="dropdown">
                             <abbr title="Menu Funcionários">
                                 <a class="dropdown-toggle li-color" href="#" data-bs-toggle="dropdown">

@@ -8,6 +8,7 @@ use App\Models\{
     Product,
     Request,
 };
+use App\Services\RequestService;
 
 class RequestController extends Controller
 {
@@ -18,16 +19,13 @@ class RequestController extends Controller
         $requests = Request::with(['products', 'user'])->paginate(10);
 
         return view('request.index', [
-            'user' => $this->getUser(),
             'requests' => $requests
         ]);
     }
 
     public function create()
     {
-        return view('request.request', [
-            'user' => $this->getUser()
-        ]);
+        return view('request.request');
     }
 
     public function search(HttpRequest $request)
@@ -61,9 +59,11 @@ class RequestController extends Controller
 
     public function request(HttpRequest $request)
     {
-        $newRequest = Request::newRequest($request);
+        $newRequest = new RequestService();
 
-        switch ($newRequest) {
+        $requestCode = $newRequest->newRequest($request);
+
+        switch ($requestCode) {
             case 0:
                 return redirect()->route('request.create')->with('msgWarning', "Você precisa selecionar um ou mais produtos para fazer uma requisição!");
                 break;
