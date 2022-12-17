@@ -9,15 +9,7 @@ use App\Http\Controllers\{
 };
 use Illuminate\Support\Facades\Route;
 
-// Route of the initial page
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
-
-// Routes of authentication
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
+Route::get('/', [AuthController::class, 'index'])->name('login');
 Route::post('/login/auth', [AuthController::class, 'auth'])->name('auth');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
