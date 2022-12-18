@@ -14,20 +14,23 @@ class CategoryController extends Controller{
 
     use CheckAuth;
     
-    public function index(){
+    public function index()
+    {
         return view('category.index', [
             'categories' => Category::paginate(10)
         ]);
     }
 
-    public function create(){
+    public function create()
+    {
         return view('category.create');
     }
 
-    public function store(CategoryRequest $request){
+    public function store(CategoryRequest $request)
+    {
         $category = Category::where('name_category', $request->name_category)->first();
 
-        if(!is_null($category)){
+        if (!is_null($category)) {
             return redirect()->route('category.index')->with('msgError', "A categoria $request->name_category já existe!");
         }
 
@@ -39,21 +42,19 @@ class CategoryController extends Controller{
         return redirect()->route('category.index')->with('msg', "Categoria cadastrada com sucesso!");
     }
 
-    public function show($id){
-        $products = Product::where('category_id', $id)->paginate(10);
-
-        $category = Category::find($id);
-
+    public function show($id)
+    {
         return view('category.show', [
-            'products' => $products,
-            'category' => $category
+            'products' => Product::where('category_id', $id)->paginate(10),
+            'category' => Category::find($id)
         ]);
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $category = Category::find($id);
 
-        if(is_null($category)) {
+        if (is_null($category)) {
             return redirect()->back();
         }
 
@@ -62,10 +63,11 @@ class CategoryController extends Controller{
         ]);
     }
 
-    public function update(CategoryRequest $request){
+    public function update(CategoryRequest $request) 
+    {
         $category = Category::find($request->id);
 
-        if(is_null($category)) {
+        if (is_null($category)) {
             return redirect()->back();
         }
 
@@ -76,10 +78,11 @@ class CategoryController extends Controller{
         return redirect()->route('category.index')->with('msg', "Categoria editada com sucesso!");
     }
 
-    public function destroy(Request $request){
+    public function destroy(Request $request) 
+    {
         $category = Category::find($request->id);
 
-        if(is_null($category)) {
+        if (is_null($category)) {
             return redirect()->back();
         }
 
