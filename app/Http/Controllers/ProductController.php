@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request as HttpRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
+use App\Http\Services\ProductService;
 use App\Http\Traits\CheckAuth;
 use App\Models\{
     Product,
@@ -39,20 +40,17 @@ class ProductController extends Controller
         ]);
     }
 
-    public function store(ProductRequest $request){
+    public function store(ProductRequest $request)
+    {
         $product = Product::where('name', $request->name)->first();
 
         if (!is_null($product)) {
             return redirect()->route('user.index')->with('msgError', "O produto $request->name já existe!");
-        } 
-        
-        $newProduct = Product::newProduct($request, $this->getUser());
-
-        if ($newProduct) {
-            return redirect()->route('user.index')->with('msg', "Produto cadastrado com sucesso!");
-        } else{
-            return redirect()->route('user.index')->with('msgError', "Erro ao cadastrar o produto!");
         }
+
+        (new ProductService($this->getUser()))->create($request);
+
+        return redirect()->route('user.index')->with('msg', "Produto cadastrado com sucesso!");
     }
 
     public function edit($id){

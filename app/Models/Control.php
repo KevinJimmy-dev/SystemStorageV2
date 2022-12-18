@@ -9,6 +9,10 @@ class Control extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id', 'observation_control'
+    ];
+
     protected $dates = ['date'];
 
     public function users(){
