@@ -12,7 +12,8 @@ class AuthController extends Controller
         return view('login');
     }
 
-    public function auth(Request $request){
+    public function auth(Request $request)
+    {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             if (auth()->check() && auth()->user()->status != 1) {
                 return redirect()->route('login')->with('msgWarning', "Funcionário inativo!");
@@ -24,7 +25,8 @@ class AuthController extends Controller
         return redirect()->route('login')->with('msgError', "Credenciais incorretas!");
     }
 
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
         Auth::logout();
 
         $request->session()->invalidate();

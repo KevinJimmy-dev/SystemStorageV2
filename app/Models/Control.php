@@ -15,11 +15,13 @@ class Control extends Model
 
     protected $dates = ['date'];
 
-    public function users(){
+    public function users()
+    {
         return $this->hasMany('App\Models\User');
     }
 
-    public function products(){
+    public function products()
+    {
         return $this->belongsToMany(Product::class, 'control_products');
     }
 }

@@ -14,11 +14,13 @@ class Request extends Model{
 
     protected $dates = ['date'];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo('App\Models\User');
     }
 
-    public function products(){
+    public function products()
+    {
         return $this->belongsToMany(Product::class, 'request_products');
     }
 }

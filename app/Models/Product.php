@@ -35,32 +35,4 @@ class Product extends Model
     {
         return $this->belongsToMany(Control::class, 'control_products');
     }
-
-    public static function newProduct($request, $user)
-    {
-        $info = $request->all();
-
-        $info['user_id'] = $user->id;
-
-        $create = Product::create($info);
-
-        if ($create) {
-            $control = new Control();
-
-            $control->observation_control = $request->observation;
-            $control->user_id = $user->id;
-
-            $createControl = $control->save();
-
-            if ($createControl) {
-                $control->products()->attach([
-                    1 => ['control_id' => $control->id, 'product_id' => $create->id]
-                ]);
-
-                return true;
-            }
-        } else {
-            return false;
-        }
-    }
 }

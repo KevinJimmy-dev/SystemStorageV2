@@ -36,27 +36,33 @@ class User extends Authenticatable
 
     protected $with = ['categories', 'controls', 'requests'];
 
-    public function admin(): BelongsTo{
+    public function admin(): BelongsTo
+    {
         return $this->belongsTo(Admin::class);
     }
 
-    public function coordinator(): BelongsTo{
+    public function coordinator(): BelongsTo
+    {
         return $this->belongsTo(Coordinator::class);
     }
 
-    public function employee(): BelongsTo{
+    public function employee(): BelongsTo
+    {
         return $this->belongsTo(Employee::class);
     }
 
-    public function requests(): BelongsTo{
+    public function requests(): BelongsTo
+    {
         return $this->belongsTo(Request::class);
     }
 
-    public function controls(): BelongsTo{
+    public function controls(): BelongsTo
+    {
         return $this->belongsTo(Control::class);
     }
 
-    public function categories(): HasMany{
+    public function categories(): HasMany
+    {
         return $this->hasMany(Category::class);
     }
 }
