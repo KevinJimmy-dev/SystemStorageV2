@@ -9,7 +9,7 @@ use App\Http\Services\ProductService;
 use App\Http\Traits\CheckAuth;
 use App\Models\{
     Product,
-    Category,    
+    Category,
 };
 
 class ProductController extends Controller
@@ -33,8 +33,9 @@ class ProductController extends Controller
             'search' => $search
         ]);
     }
-    
-    public function create(){
+
+    public function create()
+    {
         return view('product.register', [
             'categories' => Category::all(),
         ]);
@@ -63,7 +64,7 @@ class ProductController extends Controller
 
         return view('product.edit', [
             'product' => $product,
-            'categories' => Category::all()  
+            'categories' => Category::all()
         ]);
     }
 
@@ -80,17 +81,16 @@ class ProductController extends Controller
         return redirect()->route('user.index')->with('msg', "Produto editado com sucesso!");
     }
 
-    public function destroy(HttpRequest $request){
+    public function destroy(HttpRequest $request)
+    {
         $product = Product::find($request->id);
 
-        if(is_null($product)) {
+        if (is_null($product)) {
             return redirect()->back();
         }
 
-        if($product->delete()){
-            return redirect()->route('user.index')->with('msg', "Produto excluido com sucesso!");
-        } else{
-            return redirect()->route('user.index')->with('msgError', "Erro ao excluir o produto!");
-        }
+        $product->delete();
+
+        return redirect()->route('user.index')->with('msg', "Produto excluido com sucesso!");
     }
 }
