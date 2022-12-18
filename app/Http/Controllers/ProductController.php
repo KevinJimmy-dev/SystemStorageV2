@@ -53,33 +53,31 @@ class ProductController extends Controller
         return redirect()->route('user.index')->with('msg', "Produto cadastrado com sucesso!");
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $product = Product::find($id);
 
-        if(is_null($product)){
+        if (is_null($product)) {
             return redirect()->back();
         }
-
-        $categories = Category::all();
 
         return view('product.edit', [
             'product' => $product,
-            'categories' => $categories   
+            'categories' => Category::all()  
         ]);
     }
 
-    public function update(ProductRequest $request){
+    public function update(ProductRequest $request)
+    {
         $product = Product::find($request->id);
 
-        if(is_null($product)) {
+        if (is_null($product)) {
             return redirect()->back();
         }
 
-        if($product->update($request->all())){
-            return redirect()->route('user.index')->with('msg', "Produto editado com sucesso!");
-        } else{
-            return redirect()->route('user.index')->with('msgError', "Erro ao editar o produto!");
-        }
+        $product->update($request->all());
+
+        return redirect()->route('user.index')->with('msg', "Produto editado com sucesso!");
     }
 
     public function destroy(HttpRequest $request){
