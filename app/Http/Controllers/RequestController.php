@@ -16,10 +16,8 @@ class RequestController extends Controller
 
     public function index()
     {
-        $requests = Request::with(['products', 'user'])->paginate(10);
-
         return view('request.index', [
-            'requests' => $requests
+            'requests' => Request::with(['products', 'user'])->paginate(10)
         ]);
     }
 
@@ -30,8 +28,6 @@ class RequestController extends Controller
 
     public function search(HttpRequest $request)
     {
-        $request->word;
-
         $products = Product::where([
             ['name', 'like', '%' . $request->word . '%']
         ])->get()->toArray();
@@ -57,11 +53,9 @@ class RequestController extends Controller
         }
     }
 
-    public function request(HttpRequest $request)
+    public function request (HttpRequest $request)
     {
-        $newRequest = new RequestService();
-
-        $requestCode = $newRequest->newRequest($request);
+        $requestCode = (new RequestService())->newRequest($request);
 
         switch ($requestCode) {
             case 0:

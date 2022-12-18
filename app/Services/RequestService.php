@@ -13,11 +13,6 @@ class RequestService
     {
         $user = auth()->user();
 
-        // $quantity = $request->quantity;
-        // $requests = $request->request_value;
-        // $id = $request->id_product;
-        // $name = $request->name_product;
-
         if (count($request->quantity) == 0) {
             return 0;
         }
